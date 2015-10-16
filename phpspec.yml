@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Depotwarehouse\YEGVotes
+        psr4_prefix: Depotwarehouse\YEGVotes
+        src_path: app
