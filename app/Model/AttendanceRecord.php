@@ -5,19 +5,15 @@ namespace Depotwarehouse\YEGVotes\Model;
 class AttendanceRecord
 {
 
-    /** @var string */
     public $attendee;
     public $days_in_attendance;
     public $total_meetings;
-    public $ward;
 
     public function __construct($attendee, $days_present, $total_days)
     {
-        $this->attendee = $attendee;
+        $this->attendee = new CouncilMember($attendee);
         $this->days_in_attendance = $days_present;
         $this->total_meetings = $total_days;
-
-        $this->ward = Ward::getWardFor($attendee);
     }
 
     /**
@@ -30,16 +26,12 @@ class AttendanceRecord
 
     public function getShortWard()
     {
-        return "ward{$this->ward}";
+        return $this->attendee->getShortWard();
     }
 
     public function getWard()
     {
-        if ($this->ward == "Mayor") {
-            return $this->ward;
-        }
-
-        return "Ward {$this->ward}";
+        return $this->attendee->getWard();
     }
 
     public function attendanceFraction()

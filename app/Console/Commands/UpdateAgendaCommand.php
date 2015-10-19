@@ -92,7 +92,7 @@ class UpdateAgendaCommand extends Command
                     continue;
                 }
 
-                if (!in_array($agendaData['item_id'], $itemIds)) {
+                if (in_array($agendaData['item_id'], $itemIds)) {
                     $skippedRecords++;
                     continue;
                 }

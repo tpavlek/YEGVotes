@@ -44,6 +44,8 @@ class Attendance extends Model
             $attendance_records->push(new AttendanceRecord($row['attendee'], $row['present'], $row['total']));
         }
 
-        return $attendance_records->sortBy('ward');
+        return $attendance_records->sortBy(function(AttendanceRecord $attendanceRecord) {
+            return $attendanceRecord->getWard();
+        });
     }
 }

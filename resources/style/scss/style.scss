@@ -55,11 +55,14 @@ span[data-attendance-percent="100"] { color: green; }
 .vote {
 
   width: 100%;
-  height: 2rem;
   line-height: 2rem;
+  height: 2rem;
 
   .short-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
     display:inline-block;
+    float:left;
     width: 80%;
     font-weight: 800;
     padding-left: 0.5rem;
@@ -68,12 +71,31 @@ span[data-attendance-percent="100"] { color: green; }
   }
 
   .vote {
+    padding-left: 0.5rem;
     display:inline-block;
     height: 100%;
     float:right;
     width: 20%;
     min-width: 100px;
+    cursor: pointer;
+  }
+  .vote.motion-list { cursor: default; }
+}
+.vote.Yes { background-color: green; }
+.vote.No { background-color: darkred; color: white; }
+.vote.Absent { background-color: goldenrod;}
+.vote.Abstain { background-color: lightgrey; }
+
+.voting-table {
+  line-height: 2rem;
+  text-align: left;
+  margin: 0 auto;
+  font-size: 120%;
+
+  .vote { width: auto; padding-left: 0.5rem; padding-right: 0.5rem;}
+
+  tr td:nth-child(1), tr th:nth-child(1) {
+    padding-right: 5rem;
   }
 
-  .vote.yea {  background: green; }
 }

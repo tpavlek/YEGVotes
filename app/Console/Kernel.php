@@ -5,6 +5,8 @@ namespace Depotwarehouse\YEGVotes\Console;
 use Depotwarehouse\YEGVotes\Console\Commands\UpdateAgendaCommand;
 use Depotwarehouse\YEGVotes\Console\Commands\UpdateAttendanceCommand;
 use Depotwarehouse\YEGVotes\Console\Commands\UpdateMeetingsCommand;
+use Depotwarehouse\YEGVotes\Console\Commands\UpdateMotionsCommand;
+use Depotwarehouse\YEGVotes\Console\Commands\UpdateVotesCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -19,6 +21,8 @@ class Kernel extends ConsoleKernel
         UpdateMeetingsCommand::class,
         UpdateAttendanceCommand::class,
         UpdateAgendaCommand::class,
+        UpdateMotionsCommand::class,
+        UpdateVotesCommand::class,
     ];
 
     /**
