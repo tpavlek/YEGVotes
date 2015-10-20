@@ -86,6 +86,33 @@ span[data-attendance-percent="100"] { color: green; }
 .vote.Absent { background-color: goldenrod;}
 .vote.Abstain { background-color: lightgrey; }
 
+.council-member-img { display: inline-block; }
+.council-member-img.ward1 { }
+.council-member-img.ward2 { background-image: url('/img/ward2.jpg'); width: 200px; height: 250px;}
+
+.mover, .seconder { width: 30rem; text-align: left; height: 150px; background: green; padding: 1rem; margin: 0 auto;}
+
+.small-person-details {
+  position: relative;
+  .council-member-img { border-radius: 50%; background-size: 100px 100px; width: 100px; height: 100px; }
+  .ward1 { background-image: url('/img/ward1sq.jpg'); }
+  .ward2 { background-image: url('/img/ward2sq.jpg'); }
+  .ward3 { background-image: url('/img/ward3sq.jpg'); }
+  .ward4 { background-image: url('/img/ward4sq.jpg'); }
+  .ward5 { background-image: url('/img/ward5sq.jpg'); }
+  .ward6 { background-image: url('/img/ward6sq.jpg'); }
+  .ward7 { background-image: url('/img/ward7sq.jpg'); }
+  .ward8 { background-image: url('/img/ward8sq.jpg'); }
+  .ward9 { background-image: url('/img/ward9sq.jpg'); }
+  .ward10 { background-image: url('/img/ward10sq.jpg'); }
+  .ward11 { background-image: url('/img/ward11sq.jpg'); }
+  .ward12 { background-image: url('/img/ward12sq.jpg'); }
+
+  h3 { position: absolute; top: 1rem; display: inline-block; margin: 0; padding: 0; padding-left: 1rem; line-height: 2rem;}
+  small { display: block; }
+}
+
+
 .voting-table {
   line-height: 2rem;
   text-align: left;

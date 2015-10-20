@@ -45,7 +45,7 @@ class Attendance extends Model
         }
 
         return $attendance_records->sortBy(function(AttendanceRecord $attendanceRecord) {
-            return $attendanceRecord->getWard();
+            return $attendanceRecord->getAttendee()->getWardNumber();
         });
     }
 }

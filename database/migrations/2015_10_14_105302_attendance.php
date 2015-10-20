@@ -13,7 +13,8 @@ class Attendance extends Migration
     public function up()
     {
         \Schema::create('attendance', function(Blueprint $table) {
-            $table->increments('id');
+            $table->string('id');
+            $table->primary('id');
 
             $table->integer('meeting_id')->unsigned();
             $table->foreign('meeting_id')->references('id')->on('meetings');

@@ -2,6 +2,7 @@
 
 namespace Depotwarehouse\YEGVotes\Console\Commands;
 
+use Depotwarehouse\YEGVotes\Jobs\UpdateAttendance;
 use Depotwarehouse\YEGVotes\Model\Attendance;
 use Depotwarehouse\YEGVotes\Model\Meeting;
 use Illuminate\Console\Command;
@@ -30,15 +31,12 @@ class UpdateAttendanceCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @return void
+     * @param \Depotwarehouse\YEGVotes\Jobs\UpdateAttendance $internalCommand
      */
-    public function __construct(Meeting $meetings, Attendance $model, Client $sodaClient)
+    public function __construct(UpdateAttendance $internalCommand)
     {
         parent::__construct();
-
-        $this->model = $model;
-        $this->meetings = $meetings;
-        $this->sodaClient = $sodaClient;
+        $this->internalCommand = $internalCommand;
     }
 
     /**
@@ -48,36 +46,7 @@ class UpdateAttendanceCommand extends Command
      */
     public function handle()
     {
-        $searchParams = [
-            '$limit' => 50000
-        ];
-        $data = $this->sodaClient->get("/resource/prdj-dgnz.json", $searchParams);
-
-        $createdRecords = 0;
-        $totalRecords = count($data);
-        foreach ($data as $attendanceData) {
-            $meeting = $this->meetings->find($attendanceData['meeting_id']);
-
-            if ($meeting == null) {
-                $this->output->writeln("There was no meeting with minutes with ID: {$attendanceData['meeting_id']}");
-                continue;
-            }
-
-            $existingRecord = $this->model->attendeeAtMeeting($attendanceData['attendee'], $attendanceData['meeting_id']);
-
-            if ($existingRecord === null) {
-                // We need to create a new record.
-                $this->model->create([
-                    'meeting_id' => $attendanceData['meeting_id'],
-                    'item_id' => $attendanceData['item_id'],
-                    'attendee' => $attendanceData['attendee'],
-                    'present' => ($attendanceData['status'] == 'Present')
-                ]);
-                $createdRecords++;
-            }
-
-        }
-
-        $this->output->writeln("Processed {$totalRecords}, created {$createdRecords} records");
+        $this->internalCommand->setOutputHandler($this->output);
+        $this->internalCommand->execute();
     }
 }

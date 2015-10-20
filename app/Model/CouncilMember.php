@@ -16,6 +16,12 @@ class CouncilMember
         return $this->name;
     }
 
+    public function getWardNumber()
+    {
+        if ($this->ward == "Mayor") return 0;
+        return $this->ward;
+    }
+
 
     public function getShortWard()
     {

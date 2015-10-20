@@ -18,7 +18,6 @@ class Councillors extends Controller
     {
         $last_meeting = $this->meetingModel->findLatestMeeting();
 
-
         $records = $this->attendanceModel->getRecordsForCouncil();
         return view('councillor_list')
             ->with('attendance', $records)

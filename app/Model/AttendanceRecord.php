@@ -16,9 +16,6 @@ class AttendanceRecord
         $this->total_meetings = $total_days;
     }
 
-    /**
-     * @return string
-     */
     public function getAttendee()
     {
         return $this->attendee;
