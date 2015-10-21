@@ -19,7 +19,7 @@ class CouncilMember
     public function getWardNumber()
     {
         if ($this->ward == "Mayor") return 0;
-        return $this->ward;
+        return intval($this->ward);
     }
 
 

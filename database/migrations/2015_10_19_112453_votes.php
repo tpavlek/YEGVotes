@@ -17,7 +17,7 @@ class Votes extends Migration
             $table->primary('id');
 
             $table->string('motion_id');
-            $table->foreign('motion_id')->references('id')->on('motions');
+            $table->foreign('motion_id')->references('id')->on('motions')->onDelete('cascade');
 
             $table->string('voter');
             $table->string('vote');

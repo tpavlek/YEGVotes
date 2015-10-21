@@ -42,6 +42,16 @@ abstract class SocrataSync
     public abstract function getIdsToSkip(Collection $data);
 
     /**
+     * Get the search parameters that will be passed to the Socrata API.
+     *
+     * @return array
+     */
+    public function getSearchParams()
+    {
+        return [];
+    }
+
+    /**
      * Get the key of the foreign relationship, which will map to an entry in the IdsToSkip array.
      *
      * @return string
@@ -81,6 +91,8 @@ abstract class SocrataSync
             '$limit' => 5000,
             '$offset' => 0
         ];
+
+        $searchParams = $searchParams + $this->getSearchParams();
 
         $data = $this->socrataClient->get($this->getResourceUri(), $searchParams);
         $recordsToInsert = [];

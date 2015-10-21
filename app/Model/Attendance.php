@@ -14,6 +14,10 @@ class Attendance extends Model
 
     protected $fillable = [ "meeting_id", "item_id", "attendee", "present" ];
 
+    public function getAttendee()
+    {
+        return new CouncilMember($this->attributes['attendee']);
+    }
 
     public function attendeeAtMeeting($attendee, $meeting_id)
     {
@@ -28,7 +32,6 @@ class Attendance extends Model
      */
     public function getRecordsForCouncil()
     {
-
         $results = $this->getConnection()->getPdo()->query("
             select attendee,
             (select count(id) from attendance where present = 1 and a.attendee = attendee) as present,

@@ -1,3 +1,12 @@
+@import "forms";
+
+$background-color: #D4DAD0;
+$yes-vote-color: green;
+$absent-vote-color: #daa520;
+$no-vote-color: #D44141;
+
+$row-highlight-color: #1F1F1F;
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -12,7 +21,7 @@ html, button, input, select, textarea,
 }
 
 body {
-  background-color:#D4DAD0;
+  background-color:$background-color;
 }
 
 .body-wrapper {
@@ -53,47 +62,55 @@ span[data-attendance-percent="100"] { color: green; }
 }
 
 .vote {
-
   width: 100%;
   line-height: 2rem;
-  height: 2rem;
+
+  .vote-summary, .sub-votes {
+    height: 2rem;
+    overflow: hidden;
+  }
+
+  .sub-votes {
+    text-align:right;
+  }
 
   .short-title {
-    overflow: hidden;
     text-overflow: ellipsis;
-    display:inline-block;
-    float:left;
-    width: 80%;
     font-weight: 800;
     padding-left: 0.5rem;
     background: darkgrey;
-    height: 100%;
+    cursor: pointer;
   }
 
   .vote {
+    text-align: left;
     padding-left: 0.5rem;
-    display:inline-block;
+    width: 100%;
     height: 100%;
-    float:right;
-    width: 20%;
-    min-width: 100px;
     cursor: pointer;
+    display:block;
   }
   .vote.motion-list { cursor: default; }
+
 }
+
 .vote.Yes { background-color: green; }
 .vote.No { background-color: darkred; color: white; }
 .vote.Absent { background-color: goldenrod;}
-.vote.Abstain { background-color: lightgrey; }
+.vote.Abstain, .vote.No-Vote { background-color: lightgrey; }
 
 .council-member-img { display: inline-block; }
 .council-member-img.ward1 { }
 .council-member-img.ward2 { background-image: url('/img/ward2.jpg'); width: 200px; height: 250px;}
 
-.mover, .seconder { width: 30rem; text-align: left; height: 150px; background: green; padding: 1rem; margin: 0 auto;}
+.mover, .seconder { width: 30rem; text-align: left; height: 150px; margin: 0 auto;}
 
 .small-person-details {
   position: relative;
+  padding: 1rem;
+
+  .person-details { background-color: rgba(187, 187, 187, 0.270588); text-align: left; padding: 1rem; }
+
   .council-member-img { border-radius: 50%; background-size: 100px 100px; width: 100px; height: 100px; }
   .ward1 { background-image: url('/img/ward1sq.jpg'); }
   .ward2 { background-image: url('/img/ward2sq.jpg'); }
@@ -107,22 +124,48 @@ span[data-attendance-percent="100"] { color: green; }
   .ward10 { background-image: url('/img/ward10sq.jpg'); }
   .ward11 { background-image: url('/img/ward11sq.jpg'); }
   .ward12 { background-image: url('/img/ward12sq.jpg'); }
+  .wardMayor { background-image: url("/img/wardMayorsq.jpg"); }
 
   h3 { position: absolute; top: 1rem; display: inline-block; margin: 0; padding: 0; padding-left: 1rem; line-height: 2rem;}
   small { display: block; }
 }
 
 
-.voting-table {
-  line-height: 2rem;
-  text-align: left;
-  margin: 0 auto;
-  font-size: 120%;
 
-  .vote { width: auto; padding-left: 0.5rem; padding-right: 0.5rem;}
+.vote-container { margin-bottom: 1rem; margin-top: 2rem; display:inline-block; }
 
-  tr td:nth-child(1), tr th:nth-child(1) {
-    padding-right: 5rem;
+.tabular-votes {
+  display: flex;
+  .vote-type { margin: 0; padding: 0.5rem; box-shadow: 0 1px 5px $row-highlight-color; }
+  .vote-column.Yes .vote-type { color: whitesmoke; background: darken($yes-vote-color, 10%);   }
+  .vote-column.Absent .vote-type { background: darken($absent-vote-color, 10%); }
+  .vote-column.No .vote-type { color:whitesmoke; background: darken($no-vote-color, 10%); }
+
+  .vote-column {
+    flex-direction: column;
+    text-align: left;
+    padding-bottom: 0.5rem;
   }
 
+  .vote-column.Yes { background-color: $yes-vote-color; }
+  .vote-column.Absent { background-color: $absent-vote-color; }
+  .vote-column.No { background-color: $no-vote-color; }
+
+  .vote { padding: 0.5rem; }
+}
+
+.motion-status {
+  font-size: 4em;
+  height: 150px;
+  line-height: 150px;
+  margin-bottom: 2rem;
+}
+
+header nav {
+  padding-left: 2rem;
+  background: darken($background-color, 10%);
+  box-shadow: 0 2px 5px black;
+  a { color: inherit; text-decoration: none; }
+  h1 { display: inline-block; }
+  ul { display: inline-block; }
 }

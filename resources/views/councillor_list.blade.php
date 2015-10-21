@@ -20,32 +20,52 @@
                         </h3>
                     </div>
                     <h2>Recent Votes</h2>
-                    @foreach ($voting_items as $voting_item)
-                        <div class="vote">
-                            <div class="short-title">{{ $voting_item->title }}</div>
-                            @if ($voting_item->motions->count() > 1)
-                                <span class="vote motion-list">Motions: {{ $voting_item->motions->count() }}</span>
+                    <div class="vote-container" style="margin-top: 0;">
+                        @foreach ($voting_items as $voting_item)
 
-                                <div class="sub-votes">
-                                    @foreach ($voting_item->motions as $motion)
-                                        <span class="vote {{ $voting_item->vote($attendanceRecord->getAttendee()) }}"
-                                              data-remote-url="{{ URL::route('motion.show', $motion->id) }}">
-                                            {{ $motion->vote($attendanceRecord->getAttendee()) }}
-                                        </span>
+                            <div class="pure-g">
+                                <div class="vote">
+                                    <div class="vote-summary">
+                                        <div class="pure-u-4-5">
+                                            <div class="short-title" data-remote-url="{{ URL::route('agenda_item.show', $voting_item->id) }}">
+                                                {{ $voting_item }}
+                                            </div>
+                                        </div>
 
-                                    @endforeach
+                                        @if ($voting_item->interestingMotions()->count() > 1)
+                                            <div class="pure-u-1-5">
+                                                <span class="vote motion-list">Motions: {{ $voting_item->motions->count() }}</span>
+                                            </div>
+                                        @else
+                                            <div class="pure-u-1-5">
+                                                <span class="vote {{ $voting_item->interestingMotions()->first()->vote($attendanceRecord->getAttendee()) }}"
+                                                      data-remote-url="{{ URL::route('motion.show', $voting_item->motion->id) }}">
+                                                    {{ $voting_item->vote($attendanceRecord->getAttendee()) }}
+                                                </span>
+                                            </div>
+                                        @endif
+
+                                    </div>
+
+                                    @if ($voting_item->interestingMotions()->count() > 1)
+                                        <div class="sub-votes">
+                                            @foreach ($voting_item->interestingMotions() as $motion)
+                                                <div class="pure-u-1-5">
+                                                    <span class="vote {{ $motion->vote($attendanceRecord->getAttendee()) }}"
+                                                          data-remote-url="{{ URL::route('motion.show', $motion->id) }}">
+                                                        {{ $motion->vote($attendanceRecord->getAttendee()) }}
+                                                    </span>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
+
                                 </div>
+                            </div>
 
-                            @else
-                                <span class="vote {{ $voting_item->vote($attendanceRecord->getAttendee()) }}"
-                                      data-remote-url="{{ URL::route('motion.show', $voting_item->motion->id) }}">
-                                    {{ $voting_item->vote($attendanceRecord->getAttendee()) }}
-                                </span>
-                            @endif
 
-                        </div>
-
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
                 <div style="clear:both;"></div>
             </div>
@@ -59,7 +79,13 @@
         $(document).ready(function() {
             $("span.vote:not(.motion-list)").click(function() {
                 window.location = $(this).data('remote-url');
+            });
+
+            $("div.short-title").click(function() {
+                window.location = $(this).data('remote-url');
             })
+
+
         });
     </script>
 @stop

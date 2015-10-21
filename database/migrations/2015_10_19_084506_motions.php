@@ -17,7 +17,7 @@ class Motions extends Migration
             $table->primary('id');
 
             $table->integer('item_id')->unsigned();
-            $table->foreign('item_id')->references('id')->on('agenda_items');
+            $table->foreign('item_id')->references('id')->on('agenda_items')->onDelete('cascade');
 
             $table->string('mover')->nullable();
             $table->string('seconder')->nullable();

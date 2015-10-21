@@ -1,9 +1,28 @@
 @extends('layout')
 
 @section('content')
-    <h2>{{ $motion->meeting->meeting_type }} {{ $motion->meeting->date->toDateString() }}: {{ $motion->agenda_item }}</h2>
-
-    <h3>Motion: {{ strip_tags($motion) }}</h3>
+    <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-2">
+            <h1>
+                {{ $motion->meeting->title }}
+                <a href="{{ URL::route('meetings.show', $motion->meeting->id) }}" class="button primary small">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </h1>
+            <h2>
+                {{ $motion->agenda_item }}
+                <a href="{{ URL::route('agenda_item.show', $motion->agenda_item->id) }}" class="button primary xsmall">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </h2>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+            <h1>Motion:</h1>
+            <p>
+                {!! $motion !!}
+            </p>
+        </div>
+    </div>
     <div class="pure-g">
         <div class="pure-u-1 pure-u-md-1-3">
             @if ($motion->mover)
@@ -27,65 +46,57 @@
         </div>
 
         <div class="pure-u-1 pure-u-md-1-3">
-            @if ($motion->status == "Carried")
-                <div class="motion-status">
-                    <i class="fa-check-square-o fa-2x"></i> {{ $motion->status }}
-                </div>
-            @elseif ($motion->status == "Failed")
-            @elseif ($motion->status == "No Vote")
-            @else
-            @endif
-            <h2>Motion was: {{ $motion->status }}</h2>
+            <div class="motion-status">
+                @if ($motion->status == "Carried")
+                    <i class="fa fa-check-square-o"></i> {{ $motion->status }}
+                @elseif ($motion->status == "Failed" || $motion->status == "No Vote")
+                    <i class="fa fa-times-circle-o"></i> {{ $motion->status }}
+                @else
+                    <i class="fa fa-times-circle-o"></i> No Status
+                @endif
+            </div>
         </div>
 
     </div>
 
+    <div class="vote-container">
+        <div class="tabular-votes">
+            @if ($votes->get('Yes'))
+                <div class="vote-column Yes">
+                    <h4 class="vote-type">Yes</h4>
+                    @foreach ($votes->get('Yes') as $vote)
+                        <div class="vote">{{ $vote->voter }}</div>
+                    @endforeach
+                </div>
+            @endif
 
-    <h3>Votes</h3>
-    <div>
-        @if ($votes->get('Yes'))
-        <h4>Yes</h4>
-            @foreach ($votes->get('Yes') as $vote)
-                <div class="vote">{{ $vote->voter }}</div>
-            @endforeach
-        @endif
+            @if ($votes->get('No'))
+                <div class="vote-column No">
+                    <h4 class="vote-type">No</h4>
+                    @foreach ($votes->get('No') as $vote)
+                        <div class="vote">{{ $vote->voter }}</div>
+                    @endforeach
+                </div>
+            @endif
 
-        @if ($votes->get('No'))
-            <h4>No</h4>
-            @foreach ($votes->get('No') as $vote)
-                <div class="vote">{{ $vote->voter }}</div>
-            @endforeach
-        @endif
+            @if ($votes->get('Abstain'))
+                <div class="vote-column Abstain">
+                    <h4 class="vote-type">Abstain</h4>
+                    @foreach ($votes->get('Abstain') as $vote)
+                        <div class="vote">{{ $vote->voter }}</div>
+                    @endforeach
+                </div>
+            @endif
 
-        @if ($votes->get('Abstain'))
-            <h4>Abstain</h4>
-            @foreach ($votes->get('Abstain') as $vote)
-                <div class="vote">{{ $vote->voter }}</div>
-            @endforeach
-        @endif
+            @if ($votes->get('Absent'))
+                <div class="vote-column Absent">
+                    <h4 class="vote-type">Absent</h4>
+                    @foreach ($votes->get('Absent') as $vote)
+                        <div class="vote">{{ $vote->voter }}</div>
+                    @endforeach
+                </div>
+            @endif
 
-        @if ($votes->get('Absent'))
-            <h4>Absent</h4>
-            @foreach ($votes->get('Absent') as $vote)
-                <div class="vote">{{ $vote->voter }}</div>
-            @endforeach
-        @endif
-
-
+        </div>
     </div>
-
-    <table class="voting-table">
-        <thead>
-            <tr>
-                <th>Council Member</th>
-                <th>Vote</th>
-            </tr>
-            @foreach($motion->votes as $vote)
-                <tr>
-                    <td>{{ $vote->voter }}</td>
-                    <td class="vote {{ $vote->vote }}">{{ $vote }}</td>
-                </tr>
-            @endforeach
-        </thead>
-    </table>
 @stop

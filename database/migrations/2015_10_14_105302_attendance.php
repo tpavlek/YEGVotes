@@ -17,7 +17,7 @@ class Attendance extends Migration
             $table->primary('id');
 
             $table->integer('meeting_id')->unsigned();
-            $table->foreign('meeting_id')->references('id')->on('meetings');
+            $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade');
 
             $table->integer('item_id')->unsigned();
             $table->string('attendee');

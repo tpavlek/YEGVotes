@@ -26,6 +26,15 @@ class UpdateAttendance extends SocrataSync
         return $entry['meeting_id'] . $entry['attendee'];
     }
 
+    public function getSearchParams()
+    {
+        // We don't want committee or board members.
+        return [
+            '$where' => "attendee like '%Coun% or attendee like '%Mayor%"
+        ];
+    }
+
+
     public function getIdsToSkip(Collection $data)
     {
         $meetingIds = $data->map(function ($dataItem) {

@@ -17,7 +17,7 @@ class Agendas extends Migration
             $table->primary('id');
 
             $table->integer('meeting_id')->unsigned();
-            $table->foreign('meeting_id')->references('id')->on('meetings');
+            $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade');
 
             $table->string('title');
         });

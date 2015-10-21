@@ -13,10 +13,16 @@ class Motion extends Model
 
     public function vote($council_member)
     {
-        return $this->votes()
+        $vote = $this->votes()
             ->getQuery()
             ->where('voter', 'like', $council_member)
             ->first();
+
+        if ($vote == null) {
+            return new Vote([ 'vote' => 'No-Vote' ]);
+        }
+
+        return $vote;
     }
 
     public function getMoverAttribute()

@@ -12,6 +12,11 @@ class Vote extends Model
 
     public $fillable = [ "id", "motion_id", "voter", "vote" ];
 
+    public function motion()
+    {
+        return $this->belongsTo(Motion::class, 'motion_id', 'id', 'votes');
+    }
+
     public function __toString()
     {
         return $this->vote;

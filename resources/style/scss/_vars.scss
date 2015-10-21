@@ -1,0 +1,81 @@
+@mixin box-sizing( $type: border-box ) {
+  -webkit-box-sizing: $type;
+  -moz-box-sizing: $type;
+  -o-box-sizing: $type;
+  -ms-box-sizing: $type;
+  box-sizing: $type;
+}
+
+@if (variable_exists(contact-header-background) == false) {
+  $contact-header-background: #333333;
+}
+
+@if (variable_exists(contact-header-foreground) == false) {
+  $contact-header-foreground: #E6E6E6;
+}
+@if (variable_exists(navigation-header-background) == false) {
+  $navigation-header-background: #F1F1F1;
+}
+
+@if (variable_exists(navigation-header-foreground) == false) {
+  $navigation-header-foreground: black;
+}
+
+@if (variable_exists(call-to-action-block-background-color) == false) {
+  $call-to-action-block-background-color: #FF6C2E;
+}
+
+@if (variable_exists(call-to-action-block-foreground-color) == false) {
+  $call-to-action-block-foreground-color: white;
+}
+
+@if (variable_exists(splash-foreground-color) == false) {
+  $splash-foreground-color: white;
+}
+@if (variable_exists(splash-height-percentage) == false) {
+  $splash-height-percentage: 70%;
+}
+@if (variable_exists(splash-image-url) == false) {
+  $splash-image-url: url('../img/keyboard.png');
+}
+
+@if (variable_exists(button-primary-foreground-color) == false) {
+  $button-primary-foreground-color: whitesmoke;
+}
+
+@if (variable_exists(button-primary-background-color) == false) {
+  $button-primary-background-color: #DC5252;
+}
+
+@if (variable_exists(inverted-button-background-color) == false) {
+  $inverted-button-background-color: white;
+}
+
+@if (variable_exists(inverted-button-foreground-color) == false) {
+  $inverted-button-foreground-color: white;
+}
+
+@if (variable_exists(section-header-underline-color) == false) {
+  $section-header-underline-color: #EDC800;
+}
+
+@if (variable_exists(section-border-color) == false) {
+  $section-border-color: #B2B2B2;
+}
+
+@if (variable_exists(carousel-selector-color) == false) {
+  $carousel-selector-color: #333333;
+}
+
+@if (variable_exists(subsplash-background-color) == false) {
+  $subsplash-background-color: #EDC800;
+}
+
+@if (variable_exists(subsplash-foreground-color) == false) {
+  $subsplash-foreground-color: black;
+}
+
+
+
+
+

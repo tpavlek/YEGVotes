@@ -35,6 +35,15 @@ class UpdateMeetings extends SocrataSync
         return null;
     }
 
+    public function getSearchParams()
+    {
+        $now = Carbon::now()->toDateString();
+        return [
+            '$where' => "meeting_date < '{$now}' and record_type like 'Minutes'"
+        ];
+    }
+
+
     public function mapRecord(array $entry)
     {
         return [

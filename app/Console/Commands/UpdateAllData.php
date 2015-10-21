@@ -62,10 +62,15 @@ class UpdateAllData extends Command
         $this->updateMotions->setOutputHandler($this->output);
         $this->updateVotes->setOutputHandler($this->output);
 
+        $this->output->writeln("--- Updating Meetings ---");
         $this->updateMeetings->execute();
+        $this->output->writeln("--- Updating Attendance ---");
         $this->updateAttendance->execute();
+        $this->output->writeln("--- Updating Agenda ---");
         $this->updateAgenda->execute();
+        $this->output->writeln("--- Updating Motions ---");
         $this->updateMotions->execute();
+        $this->output->writeln("--- Updating Votes ---");
         $this->updateVotes->execute();
     }
 }

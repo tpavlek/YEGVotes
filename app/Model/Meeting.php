@@ -21,6 +21,11 @@ class Meeting extends Model
     public $dates = [ "date" ];
     protected $fillable = [ "id", "meeting_type", 'record_type', "date", "location" ];
 
+    public function getTitleAttribute()
+    {
+        return $this->date->toDateString() . " " . $this->meeting_type;
+    }
+
     /**
      * Find the latest meeting.
      *
@@ -49,6 +54,22 @@ class Meeting extends Model
     public function agenda_items()
     {
         return $this->hasMany(AgendaItem::class, "meeting_id", "id");
+    }
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class, 'meeting_id', 'id');
+    }
+
+    public function getAttendance()
+    {
+        $records = $this->attendance;
+
+        $records = $records->sortBy(function (Attendance $attendance) {
+            return $attendance->getAttendee()->getWardNumber();
+        });
+
+        return $records;
     }
 
     public function getVotingItems()
