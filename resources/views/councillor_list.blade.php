@@ -1,5 +1,8 @@
 @extends('layout')
 
+@section('title')
+@stop
+
 @section('content')
 <div class="pure-g">
     @foreach ($attendance as $attendanceRecord)

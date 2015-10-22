@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+- {{ $attendanceRecord->getAttendee() }}
+@stop
+
 @section('additional_nav')
     @if(\Illuminate\Support\Str::contains(URL::current(), "no_votes"))
         <li>

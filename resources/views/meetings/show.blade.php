@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+- {{ $meeting }}
+@stop
+
 @section('content')
 
     <div class="pure-g">

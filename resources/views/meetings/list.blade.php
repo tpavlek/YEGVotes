@@ -1,5 +1,9 @@
 @extends('layout')
 
+@section('title')
+- List Meetings
+@stop
+
 @section('content')
 
 <h2>Meetings</h2>
