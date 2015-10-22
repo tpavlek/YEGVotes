@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/all.css"/>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
 <header>
@@ -31,4 +30,5 @@
     &copy; <a href="http://tpavlek.me">Troy Pavlek</a> {{ \Carbon\Carbon::now()->year }}.
     Data provided by <a href="https://data.edmonton.ca">Edmonton Open Data Catalogue</a>
 </footer>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 </body>
