@@ -21,4 +21,8 @@
 <div class="body-wrapper">
     @yield('content')
 </div>
+<footer>
+    &copy; <a href="http://tpavlek.me">Troy Pavlek</a> {{ \Carbon\Carbon::now()->year }}.
+    Data provided by <a href="https://data.edmonton.ca">Edmonton Open Data Catalogue</a>
+</footer>
 </body>
