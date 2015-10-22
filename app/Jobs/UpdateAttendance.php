@@ -18,7 +18,7 @@ class UpdateAttendance extends SocrataSync
 
     public function getResourceUri()
     {
-        return "/resource/prdj-dgnz.json";
+        return "/resource/7en4-rwfd.json";
     }
 
     public function resourceId($entry)
@@ -30,7 +30,7 @@ class UpdateAttendance extends SocrataSync
     {
         // We don't want committee or board members.
         return [
-            '$where' => "attendee like '%Coun% or attendee like '%Mayor%"
+            '$where' => "attendee like '%Coun%' or attendee like '%Mayor%'"
         ];
     }
 

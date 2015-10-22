@@ -26,6 +26,11 @@ class Meeting extends Model
         return $this->date->toDateString() . " " . $this->meeting_type;
     }
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     /**
      * Find the latest meeting.
      *

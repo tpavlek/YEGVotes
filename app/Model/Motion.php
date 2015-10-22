@@ -48,6 +48,11 @@ class Motion extends Model
         return $this->hasMany(Vote::class, 'motion_id', 'id');
     }
 
+    public function hasVotes()
+    {
+        return $this->votes->count();
+    }
+
     public function agenda_item()
     {
         return $this->hasOne(AgendaItem::class, 'id', 'item_id');

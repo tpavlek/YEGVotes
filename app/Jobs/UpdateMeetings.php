@@ -17,7 +17,7 @@ class UpdateMeetings extends SocrataSync
 
     public function getResourceUri()
     {
-        return '/resource/mner-asqn.json';
+        return '/resource/p738-nr6i.json';
     }
 
     public function resourceId($entry)
@@ -39,7 +39,7 @@ class UpdateMeetings extends SocrataSync
     {
         $now = Carbon::now()->toDateString();
         return [
-            '$where' => "meeting_date < '{$now}' and record_type like 'Minutes'"
+            "\$where" => "meeting_date < '{$now}' AND record_type = 'Minutes'"
         ];
     }
 
@@ -47,7 +47,7 @@ class UpdateMeetings extends SocrataSync
     public function mapRecord(array $entry)
     {
         return [
-            'id' => $entry['meeting_id'],
+            'id' => $this->resourceId($entry),
             'date' => $this->mergeMeetingDateAndTime($entry['meeting_date'], $entry['meeting_time']),
             'meeting_type' => $entry['meeting_type'],
             'record_type' => $entry['record_type'],

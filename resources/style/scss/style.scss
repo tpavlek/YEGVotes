@@ -6,6 +6,7 @@ $absent-vote-color: #daa520;
 $no-vote-color: #D44141;
 
 $row-highlight-color: #1F1F1F;
+$subtle-background-color: rgba(187, 187, 187, 0.270588);
 
 * {
   -webkit-box-sizing: border-box;
@@ -109,7 +110,7 @@ span[data-attendance-percent="100"] { color: green; }
   position: relative;
   padding: 1rem;
 
-  .person-details { background-color: rgba(187, 187, 187, 0.270588); text-align: left; padding: 1rem; }
+  .person-details {  text-align: left; padding: 1rem; }
 
   .council-member-img { border-radius: 50%; background-size: 100px 100px; width: 100px; height: 100px; }
   .ward1 { background-image: url('/img/ward1sq.jpg'); }
@@ -158,7 +159,6 @@ span[data-attendance-percent="100"] { color: green; }
   font-size: 4em;
   height: 150px;
   line-height: 150px;
-  margin-bottom: 2rem;
 }
 
 header nav {
@@ -169,3 +169,22 @@ header nav {
   h1 { display: inline-block; }
   ul { display: inline-block; }
 }
+
+.motion-summary {
+  box-sizing: border-box;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: $subtle-background-color;
+
+  .vote-container { display: none; }
+}
+
+.absolute-motion-summary {
+  position: absolute;
+  background-color: rgb(187, 187, 187);
+  width: 70%;
+  left: 15%;
+  right: 15%;
+}
+
+

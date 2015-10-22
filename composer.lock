@@ -364,16 +364,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.1.19",
+            "version": "v5.1.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "45e181369991579dc3ad015665eabbb72c0fadba"
+                "reference": "435af155ed15a6b1d03a0d0a46ae4c347d96b0d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/45e181369991579dc3ad015665eabbb72c0fadba",
-                "reference": "45e181369991579dc3ad015665eabbb72c0fadba",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/435af155ed15a6b1d03a0d0a46ae4c347d96b0d7",
+                "reference": "435af155ed15a6b1d03a0d0a46ae4c347d96b0d7",
                 "shasum": ""
             },
             "require": {
@@ -387,6 +387,7 @@
                 "monolog/monolog": "~1.11",
                 "mtdowling/cron-expression": "~1.0",
                 "nesbot/carbon": "~1.19",
+                "paragonie/random_compat": "^1.0.4",
                 "php": ">=5.5.9",
                 "psy/psysh": "~0.5.1",
                 "swiftmailer/swiftmailer": "~5.1",
@@ -488,7 +489,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-10-01 18:32:48"
+            "time": "2015-10-14 15:49:40"
         },
         {
             "name": "league/flysystem",
@@ -788,6 +789,51 @@
             "time": "2015-09-19 14:15:08"
         },
         {
+            "name": "paragonie/random_compat",
+            "version": "1.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "7647ac58c35ece044b939e01c85dbaa73ed26351"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/7647ac58c35ece044b939e01c85dbaa73ed26351",
+                "reference": "7647ac58c35ece044b939e01c85dbaa73ed26351",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/random.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "pseudorandom",
+                "random"
+            ],
+            "time": "2015-10-20 15:22:41"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -903,12 +949,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/socrata/soda-php.git",
-                "reference": "febe86ebccb41020bfbcd8b51584d639860204e0"
+                "reference": "c29f3c3a03267060f32026495b44974cdacda80b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/socrata/soda-php/zipball/febe86ebccb41020bfbcd8b51584d639860204e0",
-                "reference": "febe86ebccb41020bfbcd8b51584d639860204e0",
+                "url": "https://api.github.com/repos/socrata/soda-php/zipball/c29f3c3a03267060f32026495b44974cdacda80b",
+                "reference": "c29f3c3a03267060f32026495b44974cdacda80b",
                 "shasum": ""
             },
             "require": {
@@ -937,7 +983,7 @@
                 "sdk",
                 "socrata"
             ],
-            "time": "2014-10-23 05:18:12"
+            "time": "2015-10-14 22:28:26"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2479,16 +2525,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.13",
+            "version": "4.8.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "be067d6105286b74272facefc2697038f8807b77"
+                "reference": "b4900675926860bef091644849305399b986efa2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/be067d6105286b74272facefc2697038f8807b77",
-                "reference": "be067d6105286b74272facefc2697038f8807b77",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b4900675926860bef091644849305399b986efa2",
+                "reference": "b4900675926860bef091644849305399b986efa2",
                 "shasum": ""
             },
             "require": {
@@ -2547,7 +2593,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-14 13:49:40"
+            "time": "2015-10-17 15:03:30"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
