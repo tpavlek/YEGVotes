@@ -26,7 +26,10 @@
     <div class="pure-g">
         <div class="pure-u-1 pure-u-md-1-3">
             @if ($motion->mover)
-                <div class="mover">
+                <div class="mover" style="position:relative;">
+                    <div class="motion-label">
+                        Mover
+                    </div>
                     <div class="small-person-details">
                         @include('councilMemberPartial', [ 'council_member' => $motion->mover ])
                     </div>
@@ -38,6 +41,9 @@
         <div class="pure-u-1 pure-u-md-1-3">
             @if($motion->seconder)
                 <div class="seconder">
+                    <div class="motion-label">
+                        Second
+                    </div>
                     <div class="small-person-details">
                         @include('councilMemberPartial', [ 'council_member' => $motion->seconder ])
                     </div>

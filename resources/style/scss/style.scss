@@ -102,7 +102,11 @@ span[data-attendance-percent="100"] { color: green; }
 
 }
 
-.mover, .seconder { width: 30rem; text-align: left; height: 150px; margin: 0 auto;}
+.mover, .seconder { width: 30rem; text-align: left; height: 150px; margin: 0 auto; position:relative; }
+
+.mover .small-person-details, .seconder .small-person-details {
+  margin-left: 1.5rem;
+}
 
 @media screen and (max-width: 31em), screen and (min-width: 64em) and (max-width: 106em)  {
   .vote .motion-list {
@@ -142,7 +146,7 @@ span[data-attendance-percent="100"] { color: green; }
   .ward12 { background-image: url('/img/ward12sq.jpg'); }
   .wardMayor { background-image: url("/img/wardMayorsq.jpg"); }
 
-  h3 { position: absolute; top: 1rem; display: inline-block; margin: 0; padding: 0; padding-left: 1rem; line-height: 2rem;}
+  h3 { position: absolute; top: 3rem; display: inline-block; margin: 0; padding: 0; padding-left: 1rem; line-height: 2rem;}
   small { display: block; }
 }
 
@@ -284,6 +288,22 @@ header nav {
   }
 
   li.active { background: orangered;}
+}
+
+.motion-label {
+  display: inline-block;
+  font-size: 1.5em;
+  /* Safari */
+  -webkit-transform: rotate(-90deg);
+
+  /* Firefox */
+  -moz-transform: rotate(-90deg);
+
+  /* IE */
+  -ms-transform: rotate(-90deg);
+  position:absolute;
+  left: 0;
+  top: 50%;
 }
 
 
