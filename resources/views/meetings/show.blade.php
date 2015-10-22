@@ -6,7 +6,7 @@
         <div class="pure-u-1 pure-u-lg-1-2">
             <h1>{{ $meeting }}</h1>
             <div style="text-align: left; line-height:1.8em;">
-                @foreach($meeting->agenda_items as $agenda_item)
+                @forelse($meeting->agenda_items as $agenda_item)
                     <span>{{ $agenda_item->title }}</span>
                     @if ($agenda_item->hasVotes())
                         <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
@@ -14,7 +14,14 @@
                         </a>
                     @endif
                     <br />
-                @endforeach
+                @empty
+                    <h2>There is nothing here!</h2>
+                    <p>
+                        This usually means that the city clerk has not yet updated the Edmonton Open Data API with
+                        this meeting's minutes
+                    </p>
+                    <a href="{{ URL::to('/') }}" class="button xlarge">Go Home and Try Again</a>
+                @endforelse
             </div>
         </div>
         <div class="pure-u-1 pure-u-lg-1-2">

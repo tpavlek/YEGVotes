@@ -22,7 +22,6 @@
                     <h2>Recent Votes</h2>
                     <div class="vote-container" style="margin-top: 0;">
                         @foreach ($voting_items as $voting_item)
-
                             <div class="pure-g">
                                 <div class="vote">
                                     <div class="vote-summary">

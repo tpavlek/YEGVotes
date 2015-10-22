@@ -23,6 +23,11 @@
         @forelse ($agenda_item->motions as $motion)
             <div class="pure-u-1 pure-u-md-1-3">
                 <div class="motion-summary">
+                    <p>
+                        <a href="{{ URL::route('motion.show', $motion->id) }}" class="button secondary xsmall">
+                            View Motion
+                        </a>
+                    </p>
                     {!! $motion !!}
                     <div class="motion-status" style="font-size: 2em;">
                         @if ($motion->status == "Carried")
@@ -35,7 +40,9 @@
                     </div>
                     @if ($motion->hasVotes())
                         <div>
-                            <button class="button vote-toggle">Show Votes</button>
+                            <button class="button vote-toggle">
+                                <i class="fa fa-expand"></i> <span class="vote-text">Show Votes</span>
+                            </button>
                         </div>
                     @endif
 
@@ -97,7 +104,7 @@
 
                 console.log($(this));
                 if (voteContainer.is(':visible')) {
-                    button.text("Show Votes");
+                    button.find('.vote-text').html("Show Votes");
                     motionSummary.removeClass('absolute-motion-summary');
                     voteContainer.slideToggle();
                 } else {
@@ -116,7 +123,7 @@
                         left: "-=" + leftDifference
                         //right: "15%",
                     }, 500, function() {
-                        button.text("Hide Votes");
+                        button.find('.vote-text').html("Hide Votes");
                         motionSummary.addClass('absolute-motion-summary');
                         motionSummary.removeAttr('style');
                         voteContainer.slideToggle().css("display", "inline-block");

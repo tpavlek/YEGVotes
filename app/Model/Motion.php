@@ -13,10 +13,9 @@ class Motion extends Model
 
     public function vote($council_member)
     {
-        $vote = $this->votes()
-            ->getQuery()
-            ->where('voter', 'like', $council_member)
-            ->first();
+        $vote = $this->votes->first(function ($key, Vote $vote) use ($council_member) {
+            return $vote->voter == $council_member;
+        });
 
         if ($vote == null) {
             return new Vote([ 'vote' => 'No-Vote' ]);

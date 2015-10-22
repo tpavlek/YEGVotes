@@ -19,6 +19,7 @@ class AgendaItem extends Model
     public $timestamps = false;
 
     protected $fillable = [ 'id', 'meeting_id', 'title' ];
+    protected $interestingMotions = null;
 
     public function __toString()
     {
@@ -71,9 +72,15 @@ class AgendaItem extends Model
      * Gets a collection of (up-to) five interesting motions.
      *
      * These motions exclude any "no-vote" motions, and in a large set will include the first two and the final three.
+     *
+     * For efficiency reasons the result will be "cached" in `$this->interestingMotions`
      */
     public function interestingMotions()
     {
+        if ($this->interestingMotions != null) {
+            return $this->interestingMotions;
+        }
+
         /** @var \Illuminate\Database\Eloquent\Collection $motions */
         $motions = $this->motions;
 
@@ -87,6 +94,8 @@ class AgendaItem extends Model
         }
 
         $interestingMotions = $motions->slice(0, 2)->merge($motions->slice($motions->count() - 3, 3));
+
+        $this->interestingMotions = $interestingMotions;
         return $interestingMotions;
     }
 

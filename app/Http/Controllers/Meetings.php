@@ -16,6 +16,10 @@ class Meetings extends Controller
     {
         $meetings = $this->model->orderBy('date', 'desc')->get();
 
+        $meetings = $meetings->groupBy(function(Meeting $meeting) {
+            return $meeting->date->format("Y-m");
+        });
+
         return view('meetings.list')->with('meetings', $meetings);
     }
 
