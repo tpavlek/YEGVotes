@@ -3,13 +3,9 @@
 @section('content')
 <div class="pure-g">
     @foreach ($attendance as $attendanceRecord)
-        <div class="pure-u-1-2">
+        <div class="pure-u-lg-1-2 pure-u-1">
             <div class="person-summary">
-                <div class="person-details">
-                    <img src="/img/{{ $attendanceRecord->getShortWard() }}.jpg" />
-                    <h3>{{ $attendanceRecord->getAttendee() }} <small>{{ $attendanceRecord->getWard() }}</small></h3>
-
-                </div>
+                @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee() ])
                 <div class="voting-summary">
                     <div class="attendance">
                         <h3>
@@ -33,7 +29,9 @@
 
                                         @if ($voting_item->interestingMotions()->count() > 1)
                                             <div class="pure-u-1-5">
-                                                <span class="vote motion-list">Motions: {{ $voting_item->motions->count() }}</span>
+                                                <span class="vote motion-list">
+                                                    <span class="motion-list-label">Motions:</span>
+                                                    <span class=motion-list-count">{{ $voting_item->motions->count() }}</span>
                                             </div>
                                         @else
                                             <div class="pure-u-1-5">

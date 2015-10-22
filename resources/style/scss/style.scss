@@ -22,7 +22,7 @@ html, button, input, select, textarea,
 }
 
 body {
-  background-color:$background-color;
+  background-color: $background-color;
 }
 
 .body-wrapper {
@@ -45,6 +45,13 @@ $person-details-size: 300px;
   .voting-summary { text-align: left; float: right; width: calc(100% - 300px);}
 
   margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 64em) {
+  .person-summary {
+    .person-details { float: none; width: 100%; }
+    .voting-summary { float: none; width: 100%; }
+  }
 }
 
 span[data-attendance-percent^="7"] { color: red; }
@@ -95,16 +102,24 @@ span[data-attendance-percent="100"] { color: green; }
 
 }
 
+.mover, .seconder { width: 30rem; text-align: left; height: 150px; margin: 0 auto;}
+
+@media screen and (max-width: 64em) {
+  .vote .motion-list {
+    .motion-list-label { display: none; }
+  }
+
+  .mover, .seconder { width: auto; }
+}
+
 .vote.Yes { background-color: green; }
 .vote.No { background-color: darkred; color: white; }
 .vote.Absent { background-color: goldenrod;}
 .vote.Abstain, .vote.No-Vote { background-color: lightgrey; }
 
 .council-member-img { display: inline-block; }
-.council-member-img.ward1 { }
-.council-member-img.ward2 { background-image: url('/img/ward2.jpg'); width: 200px; height: 250px;}
 
-.mover, .seconder { width: 30rem; text-align: left; height: 150px; margin: 0 auto;}
+
 
 .small-person-details {
   position: relative;
@@ -131,6 +146,44 @@ span[data-attendance-percent="100"] { color: green; }
   small { display: block; }
 }
 
+.person-summary {
+  .council-member-img { background-size: 200px 250px; width: 200px; height: 250px; }
+  .ward1 { background-image: url('/img/ward1.jpg'); }
+  .ward2 { background-image: url('/img/ward2.jpg'); }
+  .ward3 { background-image: url('/img/ward3.jpg'); }
+  .ward4 { background-image: url('/img/ward4.jpg'); }
+  .ward5 { background-image: url('/img/ward5.jpg'); }
+  .ward6 { background-image: url('/img/ward6.jpg'); }
+  .ward7 { background-image: url('/img/ward7.jpg'); }
+  .ward8 { background-image: url('/img/ward8.jpg'); }
+  .ward9 { background-image: url('/img/ward9.jpg'); }
+  .ward10 { background-image: url('/img/ward10.jpg'); }
+  .ward11 { background-image: url('/img/ward11.jpg'); }
+  .ward12 { background-image: url('/img/ward12.jpg'); }
+  .wardMayor { background-image: url("/img/wardMayor.jpg"); }
+}
+
+@media screen and (max-width: 64em) {
+  .person-summary {
+    .council-member-img { border-radius: 50%; background-size: 100px 100px; width: 100px; height: 100px; }
+    .ward1 { background-image: url('/img/ward1sq.jpg'); }
+    .ward2 { background-image: url('/img/ward2sq.jpg'); }
+    .ward3 { background-image: url('/img/ward3sq.jpg'); }
+    .ward4 { background-image: url('/img/ward4sq.jpg'); }
+    .ward5 { background-image: url('/img/ward5sq.jpg'); }
+    .ward6 { background-image: url('/img/ward6sq.jpg'); }
+    .ward7 { background-image: url('/img/ward7sq.jpg'); }
+    .ward8 { background-image: url('/img/ward8sq.jpg'); }
+    .ward9 { background-image: url('/img/ward9sq.jpg'); }
+    .ward10 { background-image: url('/img/ward10sq.jpg'); }
+    .ward11 { background-image: url('/img/ward11sq.jpg'); }
+    .ward12 { background-image: url('/img/ward12sq.jpg'); }
+    .wardMayor { background-image: url("/img/wardMayorsq.jpg"); }
+
+    h3 { font-size: 100%; text-align: center; }
+  }
+}
+
 
 
 .vote-container { margin-bottom: 1rem; margin-top: 2rem; display:inline-block; }
@@ -143,7 +196,6 @@ span[data-attendance-percent="100"] { color: green; }
   .vote-column.No .vote-type { color:whitesmoke; background: darken($no-vote-color, 10%); }
 
   .vote-column {
-    flex-direction: column;
     text-align: left;
     padding-bottom: 0.5rem;
   }
@@ -155,10 +207,20 @@ span[data-attendance-percent="100"] { color: green; }
   .vote { padding: 0.5rem; }
 }
 
+@media screen and (max-width: 64em) {
+  .tabular-votes {
+    display: block;
+  }
+}
+
 .motion-status {
   font-size: 4em;
   height: 150px;
   line-height: 150px;
+}
+
+.motion-status.smaller {
+  font-size: 2em;
 }
 
 header nav {
@@ -187,6 +249,20 @@ header nav {
   width: 70%;
   left: 15%;
   right: 15%;
+}
+
+@media screen and (max-width: 64em) {
+  header nav h1 { font-size: 1em; }
+  header nav ul { font-size: 1em; }
+
+  .absolute-motion-summary {
+    width: 90%;
+    left: 5%;
+    right:5%;
+  }
+
+  .motion-summary { margin-left: 0; margin-right: 0; }
+  .motion-status.smaller { font-size: 1.5em; height: 2em; line-height: 2em; }
 }
 
 .meetings-list {

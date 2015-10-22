@@ -21,7 +21,7 @@
     <h2>Motions</h2>
     <div class="pure-g">
         @forelse ($agenda_item->motions as $motion)
-            <div class="pure-u-1 pure-u-md-1-3">
+            <div class="pure-u-1 pure-u-md-1-3 motion-summary-container">
                 <div class="motion-summary">
                     <p>
                         <a href="{{ URL::route('motion.show', $motion->id) }}" class="button secondary xsmall">
@@ -29,7 +29,7 @@
                         </a>
                     </p>
                     {!! $motion !!}
-                    <div class="motion-status" style="font-size: 2em;">
+                    <div class="motion-status smaller">
                         @if ($motion->status == "Carried")
                             <i class="fa fa-check-square-o"></i> {{ $motion->status }}
                         @elseif ($motion->status == "Failed" || $motion->status == "No Vote")
@@ -97,41 +97,63 @@
 
     <script>
         $(document).ready(function() {
-            $(".vote-toggle").click(function() {
+            var bindAnimation = function() {
                 var button = $(this);
                 var voteContainer = $(this).parent().next();
                 var motionSummary = $(this).parents('.motion-summary');
 
-                console.log($(this));
                 if (voteContainer.is(':visible')) {
-                    button.find('.vote-text').html("Show Votes");
-                    motionSummary.removeClass('absolute-motion-summary');
-                    voteContainer.slideToggle();
+                    var originalMotionSummary = $(this).parents('.motion-summary-container').find('.motion-summary:not(".duplicate")');
+                    console.log(originalMotionSummary);
+
+
+                    var widthDifference = motionSummary.width() - originalMotionSummary.width();
+                    motionSummary.animate({
+                        height: "-=" + motionSummary.height(),
+                        width: "-=" + widthDifference,
+                        left: "+=" + (widthDifference / 2),
+                        right: "+=" + (widthDifference / 2)
+                    }, 500, "swing", function() {
+                        motionSummary.remove();
+                        originalMotionSummary.css("display", "block");
+                    });
                 } else {
                     var width = $(window).width();
                     var fifteenFromLeft = width * 0.15;
+                    var newWidth = width * 0.7;
+
+                    if (width < 1024) {
+                        // If the screen is less than 1024 wide, we make the modal 90% of width instead of 70%
+                        fifteenFromLeft = width * 0.05;
+                        newWidth = width * 0.9;
+                    }
                     var currentPosition = motionSummary.position();
 
-                    motionSummary.css("position", "absolute");
-                    motionSummary.css("top", currentPosition.top);
-                    motionSummary.css("left", currentPosition.left);
+                    var newMotionSummary = motionSummary.clone().addClass('duplicate').appendTo(motionSummary.parent());
+                    $(".vote-toggle").unbind("click");
+                    $(".vote-toggle").click(bindAnimation);
+                    motionSummary.css("display", "none");
+                    newMotionSummary.css("position", "absolute");
+                    newMotionSummary.css("top", currentPosition.top);
+                    newMotionSummary.css("left", currentPosition.left);
 
                     var leftDifference = currentPosition.left - fifteenFromLeft;
 
-                    motionSummary.animate({
-                        width: width * 0.7,
+                    newMotionSummary.animate({
+                        width: newWidth,
                         left: "-=" + leftDifference
-                        //right: "15%",
                     }, 500, function() {
-                        button.find('.vote-text').html("Hide Votes");
-                        motionSummary.addClass('absolute-motion-summary');
-                        motionSummary.removeAttr('style');
-                        voteContainer.slideToggle().css("display", "inline-block");
+                        newMotionSummary.find('.vote-toggle .vote-text').html("Hide Votes");
+                        newMotionSummary.addClass('absolute-motion-summary');
+                        newMotionSummary.removeAttr('style');
+                        newMotionSummary.find('.vote-container').slideToggle().css("display", "inline-block");
                     });
 
                 }
 
-            });
+            };
+
+            $(".vote-toggle").click(bindAnimation);
         });
     </script>
 @stop
