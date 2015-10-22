@@ -31,4 +31,6 @@
     Data provided by <a href="https://data.edmonton.ca">Edmonton Open Data Catalogue</a>
 </footer>
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+@yield('scripts', "")
 </body>

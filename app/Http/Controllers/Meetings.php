@@ -14,7 +14,7 @@ class Meetings extends Controller
 
     public function listMeetings()
     {
-        $meetings = $this->model->orderBy('date', 'desc')->get();
+        $meetings = $this->model->with('agenda_items')->orderBy('date', 'desc')->get();
 
         $meetings = $meetings->groupBy(function(Meeting $meeting) {
             return $meeting->date->format("Y-m");

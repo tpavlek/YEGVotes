@@ -68,6 +68,10 @@
 
     </div>
 
+
+@stop
+
+@section('scripts')
     <script>
         $(document).ready(function() {
             $("span.vote:not(.motion-list)").click(function() {

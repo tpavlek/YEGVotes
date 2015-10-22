@@ -53,6 +53,13 @@ class Meeting extends Model
             ->firstOrFail();
     }
 
+    public function hasVotes()
+    {
+        return $this->agenda_items->contains(function ($key, AgendaItem $agenda_item) {
+            return $agenda_item->hasVotes();
+        });
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
