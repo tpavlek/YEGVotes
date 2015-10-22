@@ -27,6 +27,43 @@ class Attendance extends Model
             ->first();
     }
 
+    public function getRecordForCouncilMember($council_member)
+    {
+        $available_councillors = [
+            "A. Knack - Councillor",
+            "A. Sohi - Councillor",
+            "B. Anderson - Councillor",
+            "B. Esslinger - Councillor",
+            "B. Henderson - Councillor",
+            "D. Loken - Councillor",
+            "E. Gibbons - Councillor",
+            "M. Nickel - Councillor",
+            "M. Oshry - Councillor",
+            "M. Walters - Councillor",
+            "S. McKeen - Councillor",
+            "T. Caterina - Councillor",
+            "D. Iveson - Mayor"
+        ];
+        $council_member = (string)$council_member;
+        if (!in_array($council_member, $available_councillors)) {
+            throw new \InvalidArgumentException("Attempted to query an illegal council member");
+        }
+
+        $results = $this->getConnection()->getPdo()->query("
+            select attendee,
+            (select count(id) from attendance where present = 1 and a.attendee = attendee) as present,
+            count(id) as total
+            from attendance as a
+            where a.attendee like '%{$council_member}%'
+        ");
+
+        foreach ($results as $row) {
+            return new AttendanceRecord($row['attendee'], $row['present'], $row['total']);;
+        }
+
+        return null;
+    }
+
     /**
      * @return \Illuminate\Support\Collection
      */

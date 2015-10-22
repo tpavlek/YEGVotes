@@ -18,11 +18,19 @@ class Councillors extends Controller
 
     public function index()
     {
-        $voting_items = $this->agendaModel->bylaws()->take(10)->get([ 'agenda_items.*' ]);
+        $voting_items = $this->agendaModel->bylaws()->take(10)->get();
         $records = $this->attendanceModel->getRecordsForCouncil();
         return view('councillor_list')
             ->with('attendance', $records)
             ->with('voting_items', $voting_items);
+    }
+
+    public function show($council_member)
+    {
+        $attendance = $this->attendanceModel->getRecordForCouncilMember($council_member);
+        $bylaws = $this->agendaModel->bylaws()->paginate(15);
+
+        return view('councillor.show')->with('voting_items', $bylaws)->with('attendanceRecord', $attendance);
     }
 
 }

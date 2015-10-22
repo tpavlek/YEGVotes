@@ -104,7 +104,7 @@ span[data-attendance-percent="100"] { color: green; }
 
 .mover, .seconder { width: 30rem; text-align: left; height: 150px; margin: 0 auto;}
 
-@media screen and (max-width: 64em) {
+@media screen and (max-width: 31em), screen and (min-width: 64em) and (max-width: 106em)  {
   .vote .motion-list {
     .motion-list-label { display: none; }
   }
@@ -269,6 +269,21 @@ header nav {
   line-height: 1.8em;
   a { text-decoration: none; }
   a:hover { border-bottom: 3px solid slategray; }
+}
+
+.pagination {
+  list-style: none;
+  li {
+    display: inline-block;
+    padding: 0.5rem;
+    background: lightblue;
+    color: black;
+
+    a { text-decoration: none; color: black;}
+    a, a:active { outline: 0;}
+  }
+
+  li.active { background: orangered;}
 }
 
 

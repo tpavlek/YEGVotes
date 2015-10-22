@@ -40,6 +40,7 @@ class AgendaItem extends Model
                 $query->has('votes');
             })
             ->join("meetings", "agenda_items.meeting_id", '=', 'meetings.id')
+            ->select("agenda_items.*")
             ->orderBy('meetings.date', 'DESC')
             ->with('motions.votes');
     }
