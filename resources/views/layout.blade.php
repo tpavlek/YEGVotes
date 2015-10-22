@@ -14,6 +14,7 @@
             <li>
                 <a href="{{ URL::route('meetings.list') }}">Meetings</a>
             </li>
+            @yield('additional_nav', '')
         </ul>
     </nav>
 </header>

@@ -7,3 +7,4 @@ get('/motions/{motion_id}', 'Motions@show')->name('motion.show');
 
 get('/agenda/{agenda_item_id}', 'AgendaItems@show')->name('agenda_item.show');
 get('/councillor/{council_member}', 'Councillors@show')->name('councillor.show');
+get('councillor/{council_member}/no_votes', 'Councillors@noVotes')->name('councillor.no_votes');

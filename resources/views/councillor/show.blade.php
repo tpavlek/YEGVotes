@@ -1,5 +1,21 @@
 @extends('layout')
 
+@section('additional_nav')
+    @if(\Illuminate\Support\Str::contains(URL::current(), "no_votes"))
+        <li>
+            <a href="{{ URL::route('councillor.show', (string)$attendanceRecord->getAttendee()) }}">
+                All Votes
+            </a>
+        </li>
+    @else
+        <li>
+            <a href="{{ URL::route('councillor.no_votes', (string)$attendanceRecord->getAttendee()) }}">
+                Only Votes Against
+            </a>
+        </li>
+    @endif
+@stop
+
 @section('content')
     <div class="pure-g">
         <div class="pure-u-lg-1-2 pure-u-1">
@@ -27,7 +43,7 @@
                         </li>
                         <li>...</li>
                     @endif
-                    @for($i = $voting_items->currentPage(); $i <= $voting_items->count() - 1 && $i <= $voting_items->currentPage() + 6; $i++)
+                    @for($i = $voting_items->currentPage(); $i <= $voting_items->lastPage() - 1 && $i <= $voting_items->currentPage() + 6; $i++)
                         <li @if ($voting_items->currentPage() == $i) class="active" @endif>
                             <a href="{{ $voting_items->url($i) }}">{{ $i }}</a>
                         </li>

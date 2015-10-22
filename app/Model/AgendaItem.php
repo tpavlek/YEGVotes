@@ -45,6 +45,13 @@ class AgendaItem extends Model
             ->with('motions.votes');
     }
 
+    public function scopeVoteAgainst($query, $council_member)
+    {
+        return $query->whereHas('motions.votes', function ($query) use ($council_member) {
+            $query->where('vote', '=', "No")->where('voter', '=', $council_member);
+        });
+    }
+
     public function hasVotes()
     {
         $containsVotes = $this->motions->contains(function ($key, Motion $motion) {
