@@ -43,7 +43,6 @@ class Meeting extends Model
         $tomorrow = Carbon::now()->addDay();
         return $this->newQuery()
             ->where('date', '<=', $tomorrow->toDateTimeString())
-            ->where('meeting_type', 'like', '%city council%')
             ->whereHas('agenda_items', function(Builder $query) {
                 $query->whereHas('motions', function (Builder $query) {
                     $query->has('votes');

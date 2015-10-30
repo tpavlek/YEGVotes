@@ -2,6 +2,7 @@
 
 namespace Depotwarehouse\YEGVotes\Model;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,13 +37,48 @@ class AgendaItem extends Model
     public function scopeBylaws($query)
     {
         return $query->where('title', 'RLIKE', 'Bylaw [0-9](.*)')
-            ->whereHas('motions', function (Builder $query) {
-                $query->has('votes');
-            })
-            ->join("meetings", "agenda_items.meeting_id", '=', 'meetings.id')
-            ->select("agenda_items.*")
-            ->orderBy('meetings.date', 'DESC')
+            ->hasVotes()
+            ->orderedByMeetingDate()
             ->with('motions.votes');
+    }
+
+    public function scopeRecent($query)
+    {
+        $recentThreshold = Carbon::now()->subDays(45)->toDateTimeString();
+        return $query->join("meetings", "agenda_items.meeting_id", '=', 'meetings.id')
+            ->select("agenda_items.*")
+            ->where('meetings.date', '>', $recentThreshold);
+    }
+
+    /**
+     * @param Builder $query
+     */
+    public function scopeOrderedByMeetingDate($query)
+    {
+        return $query->join("meetings", "agenda_items.meeting_id", '=', 'meetings.id')
+            ->select("agenda_items.*")
+            ->orderBy('meetings.date', 'DESC');
+    }
+
+    /**
+     * Filters the current scope to only include items that have motions with votes on them.
+     * @param Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeHasVotes($query)
+    {
+        return $query->whereHas('motions', function (Builder $query) {
+            $query->has('votes');
+        });
+    }
+
+    public function scopeInterestingItems($query)
+    {
+        $query->bylaws()->whereHas('motions', function (Builder $query) {
+            $query->whereHas('votes', function (Builder $query) {
+                $query->whereNotIn('vote', [ 'Yes', 'Absent' ]);
+            });
+        });
     }
 
     public function scopeVoteAgainst($query, $council_member)
@@ -60,6 +96,23 @@ class AgendaItem extends Model
         return $containsVotes;
     }
 
+    /**
+     * An agenda item contains dissent if any of its component motions have dissent
+     * @return bool
+     */
+    public function hasDissent()
+    {
+        return $this->motions->contains(function ($key, Motion $motion) {
+            return $motion->hasDissent();
+        });
+
+    }
+
+    public function isBylaw()
+    {
+        return preg_match('/Bylaw [0-9](.*)/', $this->title) === 1;
+    }
+
     public function meeting()
     {
         return $this->hasOne(Meeting::class, 'id', 'meeting_id');
@@ -74,6 +127,73 @@ class AgendaItem extends Model
     {
         return $this->hasMany(Motion::class, 'item_id', 'id')
             ->orderBy('item_id', 'desc');
+    }
+
+    /**
+     * Interesting agenda items are organized as following:
+     *
+     * The first set of items will always be from the latest meeting, to a maximum of five items. They are ordered by
+     * their "interesting" factor.
+     *
+     * The next selection of items will be from the previous 45 days.
+     *
+
+     */
+    public function getInterestingAgendaItems()
+    {
+        $meetingModel = new Meeting();
+        $last_meeting = Meeting::find(1475);
+
+        /** @var \Illuminate\Database\Eloquent\Collection $recentItems */
+        $recentItems = $last_meeting->agenda_items
+            ->filter(function (AgendaItem $agendaItem) {
+                return $agendaItem->hasVotes();
+            })
+            // We use sortBy and not sortByDesc because this will get reversed in the foreach below
+            ->sortBy(function (AgendaItem $agendaItem) {
+                return $agendaItem->rankInteresting();
+            })
+            ->slice(0, 5);
+
+        $recentItemIds = $recentItems->map(function (AgendaItem $agendaItem) {
+            return $agendaItem->id;
+        })->all();
+
+        $allItems = $this->recent()->hasVotes()->with('motion.votes')->get();
+
+        $allItems = $allItems->reject(function (AgendaItem $agendaItem) use ($recentItemIds) {
+            return in_array($agendaItem->id, $recentItemIds);
+        })
+        ->sortByDesc(function (AgendaItem $agendaItem) {
+            return $agendaItem->rankInteresting();
+        })
+        ->slice(0, 20);
+
+
+        return $recentItems->merge($allItems);
+    }
+
+    /**
+     *
+     * The interesting algorithm is:
+     *
+     * (unanimous (0) | has_dissent (1)) * 0.5 = dissent_ranking
+     * (45 - num_days_since_occurrence) * 0.3 = days_ranking
+     * (any_item (0) | is_bylaw (1)) * 0.2 = bylaw_ranking
+     *
+     * Therefore, the "most interesting item possible" will be a 1, and the least interesting item a 0, with most items
+     * falling as a floating point number between 0 and 1.
+     *
+     * @return float
+     */
+    protected function rankInteresting()
+    {
+        $ranking = 0;
+        $ranking += (int)$this->hasDissent() * 0.5;
+        $ranking += Carbon::now()->diffInDays($this->date) * 0.3;
+        $ranking += (int)$this->isBylaw() * 0.2;
+
+        return $ranking;
     }
 
     /**
@@ -110,6 +230,11 @@ class AgendaItem extends Model
     public function vote($council_member)
     {
         return $this->motions->first()->vote($council_member);
+    }
+
+    public function getDateAttribute()
+    {
+        return $this->meeting->date;
     }
 
 }

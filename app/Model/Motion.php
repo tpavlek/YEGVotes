@@ -24,6 +24,17 @@ class Motion extends Model
         return $vote;
     }
 
+    /**
+     * A motion has dissent if any of its votes are not "Yes" or "Absent"
+     * @return bool
+     */
+    public function hasDissent()
+    {
+        return $this->votes->contains(function ($key, Vote $vote) {
+            return ((string)$vote != "Yes" && (string)$vote != "Absent");
+        });
+    }
+
     public function getMoverAttribute()
     {
         if ($this->attributes['mover'] == null) {
