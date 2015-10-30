@@ -141,9 +141,7 @@ abstract class SocrataSync
             $insertCollection = collect($recordsToInsert);
 
             $this->output("Beginning uniqueness check on {$insertCollection->count()} records");
-            $insertCollection = $insertCollection->unique(function ($recordToInsert) {
-                return $recordToInsert['id'];
-            });
+            $insertCollection = $insertCollection->unique('id');
 
             $this->output("Uniqueness verified, {$insertCollection->count()} records remaining");
 

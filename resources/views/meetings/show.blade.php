@@ -35,7 +35,7 @@
                     @foreach ($attendance->get(1) as $attendanceRecord)
                         <div class="pure-u-1 pure-u-md-1-2">
                             <div class="small-person-details">
-                                @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee() ])
+                                @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'attendance' => false ])
                             </div>
 
                         </div>
@@ -49,7 +49,7 @@
                     @foreach ($attendance->get(0) as $attendanceRecord)
                         <div class="pure-u-1 pure-u-md-1-2">
                             <div class="small-person-details">
-                                @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee() ])
+                                @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'attendance' => false ])
                             </div>
 
                         </div>

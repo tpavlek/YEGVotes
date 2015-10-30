@@ -41,9 +41,6 @@ $person-details-size: 300px;
     small { display: block; font-size: 70%; font-weight: 200; }
   }
 
-  .person-details { float: left; width: 300px; }
-  .voting-summary { text-align: left; float: right; width: calc(100% - 300px);}
-
   margin-bottom: 1rem;
 }
 
@@ -123,13 +120,24 @@ span[data-attendance-percent="100"] { color: green; }
 
 .council-member-img { display: inline-block; }
 
-
+.card {
+  box-shadow: 0px 1px 3px black; border-radius: 1px;
+}
 
 .small-person-details {
   position: relative;
   padding: 1rem;
+  a:hover { border-bottom: none;}
+  a .person-details:hover {  background: darken($subtle-background-color, 15%); }
 
-  .person-details {  text-align: left; padding: 1rem; }
+  .person-details {
+    text-align: left;
+    padding: 1rem;
+    background: $subtle-background-color;
+    @extend .card;
+    display: inline-flex;
+    flex-direction: row;
+  }
 
   .council-member-img { border-radius: 50%; background-size: 100px 100px; width: 100px; height: 100px; }
   .ward1 { background-image: url('/img/ward1sq.jpg'); }
@@ -146,7 +154,17 @@ span[data-attendance-percent="100"] { color: green; }
   .ward12 { background-image: url('/img/ward12sq.jpg'); }
   .wardMayor { background-image: url("/img/wardMayorsq.jpg"); }
 
-  h3 { position: absolute; top: 3rem; display: inline-block; margin: 0; padding: 0; padding-left: 1rem; line-height: 2rem;}
+  .text {
+    display: inline-flex;
+    flex-direction: column;
+    min-width: 20rem;
+
+    h3, h4 {
+      margin: 0; padding: 0; padding-left: 1rem; line-height: 2rem;
+    }
+
+  }
+
   small { display: block; }
 }
 
