@@ -70,21 +70,22 @@ span[data-attendance-percent="100"] { color: green; }
   right: 25%;
 }
 
+.vote:hover {
+  .short-title { background: darken(darkgrey, 10); }
+}
 .vote {
   width: 100%;
   line-height: 2rem;
 
   .vote-summary, .sub-votes {
-    height: 2rem;
-    overflow: hidden;
   }
 
   .sub-votes {
+    display: flex;
     text-align:right;
   }
 
   .short-title {
-    text-overflow: ellipsis;
     font-weight: 800;
     padding-left: 0.5rem;
     background: darkgrey;

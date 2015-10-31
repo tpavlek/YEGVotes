@@ -5,19 +5,7 @@
 @stop
 
 @section('additional_nav')
-    @if(\Illuminate\Support\Str::contains(URL::current(), "no_votes"))
-        <li>
-            <a href="{{ URL::route('councillor.show', (string)$attendanceRecord->getAttendee()) }}">
-                All Votes
-            </a>
-        </li>
-    @else
-        <li>
-            <a href="{{ URL::route('councillor.no_votes', (string)$attendanceRecord->getAttendee()) }}">
-                Only Votes Against
-            </a>
-        </li>
-    @endif
+
 @stop
 
 @section('content')
@@ -34,7 +22,38 @@
                         </span>)
                         </h3>
                     </div>
-                    @include('votingSummaryPartial')
+                    @if(\Illuminate\Support\Str::contains(URL::current(), "no_votes"))
+                        <a href="{{ URL::route('councillor.show', (string)$attendanceRecord->getAttendee()) }}" class="button">
+                            <i class="fa fa-thumbs-up"></i> Show All Votes
+                        </a>
+                    @else
+                        <a href="{{ URL::route('councillor.no_votes', (string)$attendanceRecord->getAttendee()) }}" class="button">
+                            <i class="fa fa-thumbs-down"></i> Show Only No Votes
+                        </a>
+                    @endif
+
+                    <div class="vote-container" style="margin-top: 0;">
+                        @foreach ($voting_items as $voting_item)
+                                <div class="vote" data-remote-url="{{ URL::route('agenda_item.show', $voting_item->id) }}">
+                                    <div class="vote-summary">
+                                        <div class="short-title">
+                                            {{ $voting_item }}
+                                        </div>
+                                    </div>
+
+                                    <div class="sub-votes">
+                                        @foreach ($voting_item->getVoteGroupsForCouncillor($attendanceRecord->getAttendee()) as $key => $votes)
+                                            <span class="vote {{ $key }}">
+                                                {{ $key }}: {{ $votes->count() }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+
+                                </div>
+
+
+                        @endforeach
+                    </div>
                 </div>
                 <div style="clear:both;"></div>
                 <ul class="pagination">
@@ -74,14 +93,9 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $("span.vote:not(.motion-list)").click(function() {
+            $("div.vote").click(function() {
                 window.location = $(this).data('remote-url');
             });
-
-            $("div.short-title").click(function() {
-                window.location = $(this).data('remote-url');
-            })
-
 
         });
     </script>

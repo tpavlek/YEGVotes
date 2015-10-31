@@ -72,6 +72,11 @@ class AgendaItem extends Model
         });
     }
 
+    public function votes()
+    {
+        return $this->hasManyThrough(Vote::class, Motion::class, 'item_id');
+    }
+
     public function scopeInterestingItems($query)
     {
         $query->bylaws()->whereHas('motions', function (Builder $query) {
@@ -94,6 +99,18 @@ class AgendaItem extends Model
             return $motion->votes->count();
         });
         return $containsVotes;
+    }
+
+    public function getVoteGroupsForCouncillor($council_member)
+    {
+        if ($this->votes == null) {
+            dd($this);
+        }
+        return $this->votes->filter(function (Vote $vote) use ($council_member) {
+            return $vote->voter == $council_member;
+        })->groupBy(function (Vote $vote) {
+            return $vote->vote;
+        });
     }
 
     /**
@@ -164,10 +181,10 @@ class AgendaItem extends Model
         $allItems = $allItems->reject(function (AgendaItem $agendaItem) use ($recentItemIds) {
             return in_array($agendaItem->id, $recentItemIds);
         })
-        ->sortByDesc(function (AgendaItem $agendaItem) {
-            return $agendaItem->rankInteresting();
-        })
-        ->slice(0, 20);
+            ->sortByDesc(function (AgendaItem $agendaItem) {
+                return $agendaItem->rankInteresting();
+            })
+            ->slice(0, 20);
 
 
         return $recentItems->merge($allItems);
