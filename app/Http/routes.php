@@ -1,6 +1,6 @@
 <?php
 
-get('/', 'Councillors@index');
+get('/', 'Overview@show');
 get('/meetings', 'Meetings@listMeetings')->name('meetings.list');
 get('/meetings/{meeting_id}', 'Meetings@show')->name('meetings.show');
 get('/motions/{motion_id}', 'Motions@show')->name('motion.show');

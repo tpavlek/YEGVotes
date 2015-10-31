@@ -18,12 +18,7 @@ class Councillors extends Controller
 
     public function index()
     {
-        $voting_items = $this->agendaModel->getInterestingAgendaItems();
-        //$voting_items = $this->agendaModel->bylaws()->take(10)->get();
-        $records = $this->attendanceModel->getRecordsForCouncil();
-        return view('councillor_list')
-            ->with('attendance', $records)
-            ->with('voting_items', $voting_items);
+
     }
 
     public function show($council_member)

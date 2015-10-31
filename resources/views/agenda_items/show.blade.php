@@ -50,46 +50,8 @@
                         </div>
                     @endif
 
-                    <div class="vote-container">
-                        <div class="tabular-votes">
-                            @if ($motion->votes->groupBy('vote')->get('Yes'))
-                                <div class="vote-column Yes">
-                                    <h4 class="vote-type">Yes</h4>
-                                    @foreach ($motion->votes->groupBy('vote')->get('Yes') as $vote)
-                                        <div class="vote">{{ $vote->voter }}</div>
-                                    @endforeach
-                                </div>
-                            @endif
+                    @include('voteTablePartial', [ 'votes' => $motion->votes->groupBy('vote') ])
 
-                            @if ($motion->votes->groupBy('vote')->get('No'))
-                                <div class="vote-column No">
-                                    <h4 class="vote-type">No</h4>
-                                    @foreach ($motion->votes->groupBy('vote')->get('No') as $vote)
-                                        <div class="vote">{{ $vote->voter }}</div>
-                                    @endforeach
-                                </div>
-                            @endif
-
-                            @if ($motion->votes->groupBy('vote')->get('Abstain'))
-                                <div class="vote-column Abstain">
-                                    <h4 class="vote-type">Abstain</h4>
-                                    @foreach ($motion->votes->groupBy('vote')->get('Abstain') as $vote)
-                                        <div class="vote">{{ $vote->voter }}</div>
-                                    @endforeach
-                                </div>
-                            @endif
-
-                            @if ($motion->votes->groupBy('vote')->get('Absent'))
-                                <div class="vote-column Absent">
-                                    <h4 class="vote-type">Absent</h4>
-                                    @foreach ($motion->votes->groupBy('vote')->get('Absent') as $vote)
-                                        <div class="vote">{{ $vote->voter }}</div>
-                                    @endforeach
-                                </div>
-                            @endif
-
-                        </div>
-                    </div>
                 </div>
             </div>
         @empty

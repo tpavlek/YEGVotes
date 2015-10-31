@@ -73,6 +73,31 @@ class Motion extends Model
         return $this->agenda_item->meeting();
     }
 
+    public function getIndicatorString()
+    {
+        $yes_votes = $this->votes->filter(function (Vote $vote) {
+            return $vote->vote == "Yes";
+        })->count();
+
+        $total_votes = $this->votes->reject(function (Vote $vote) {
+            return $vote->vote == "Absent";
+        })->count();
+
+        if ($yes_votes == $total_votes) {
+            return "Unanimous";
+        }
+
+        if ($yes_votes <= floor($total_votes / 2)) {
+            return "Failed";
+        };
+
+        if ($yes_votes < $total_votes) {
+            return "Disagreement";
+        }
+
+        return "Unknown";
+    }
+
     public function __toString()
     {
         return $this->description;

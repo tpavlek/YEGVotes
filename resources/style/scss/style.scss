@@ -30,6 +30,9 @@ body {
   padding: 2rem;
 }
 
+a { text-decoration: none; color: inherit; }
+a:not(.button):hover { border-bottom: 3px solid slategray; box-sizing: border-box; }
+
 $person-details-size: 300px;
 
 .person-summary {
@@ -44,6 +47,7 @@ $person-details-size: 300px;
   margin-bottom: 1rem;
 }
 
+
 @media screen and (max-width: 64em) {
   .person-summary {
     .person-details { float: none; width: 100%; }
@@ -51,7 +55,7 @@ $person-details-size: 300px;
   }
 }
 
-span[data-attendance-percent^="7"] { color: red; }
+span[data-attendance-percent^="7"] { color: darkred; }
 span[data-attendance-percent^="8"] { color: darkorange; }
 span[data-attendance-percent^="9"] { color: mediumseagreen; }
 span[data-attendance-percent="100"] { color: green; }
@@ -102,7 +106,7 @@ span[data-attendance-percent="100"] { color: green; }
 .mover, .seconder { width: 30rem; text-align: left; height: 150px; margin: 0 auto; position:relative; }
 
 .mover .small-person-details, .seconder .small-person-details {
-  margin-left: 1.5rem;
+  margin-left: 3rem;
 }
 
 @media screen and (max-width: 31em), screen and (min-width: 64em) and (max-width: 106em)  {
@@ -121,12 +125,13 @@ span[data-attendance-percent="100"] { color: green; }
 .council-member-img { display: inline-block; }
 
 .card {
-  box-shadow: 0px 1px 3px black; border-radius: 1px;
+  box-shadow: 0px 1px 3px black; border-radius: 2px;
 }
 
 .small-person-details {
   position: relative;
   padding: 1rem;
+
   a:hover { border-bottom: none;}
   a .person-details:hover {  background: darken($subtle-background-color, 15%); }
 
@@ -251,7 +256,6 @@ header nav {
   box-shadow: 0 2px 5px black;
   a { color: inherit; text-decoration: none; }
   a:active, a:focus { outline: 0; }
-  a:hover { border-bottom: 3px solid slategray; }
   h1 { display: inline-block; }
   ul { display: inline-block; font-size: 1.3em; }
   li { display: inline-block; margin-right: 1rem; }
@@ -288,8 +292,7 @@ header nav {
   .motion-status.smaller { font-size: 1.5em; height: 2em; line-height: 2em; }
 }
 
-a { text-decoration: none; color: inherit; }
-a:hover { border-bottom: 3px solid slategray; }
+
 
 .meetings-list {
   line-height: 1.8em;
@@ -338,4 +341,134 @@ footer {
   a { font-weight: 600; }
 }
 
+.item-container {
+  @extend .card;
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+
+  header {
+    margin-bottom: 1rem;
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+}
+
+
+$tabs-base-color: lightblue;
+
+$unanimous-motion-color: lighten($yes-vote-color, 5);
+$disagreement-motion-color: lighten(darkorange, 5);
+$failed-motion-color: $no-vote-color;
+
+
+.motion.Unanimous {
+  label {
+    background: $unanimous-motion-color;
+    color: white;
+    &:hover {
+      background: darken($unanimous-motion-color, 5);
+    }
+  }
+  .motion-content {
+    background: darken($unanimous-motion-color, 10);
+    color: white;
+  }
+  [id^="motion"]:checked + label {
+    background: darken($unanimous-motion-color, 10);
+  }
+}
+
+.motion.Failed {
+  label {
+    background: $failed-motion-color;
+    color: white;
+    &:hover {
+      background: darken($failed-motion-color, 5);
+    }
+  }
+  .motion-content {
+    background: darken($failed-motion-color, 10);
+    color: white;
+  }
+  [id^="motion"]:checked + label {
+    background: darken($failed-motion-color, 10);
+  }
+}
+
+.motion.Disagreement {
+  label {
+    background: $disagreement-motion-color;
+    color: white;
+    &:hover {
+      background: darken($disagreement-motion-color, 5);
+    }
+  }
+  .motion-content {
+    background: darken($disagreement-motion-color, 10);
+    color: white;
+  }
+  [id^="motion"]:checked + label {
+    background: darken($disagreement-motion-color, 10);
+  }
+}
+
+.motions {
+  float: none;
+  list-style: none;
+  position: relative;
+  text-align: left;
+
+  display: flex;
+
+  li {
+    float: left;
+    display: block;
+  }
+  input[type="checkbox"] {
+    display:none;
+  }
+  label {
+    display: block;
+    padding: 14px 21px;
+    //border-radius: 2px 2px 0 0;
+    font-size: 20px;
+    font-weight: normal;
+    text-transform: uppercase;
+    background: $tabs-base-color;
+    cursor: pointer;
+    position: relative;
+    top: 4px;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background: darken($tabs-base-color, 10);
+    }
+  }
+
+
+  .motion-content{
+    text-align: center;
+    z-index: 2;
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    font-size: 17px;
+    line-height: 25px;
+    padding: 25px;
+    top: 53px;
+    left: 0;
+    background: darken($tabs-base-color, 15);
+  }
+
+  //The Magic
+  [id^="motion"]:checked + label {
+    top: 0;
+    padding-top: 17px;
+    background: darken($tabs-base-color, 15);
+  }
+
+  [id^="motion"]:checked ~ [id^="motion-content"] {
+    display: block;
+  }
+}
 
