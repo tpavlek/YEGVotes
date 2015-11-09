@@ -153,24 +153,14 @@ class AgendaItem extends Model
      * their "interesting" factor.
      *
      * The next selection of items will be from the previous 45 days.
-     *
-
+     * @param \Depotwarehouse\YEGVotes\Model\Meeting $last_meeting
+     * @return static
      */
-    public function getInterestingAgendaItems()
+    public function getInterestingAgendaItems(Meeting $last_meeting)
     {
-        $meetingModel = new Meeting();
-        $last_meeting = $meetingModel->findLatestMeeting();
 
-        /** @var \Illuminate\Database\Eloquent\Collection $recentItems */
-        $recentItems = $last_meeting->agenda_items
-            ->filter(function (AgendaItem $agendaItem) {
-                return $agendaItem->hasVotes();
-            })
-            // We use sortBy and not sortByDesc because this will get reversed in the foreach below
-            ->sortBy(function (AgendaItem $agendaItem) {
-                return $agendaItem->rankInteresting();
-            })
-            ->slice(0, 5);
+        $ranker = new AgendaItemRankingService();
+        $recentItems = $ranker->forLatestMeeting($last_meeting->agenda_items);
 
         $recentItemIds = $recentItems->map(function (AgendaItem $agendaItem) {
             return $agendaItem->id;
@@ -205,10 +195,8 @@ class AgendaItem extends Model
      */
     protected function rankInteresting()
     {
-
         $ranker = new AgendaItemRankingService();
         return $ranker->rank($this);
-
     }
 
     /**

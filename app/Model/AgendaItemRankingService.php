@@ -3,9 +3,42 @@
 namespace Depotwarehouse\YEGVotes\Model;
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class AgendaItemRankingService
 {
+
+    /**
+     * Ranks the agenda items for the latest meeting, and returns a slice of the collection.
+     *
+     * This has special considerations compared to general ranking, as when computing the results for the latest meeting,
+     * we want to return a maximum of five results, and we want to ensure that there are no zero-interest items present
+     * in the result.
+     *
+     * @param \Illuminate\Support\Collection $latestMeetingItems
+     * @return \Illuminate\Support\Collection
+     */
+    public function forLatestMeeting(Collection $latestMeetingItems)
+    {
+        $recentItems = $latestMeetingItems
+            // Items without votes cannot be ranked.
+            ->filter(function (AgendaItem $agendaItem) {
+                return $agendaItem->hasVotes();
+            })
+            // We use sortBy and not sortByDesc because this will get reversed in the foreach below
+            ->sortByDesc(function (AgendaItem $agendaItem) {
+                return $this->rank($agendaItem);
+            })
+            // We want a maximum of five results
+            ->slice(0, 5)
+            // Any zero-ranking elements should not be included. We do this after the slice, to reduce the number of
+            // elements that require a second `->rank()` call
+            ->filter(function (AgendaItem $agendaItem) {
+                return $this->rank($agendaItem) > 0;
+            });
+
+        return $recentItems;
+    }
 
     /**
      *

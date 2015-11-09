@@ -4,6 +4,7 @@ namespace Depotwarehouse\YEGVotes\Http\Controllers;
 
 use Depotwarehouse\YEGVotes\Model\AgendaItem;
 use Depotwarehouse\YEGVotes\Model\Attendance;
+use Depotwarehouse\YEGVotes\Model\Meeting;
 
 class Overview extends Controller
 {
@@ -19,7 +20,8 @@ class Overview extends Controller
 
     public function show()
     {
-        $voting_items = $this->agendaModel->getInterestingAgendaItems();
+        $last_meeting = (new Meeting())->findLatestMeeting();
+        $voting_items = $this->agendaModel->getInterestingAgendaItems($last_meeting);
         //$voting_items = $this->agendaModel->bylaws()->take(10)->get();
         $records = $this->attendanceModel->getRecordsForCouncil();
         return view('overview')
