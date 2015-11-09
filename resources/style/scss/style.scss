@@ -34,8 +34,6 @@ body {
 a { text-decoration: none; color: inherit; }
 a:not(.button):hover { border-bottom: 3px solid slategray; box-sizing: border-box; }
 
-$person-details-size: 300px;
-
 .person-summary {
 
   position: relative;
@@ -48,11 +46,10 @@ $person-details-size: 300px;
   margin-bottom: 1rem;
 }
 
-
 @media screen and (max-width: 64em) {
   .person-summary {
-    .person-details { float: none; width: 100%; }
-    .voting-summary { float: none; width: 100%; }
+    .person-details { width: 100%; }
+    .voting-summary { width: 100%; }
   }
 }
 
@@ -138,6 +135,7 @@ span[data-attendance-percent="100"] { color: green; }
   a .person-details:hover {  background: darken($subtle-background-color, 15%); }
 
   .person-details {
+    width: 100%;
     text-align: left;
     padding: 1rem;
     background: $subtle-background-color;
@@ -164,14 +162,12 @@ span[data-attendance-percent="100"] { color: green; }
   .text {
     display: inline-flex;
     flex-direction: column;
-    min-width: 20rem;
 
     h3, h4 {
       margin: 0; padding: 0; padding-left: 1rem; line-height: 2rem;
     }
 
   }
-
   small { display: block; }
 }
 
