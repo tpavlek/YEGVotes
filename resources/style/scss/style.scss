@@ -1,6 +1,7 @@
 @import "forms";
 
-$background-color: #D4DAD0;
+
+$background-color: lighten(#D4DAD0, 10%);
 $yes-vote-color: green;
 $absent-vote-color: #daa520;
 $no-vote-color: #D44141;
@@ -126,7 +127,7 @@ span[data-attendance-percent="100"] { color: green; }
 .council-member-img { display: inline-block; }
 
 .card {
-  box-shadow: 0px 1px 3px black; border-radius: 2px;
+  box-shadow: 0px 0px 5px grey; border-radius: 2px;
 }
 
 .small-person-details {
@@ -342,16 +343,48 @@ footer {
   a { font-weight: 600; }
 }
 
+.overview-wrapper {
+  display: flex;
+  flex-direction: row;
+
+  .items {
+    width: 70%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+    .item-container {
+      width: 450px;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .overview-wrapper { display: block; }
+  .overview-wrapper .items { width: 100%; }
+}
+
 .item-container {
   @extend .card;
+  background-color: $subtle-background-color;
   margin-bottom: 1rem;
   padding: 1rem;
-
+  border: 1px solid lighten(grey, 5%);
 
   header {
-    margin-bottom: 1rem;
-    font-size: 1.5em;
     font-weight: 500;
+    font-size: 120%;
+    margin-bottom: 1rem;
+  }
+
+  h4 {
+    text-align: left;
+    margin: 0;
+  }
+  .motions {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-flow: row wrap;
   }
 }
 
@@ -432,7 +465,6 @@ $failed-motion-color: $no-vote-color;
   label {
     display: block;
     padding: 14px 21px;
-    //border-radius: 2px 2px 0 0;
     font-size: 20px;
     font-weight: normal;
     text-transform: uppercase;
@@ -471,5 +503,10 @@ $failed-motion-color: $no-vote-color;
   [id^="motion"]:checked ~ [id^="motion-content"] {
     display: block;
   }
+
+  [id^="motion"]:checked ~ label {
+    width: 100%;
+  }
+
 }
 

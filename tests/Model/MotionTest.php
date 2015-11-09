@@ -21,7 +21,7 @@ class MotionTest extends \TestCase
      * @test
      * @group integration
      */
-    public function it_displays_correct_motion_indicator_string_for_particular_motion()
+    public function it_displays_correct_motion_indicator_string_for_particular_motion_when_motion_contains_recused_vote()
     {
         $motion = Motion::find("61652abf-5cdd-4f5a-85fe-f66a25c0ece6");
 
