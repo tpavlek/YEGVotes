@@ -79,8 +79,9 @@ class Motion extends Model
             return $vote->vote == "Yes";
         })->count();
 
+        // If a voter is absent or recused, we don't want to count their vote as "dissenting"
         $total_votes = $this->votes->reject(function (Vote $vote) {
-            return $vote->vote == "Absent";
+            return ($vote->vote == "Absent" || $vote->vote == "Recused");
         })->count();
 
         if ($yes_votes == $total_votes) {
