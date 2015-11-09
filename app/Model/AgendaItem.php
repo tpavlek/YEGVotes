@@ -159,7 +159,7 @@ class AgendaItem extends Model
     public function getInterestingAgendaItems()
     {
         $meetingModel = new Meeting();
-        $last_meeting = Meeting::find(1475);
+        $last_meeting = $meetingModel->findLatestMeeting();
 
         /** @var \Illuminate\Database\Eloquent\Collection $recentItems */
         $recentItems = $last_meeting->agenda_items
@@ -205,12 +205,10 @@ class AgendaItem extends Model
      */
     protected function rankInteresting()
     {
-        $ranking = 0;
-        $ranking += (int)$this->hasDissent() * 0.5;
-        $ranking += Carbon::now()->diffInDays($this->date) * 0.3;
-        $ranking += (int)$this->isBylaw() * 0.2;
 
-        return $ranking;
+        $ranker = new AgendaItemRankingService();
+        return $ranker->rank($this);
+
     }
 
     /**
