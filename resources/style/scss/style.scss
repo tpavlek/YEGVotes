@@ -141,10 +141,11 @@ span[data-attendance-percent="100"] { color: green; }
     background: $subtle-background-color;
     @extend .card;
     display: inline-flex;
-    flex-direction: row;
+    flex-flow: row wrap;
+    max-width: 30rem;
   }
 
-  .council-member-img { border-radius: 50%; background-size: 100px 100px; width: 100px; height: 100px; }
+  .council-member-img { border-radius: 50%; background-size: 100px 100px; width: 100px; height: 100px; margin: 0 auto;}
   .ward1 { background-image: url('/img/ward1sq.jpg'); }
   .ward2 { background-image: url('/img/ward2sq.jpg'); }
   .ward3 { background-image: url('/img/ward3sq.jpg'); }
@@ -169,6 +170,18 @@ span[data-attendance-percent="100"] { color: green; }
 
   }
   small { display: block; }
+}
+
+/* This rule exists for the front page to make scaling of the councillors not harm the images */
+@media screen and (max-width: 450px) {
+  .person-details .text {
+    font-size: 80%;
+  }
+}
+
+/* if we get to this size, we'll actually need to collapse the div and put image and information on separate lines */
+@media screen and (max-width: 400px) {
+  margin: 0 auto;
 }
 
 .person-summary {
