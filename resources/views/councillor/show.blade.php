@@ -16,9 +16,15 @@
                 <div class="voting-summary">
                     <div class="attendance">
                         <h3>
-                            Attendance: {{ $attendanceRecord->attendanceFraction() }}
+                            Meetings: {{ $attendanceRecord->attendanceFraction() }}
                             (<span data-attendance-percent="{{ $attendanceRecord->attendancePercent() }}">
                             {{ $attendanceRecord->attendancePercent() }}%
+                        </span>)
+                        </h3>
+                        <h3>
+                            Votes: {{ $attendanceRecord->voteFraction() }}
+                            (<span data-attendance-percent="{{ $attendanceRecord->votePercent() }}">
+                            {{ $attendanceRecord->votePercent() }}%
                         </span>)
                         </h3>
                     </div>

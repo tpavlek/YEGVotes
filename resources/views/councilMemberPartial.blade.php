@@ -5,9 +5,15 @@
             <h3>{{ $council_member->name }} <small>{{ $council_member->getWard() }}</small></h3>
             @if (isset($attendance) and $attendance)
                 <h4>
-                    Attendance: {{ $attendanceRecord->attendanceFraction() }}
+                    Meetings: {{ $attendanceRecord->attendanceFraction() }}
                     (<span data-attendance-percent="{{ $attendanceRecord->attendancePercent() }}">
                                 {{ $attendanceRecord->attendancePercent() }}%
+                            </span>)
+                </h4>
+                <h4>
+                    Votes: {{ $attendanceRecord->voteFraction() }}
+                    (<span data-attendance-percent="{{ $attendanceRecord->votePercent() }}">
+                                {{ $attendanceRecord->votePercent() }}%
                             </span>)
                 </h4>
             @endif

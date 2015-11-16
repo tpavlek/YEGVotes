@@ -50,15 +50,24 @@ class Attendance extends Model
         }
 
         $results = $this->getConnection()->getPdo()->query("
-            select attendee,
-            (select count(id) from attendance where present = 1 and a.attendee = attendee) as present,
-            count(id) as total
-            from attendance as a
-            where a.attendee like '%{$council_member}%'
+            select a.attendee, vote_query.votes_present as votes_present, vote_query.total_votes as total_votes,
+            (select count(id) from attendance where present = 1 and a.attendee = attendee) as meetings_present,
+            count(id) as total_meetings
+            from attendance as a,
+            (select voter, count(v.id) as total_votes,
+                (select count(id) from votes where vote not in ('Absent', 'Off the Dais') and voter = v.voter) as votes_present
+                from votes v where voter like '%{$council_member}%') as vote_query
+            where a.attendee like '%{$council_member}%';
         ");
 
         foreach ($results as $row) {
-            return new AttendanceRecord($row['attendee'], $row['present'], $row['total']);;
+            return new AttendanceRecord(
+                $row['attendee'],
+                $row['meetings_present'],
+                $row['total_meetings'],
+                $row['votes_present'],
+                $row['total_votes']
+            );
         }
 
         return null;
@@ -70,18 +79,30 @@ class Attendance extends Model
     public function getRecordsForCouncil()
     {
         $results = $this->getConnection()->getPdo()->query("
-            select attendee,
-            (select count(id) from attendance where present = 1 and a.attendee = attendee) as present,
-            count(id) as total
-            from attendance as a
-            where a.attendee like '%Coun%' or a.attendee like '%Mayor%'
+            select attendee, vote_query.votes_present as votes_present, vote_query.total_votes as total_votes,
+            (select count(id) from attendance where present = 1 and a.attendee = attendee) as meetings_present,
+            count(id) as total_meetings
+            from attendance as a,
+            (select voter, count(v.id) as total_votes,
+                (select count(id) from votes where vote not in ('Absent', 'Off the Dais') and v.voter = voter) as votes_present
+                from votes v
+                group by voter) as vote_query
+            where (a.attendee like '%Coun%' or a.attendee like '%Mayor%') and vote_query.voter = a.attendee
             group by attendee;
         ");
 
         $attendance_records = new Collection();
 
         foreach ($results as $row) {
-            $attendance_records->push(new AttendanceRecord($row['attendee'], $row['present'], $row['total']));
+            $attendance_records->push(
+                new AttendanceRecord(
+                    $row['attendee'],
+                    $row['meetings_present'],
+                    $row['total_meetings'],
+                    $row['votes_present'],
+                    $row['total_votes']
+                )
+            );
         }
 
         return $attendance_records->sortBy(function(AttendanceRecord $attendanceRecord) {
