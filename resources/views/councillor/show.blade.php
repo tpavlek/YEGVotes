@@ -38,28 +38,7 @@
                         </a>
                     @endif
 
-                    <div class="vote-container" style="margin-top: 0;">
-                        @foreach ($voting_items as $voting_item)
-                                <div class="vote" data-remote-url="{{ URL::route('agenda_item.show', $voting_item->id) }}">
-                                    <div class="vote-summary">
-                                        <div class="short-title">
-                                            {{ $voting_item }}
-                                        </div>
-                                    </div>
-
-                                    <div class="sub-votes">
-                                        @foreach ($voting_item->getVoteGroupsForCouncillor($attendanceRecord->getAttendee()) as $key => $votes)
-                                            <span class="vote {{ $key }}">
-                                                {{ $key }}: {{ $votes->count() }}
-                                            </span>
-                                        @endforeach
-                                    </div>
-
-                                </div>
-
-
-                        @endforeach
-                    </div>
+                    @include('councillor.votingSummaryPartial', [ 'councillor' => $attendanceRecord->getAttendee() ])
                 </div>
                 <div style="clear:both;"></div>
                 <ul class="pagination">

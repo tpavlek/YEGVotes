@@ -1,6 +1,7 @@
 <?php
 
-get('/', 'Overview@show');
+get('/', 'Overview@show')->name('home.index');
+get('/about', 'Overview@about')->name('about');
 get('/meetings', 'Meetings@listMeetings')->name('meetings.list');
 get('/meetings/{meeting_id}', 'Meetings@show')->name('meetings.show');
 get('/motions/{motion_id}', 'Motions@show')->name('motion.show');

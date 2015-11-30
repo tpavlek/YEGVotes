@@ -4,6 +4,7 @@ namespace Depotwarehouse\YEGVotes\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -104,12 +105,14 @@ class AgendaItem extends Model
     public function getVoteGroupsForCouncillor($council_member)
     {
         if ($this->votes == null) {
-            dd($this);
+            throw new \Exception("Tried to get a vote group on a null vote for councillor: {$council_member}");
         }
         return $this->votes->filter(function (Vote $vote) use ($council_member) {
             return $vote->voter == $council_member;
         })->groupBy(function (Vote $vote) {
             return $vote->vote;
+        })->sortBy(function (Collection $voteGroup) {
+            return $voteGroup->first()->vote;
         });
     }
 
