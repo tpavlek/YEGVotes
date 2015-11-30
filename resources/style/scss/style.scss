@@ -47,6 +47,7 @@ a:not(.button):hover { border-bottom: 3px solid slategray; box-sizing: border-bo
 }
 
 @media screen and (max-width: 64em) {
+  .body-wrapper { padding: 0.5rem; }
   .person-summary {
     .person-details { width: 100%; }
     .voting-summary { width: 100%; }
@@ -137,7 +138,7 @@ span[data-attendance-percent="100"] { color: green; }
   .vote-column.Absent { background-color: $absent-vote-color; }
   .vote-column.No { background-color: $no-vote-color; }
 
-  .vote { padding: 0.5rem; display: inline;}
+  .vote { padding: 0.5rem; display: block;}
 }
 
 @media screen and (max-width: 64em) {
@@ -400,15 +401,6 @@ footer {
   }
 }
 
-@media screen and (max-width: 1020px) {
-  .overview-wrapper .items .item-container { width: 100%; margin-right: 0; }
-}
-
-@media screen and (max-width: 1400px) {
-  .overview-wrapper { display: block; }
-  .overview-wrapper .items { width: 100%; }
-}
-
 .item-container {
   @extend .card;
   background-color: $subtle-background-color;
@@ -432,6 +424,21 @@ footer {
     flex-flow: row wrap;
   }
 }
+
+@media screen and (max-width:64em) {
+  .item-container { padding: 0.5rem; }
+}
+
+@media screen and (max-width: 1020px) {
+  .overview-wrapper .items .item-container { width: 100%; margin-right: 0; }
+}
+
+@media screen and (max-width: 1400px) {
+  .overview-wrapper { display: block; }
+  .overview-wrapper .items { width: 100%; }
+}
+
+
 
 
 $tabs-base-color: lightblue;
