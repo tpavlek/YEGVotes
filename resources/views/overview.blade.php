@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('title')
+    - Track Edmonton City Councillors
 @stop
 
 @section('content')

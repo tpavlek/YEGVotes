@@ -42,7 +42,7 @@ class AttendanceRecord
 
     public function votePercent()
     {
-        if ($this->total_votes == 0) { dd($this);}
+        if ($this->total_votes == 0) { throw new \Exception("Division by zero"); }
         return number_format(($this->votes_in_attendance / $this->total_votes) * 100);
     }
 
@@ -54,5 +54,11 @@ class AttendanceRecord
     public function attendancePercent()
     {
         return number_format(($this->days_in_attendance / $this->total_meetings) * 100);
+    }
+
+    public function sortValue()
+    {
+        // Because the attended over the total will be 1 or less, a value of 0 signals perfect attendance
+        return 1 - ($this->votes_in_attendance / $this->total_votes);
     }
 }

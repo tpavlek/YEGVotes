@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    About the Site
+    - Feature Overview
 @stop
 
 @section('content')

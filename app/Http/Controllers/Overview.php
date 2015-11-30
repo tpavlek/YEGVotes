@@ -34,8 +34,8 @@ class Overview extends Controller
     public function about()
     {
         $attendance_records = $this->attendanceModel->getRecordsForCouncil();
-        $attendance_records->sortBy(function (AttendanceRecord $attendanceRecord) {
-            return $attendanceRecord->attendancePercent();
+        $attendance_records = $attendance_records->sortBy(function (AttendanceRecord $attendanceRecord) {
+            return $attendanceRecord->sortValue();
         });
 
         // We only want the top attender and the bottom attender
