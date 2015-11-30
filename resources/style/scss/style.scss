@@ -181,8 +181,8 @@ span[data-attendance-percent="100"] { color: green; }
   max-width: 60%;
 }
 
-@media screen and (min-width: 1500px) {
-  //.whitecard { max-width: 40%; box-sizing: border-box;}
+@media screen and (max-width: 1200px) {
+  .example:first-child, .example:nth-child(2) { max-width: 100%; }
 }
 
 .section a { font-weight: bold; }
@@ -398,6 +398,10 @@ footer {
       margin-right: 2%;
     }
   }
+}
+
+@media screen and (max-width: 1020px) {
+  .overview-wrapper .items .item-container { width: 100%; margin-right: 0; }
 }
 
 @media screen and (max-width: 1400px) {
