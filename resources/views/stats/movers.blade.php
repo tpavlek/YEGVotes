@@ -52,7 +52,7 @@
                 {{ number_format(($pairings->first()['motions'] / $pairings->sum('motions')) * 100, 0) }}%
             </div>
 
-            of the time
+            of the time.
         </div>
     </div>
 
