@@ -23,6 +23,9 @@
             <li>
                 <a href="{{ URL::route('about') }}">About</a>
             </li>
+            <li>
+                <a href="{{ URL::route('stats') }}">Stats</a>
+            </li>
             @yield('additional_nav', '')
         </ul>
     </nav>

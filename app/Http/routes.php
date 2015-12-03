@@ -2,7 +2,7 @@
 
 get('/', 'Overview@show')->name('home.index');
 get('/about', 'Overview@about')->name('about');
-//get('/stats', 'Stats@show')->name('stats');
+get('/stats', 'Stats@show')->name('stats');
 get('/movers', 'Stats@movers')->name('stats.movers');
 get('/meetings', 'Meetings@listMeetings')->name('meetings.list');
 get('/meetings/{meeting_id}', 'Meetings@show')->name('meetings.show');

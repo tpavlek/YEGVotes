@@ -16,7 +16,7 @@ class Stats extends Controller
 
     public function show()
     {
-        $pie = $this->statisticsService->motionStatuses();
+        return view('stats');
     }
 
     public function movers()
