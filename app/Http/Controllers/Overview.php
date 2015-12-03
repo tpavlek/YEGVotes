@@ -49,4 +49,9 @@ class Overview extends Controller
             ->with('voting_items', $this->agendaModel->bylaws()->take(7)->get());
     }
 
+    public function stats()
+    {
+        return view('stats');
+    }
+
 }

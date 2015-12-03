@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
 class AgendaItem extends Model
 {
 
+    use FiltersProtocolItems;
+
     public $table = "agenda_items";
     public $incrementing = false;
     public $timestamps = false;
@@ -26,6 +28,11 @@ class AgendaItem extends Model
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function scopeWithoutProtocolItems(Builder $query)
+    {
+        return $this->filterProtocolItems($query);
     }
 
     /**
@@ -131,6 +138,10 @@ class AgendaItem extends Model
     public function isBylaw()
     {
         return preg_match('/Bylaw [0-9](.*)/', $this->title) === 1;
+    }
+
+    public function isPrivateReport() {
+        return str_contains(strtolower($this->title), "private reports");
     }
 
     public function meeting()

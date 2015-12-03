@@ -2,14 +2,24 @@
 
 namespace Depotwarehouse\YEGVotes\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Motion extends Model
 {
 
+    use FiltersProtocolItems;
+
     public $table = "motions";
     public $incrementing = false;
     protected $fillable = [ "id", "item_id", "mover", "seconder", "description", "status" ];
+
+    public function scopeWithoutProtocolItems(Builder $query)
+    {
+        return $query->whereHas('agenda_item', function ($query) {
+            return $this->filterProtocolItems($query);
+        });
+    }
 
     public function vote($council_member)
     {
@@ -31,7 +41,7 @@ class Motion extends Model
     public function hasDissent()
     {
         return $this->votes->contains(function ($key, Vote $vote) {
-            return ((string)$vote != "Yes" && (string)$vote != "Absent");
+            return ((string)$vote == "No" || (string)$vote == "Abstain");
         });
     }
 
@@ -51,6 +61,12 @@ class Motion extends Model
         }
 
         return new CouncilMember($this->attributes['seconder']);
+    }
+
+    public function getDescriptionAttribute($value)
+    {
+        // We don't want a blank title attribute here.
+        return str_replace('Title:<BR><BR>', '', $value);
     }
 
     public function votes()
@@ -75,6 +91,10 @@ class Motion extends Model
 
     public function getIndicatorString()
     {
+        if ($this->status == "None" || $this->status == "Failed") {
+            return $this->status;
+        }
+
         $yes_votes = $this->votes->filter(function (Vote $vote) {
             return $vote->vote == "Yes";
         })->count();
@@ -87,10 +107,6 @@ class Motion extends Model
         if ($yes_votes == $total_votes) {
             return "Unanimous";
         }
-
-        if ($yes_votes <= floor($total_votes / 2)) {
-            return "Failed";
-        };
 
         if ($yes_votes < $total_votes) {
             return "Disagreement";
