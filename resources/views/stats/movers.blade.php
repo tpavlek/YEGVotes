@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    Who makes the most motions?
+    Which Edmonton City Councillor makes the most motions?
 @stop
 
 @section('meta_description')
