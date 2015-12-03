@@ -16,11 +16,20 @@ class Stats extends Controller
 
     public function show()
     {
-        $groups = $this->statisticsService->motionStatuses();
+        $pie = $this->statisticsService->motionStatuses();
+    }
 
+    public function movers()
+    {
+        $movers = $this->statisticsService->motionsByCouncillor();
+        $seconders = $this->statisticsService->secondsByCouncillor();
 
-        dd($groups);
-        dd($groups);
+        $pairings = $this->statisticsService->motionPairings();
+
+        return view('stats.movers')
+            ->with('movers', $movers)
+            ->with('seconders', $seconders)
+            ->with('pairings', $pairings);
     }
 
 }

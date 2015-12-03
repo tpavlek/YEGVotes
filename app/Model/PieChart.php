@@ -12,8 +12,13 @@ class PieChart
         $this->items = $pieItems;
     }
 
-    public static function fromGroups(Collection $collectedGroups)
+    public static function fromItemList(Collection $items)
     {
+        $total = $items->sum();
+
+        return new self($items->map(function ($item, $key) use ($total) {
+            return new PieItem($key, ($item / $total) * 100);
+        }));
     }
 
 }
