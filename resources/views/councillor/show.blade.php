@@ -5,7 +5,7 @@
 @stop
 
 @section('meta_description')
-    About {{ $attendanceRecord->getAttendee() }}. {{ $attendanceRecord->getAttendee }}'s attendance for City Council votes
+    About {{ $attendanceRecord->getAttendee() }}. {{ $attendanceRecord->getAttendee() }}'s attendance for City Council votes
     is {{ $attendanceRecord->votePercent() }}%. View the most recent voting record for this councillor.
 @stop
 
