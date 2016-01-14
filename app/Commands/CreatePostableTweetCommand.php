@@ -4,7 +4,7 @@ namespace Depotwarehouse\YEGVotes\Commands;
 
 use Depotwarehouse\YEGVotes\Model\Election\Tweet;
 
-class CreatePostableTweetCommand
+class CreatePostableTweetCommand implements CreatesPostable
 {
 
     public function handle($tweet_url, array $candidate_ids)

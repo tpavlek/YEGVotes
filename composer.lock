@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "24042646f830d3c3c361b330b2d2fd28",
-    "content-hash": "81fd734a152c9aaf871fcddcbec55232",
+    "hash": "f168a58bf3db73f5ddb0d57e89ce6b36",
+    "content-hash": "d71933afccd17613cdb9c8090bc5e9ab",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -116,6 +116,52 @@
                 "utils"
             ],
             "time": "2015-07-23 00:54:12"
+        },
+        {
+            "name": "depotwarehouse/toolbox",
+            "version": "3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tpavlek/Toolbox.git",
+                "reference": "976c1e6600e3d49cec41d8fef6c880da7cbdd18d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tpavlek/Toolbox/zipball/976c1e6600e3d49cec41d8fef6c880da7cbdd18d",
+                "reference": "976c1e6600e3d49cec41d8fef6c880da7cbdd18d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.1",
+                "illuminate/support": "^5.1",
+                "illuminate/validation": "^5.1",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.0",
+                "satooshi/php-coveralls": "^0.6.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Depotwarehouse\\Toolbox\\": "src/"
+                },
+                "files": [
+                    "src/Strings/Strings.php",
+                    "src/Verification/Verification.php",
+                    "src/Operations/Operations.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Troy Pavlek",
+                    "email": "troy@depotwarehouse.net"
+                }
+            ],
+            "description": "A set of tools in PHP",
+            "time": "2016-01-11 18:50:34"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -573,6 +619,60 @@
                 "storage"
             ],
             "time": "2015-12-19 20:16:43"
+        },
+        {
+            "name": "league/url",
+            "version": "3.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/url.git",
+                "reference": "1ae2c3ce29a7c5438339ff6388225844e6479da8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/url/zipball/1ae2c3ce29a7c5438339ff6388225844e6479da8",
+                "reference": "1ae2c3ce29a7c5438339ff6388225844e6479da8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0",
+                "true/punycode": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Url\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ignace Nyamagana Butera",
+                    "email": "nyamsprod@gmail.com",
+                    "homepage": "https://github.com/nyamsprod/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "League/url is a lightweight PHP Url manipulating library",
+            "homepage": "http://url.thephpleague.com",
+            "keywords": [
+                "parse_url",
+                "php",
+                "url"
+            ],
+            "time": "2015-07-15 08:24:12"
         },
         {
             "name": "monolog/monolog",
@@ -1867,6 +1967,52 @@
                 "dump"
             ],
             "time": "2015-12-05 10:02:55"
+        },
+        {
+            "name": "true/punycode",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/true/php-punycode.git",
+                "reference": "74fa01d4de396c40e239794123b3874cb594a30c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/true/php-punycode/zipball/74fa01d4de396c40e239794123b3874cb594a30c",
+                "reference": "74fa01d4de396c40e239794123b3874cb594a30c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.7",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TrueBV\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Renan Gonçalves",
+                    "email": "renan.saddam@gmail.com"
+                }
+            ],
+            "description": "A Bootstring encoding of Unicode for Internationalized Domain Names in Applications (IDNA)",
+            "homepage": "https://github.com/true/php-punycode",
+            "keywords": [
+                "idna",
+                "punycode"
+            ],
+            "time": "2016-01-07 17:12:58"
         },
         {
             "name": "vlucas/phpdotenv",

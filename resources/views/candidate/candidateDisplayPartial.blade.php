@@ -1,5 +1,5 @@
 <div class="whitecard candidate">
-    <a class="candidate-link-area" href="{{ URL::route('candidate.show', $candidate->id) }}">
+    <a class="candidate-link-area" href="{{ URL::route('candidate.show', $candidate->slug) }}">
         <div class="candidate-image-container">
             <img class="candidate-image" src="{{ $candidate->img_url }}" />
         </div>

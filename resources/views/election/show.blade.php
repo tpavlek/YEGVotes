@@ -51,22 +51,18 @@
                     <a href="https://twitter.com/troypavlek" class="button"><i class="fa fa-twitter"></i> Tweet @troypavlek</a>
                     <a href="mailto:troy@tpavlek.me?subject=YEGVotes Ward12 Feedback" class="button"><i class="fa fa-envelope"></i> Email troy@tpavlek.me</a>
                 </p>
-                <h4>Planned Features</h4>
-                <ul>
-                    <li>Candidate landing pages with important information from campaign (tweets, news articles, etc.)</li>
-                    <li>Global information feed from all candidates to follow the entire election</li>
-                    <li>Voting to rank current frontrunners and reduce visibility for non-serious candidates</li>
-                </ul>
-                <p>
-
-                </p>
             </div>
         </div>
 
+    </div>
+    <a href="{{ URL::route('elections.feed', $election->id) }}" class="button secondary xlarge">
+        <i class="fa fa-rss"></i> View Campaign Feed
+    </a>
+    <div class="flex-justified">
 
-            @foreach($candidates as $candidate)
-                @include('candidate.candidateDisplayPartial')
-            @endforeach
+        @foreach($candidates as $candidate)
+            @include('candidate.candidateDisplayPartial')
+        @endforeach
 
 
 

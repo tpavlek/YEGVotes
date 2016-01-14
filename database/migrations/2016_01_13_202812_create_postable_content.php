@@ -16,10 +16,13 @@ class CreatePostableContent extends Migration
             $table->increments('id');
 
             $table->integer('candidate_id')->unsigned();
-            $table->foreign('candidate_id')->references('id')->on('election_candidates');
+            $table->foreign('candidate_id')->references('id')->on('election_candidates')->onDelete('cascade');
 
             $table->integer('postable_id')->unsigned();
             $table->string('postable_type');
+
+            $table->dateTime('approved_at')->nullable()->default(null);
+            $table->dateTime('rejected_at')->nullable()->default(null);
         });
     }
 

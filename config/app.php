@@ -137,6 +137,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         \Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        \Depotwarehouse\Toolbox\FrameworkIntegration\Laravel\ErrorPartialServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -15,16 +15,21 @@
 
     </div>
     <h1>{{ $candidate->running_name }}</h1>
+    <a href="{{ URL::route('postable.submit', [ 'candidate' => $candidate->id ]) }}" class="button secondary">Submit Campaign Update</a>
     <div class="flex">
         @include('candidate.candidateDisplayPartial')
-        <div class="whitecard">
-            <h2>Postable Content</h2>
             @forelse($postable_content as $content)
+            <div class="whitecard">
+                <h2>{{ $content->updated_at->format('M j, Y') }}</h2>
                 {!! $content->render() !!}
+            </div>
             @empty
-                <em>Seems as if there's nothing for this candidate yet.</em>
+                <div class="whitecard">
+                    <h2>Campaign Posts</h2>
+                    <em>Seems as if there's nothing for this candidate yet.</em>
+                </div>
             @endforelse
-        </div>
+
     </div>
 
 @stop
