@@ -13,8 +13,11 @@ class Candidates extends Controller
 
         $candidate = $candiateModel->findOrFail($id);
 
+        $postable_content = $candidate->postable_content;
+
         return view('candidate.show')
-            ->with('candidate', $candidate);
+            ->with('candidate', $candidate)
+            ->with('postable_content', $postable_content);
     }
 
 }

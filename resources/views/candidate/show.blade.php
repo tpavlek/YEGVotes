@@ -17,6 +17,14 @@
     <h1>{{ $candidate->running_name }}</h1>
     <div class="flex">
         @include('candidate.candidateDisplayPartial')
+        <div class="whitecard">
+            <h2>Postable Content</h2>
+            @forelse($postable_content as $content)
+                {!! $content->render() !!}
+            @empty
+                <em>Seems as if there's nothing for this candidate yet.</em>
+            @endforelse
+        </div>
     </div>
 
 @stop

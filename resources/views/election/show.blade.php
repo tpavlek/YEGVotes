@@ -9,7 +9,7 @@
     <h1>Edmonton Ward 12 By-Election <small style="color:goldenrod">{{ $election_date->format('M j, Y') }}</small></h1>
     <h2>{{ \Carbon\Carbon::now()->diffInDays($election_date) }} days away</h2>
 
-    <div class="flex" style="text-align: center;">
+    <div class="flex-justified" style="text-align: center;">
         <div class="column">
             <div class="whitecard">
                 <h3>About the By-Election</h3>

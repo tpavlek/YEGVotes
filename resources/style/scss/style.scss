@@ -575,9 +575,13 @@ $failed-motion-color: $no-vote-color;
 .flex {
   display: flex;
   flex-direction: row;
-  align-items: center;
   flex-wrap: wrap;
   .column { max-width: 50% }
+}
+
+.flex-justified {
+  @extend .flex;
+  justify-content: center;
 }
 
 .candidate-image {
