@@ -7,7 +7,9 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "socrata/soda-php": "dev-develop as 2.0"
+        "socrata/soda-php": "dev-develop as 2.0",
+        "depotwarehouse/toolbox": "^3.0",
+        "league/url": "^3.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -48,6 +50,9 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "platform": {
+            "php": "5.6"
+        }
     }
 }

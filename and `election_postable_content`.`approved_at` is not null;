@@ -1,0 +1,82 @@
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '\YEGVotes\Model\Election' at line 1
+MariaDB [yegvotes]> select `election_tweets`.* from `election_tweets` inner join `election_postable_content` on `election_postable_content`.`postable_id` = `election_tweets`.`id` where `election_postable_content`.`postable_type` = Depotwarehouse\YEGVotes\Model\Election\Tweet and `election_postable_content`.`approved_at` is not null;
+ERROR: Unknown command '\Y'.
+ERROR: Unknown command '\M'.
+ERROR: Unknown command '\E'.
+    -> 
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '\YEGVotes\Model\Election' at line 1
+MariaDB [yegvotes]> select `election_tweets`.* from `election_tweets` inner join `election_postable_content` on `election_postable_content`.`postable_id` = `election_tweets`.`id` where `election_postable_content`.`postable_type` = 'Depotwarehouse\YEGVotes\Model\Election\Tweet' and `election_postable_content`.`approved_at` is not null;
+Empty set (0.01 sec)
+
+MariaDB [yegvotes]> select * from election_postable_content where postable_id = 1;
++----+--------------+-------------+-----------------------------------------------------+---------------------+
+| id | candidate_id | postable_id | postable_type                                       | approved_at         |
++----+--------------+-------------+-----------------------------------------------------+---------------------+
+|  1 |          274 |           1 | Depotwarehouse\YEGVotes\Model\Election\Tweet        | 2016-01-14 13:24:05 |
+|  5 |          269 |           1 | Depotwarehouse\YEGVotes\Model\Election\FacebookPost | 2016-01-14 14:04:40 |
+|  6 |          280 |           1 | Depotwarehouse\YEGVotes\Model\Election\Youtube      | 2016-01-14 14:29:53 |
++----+--------------+-------------+-----------------------------------------------------+---------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [yegvotes]> select * from election_postable_content where postable_id = 1 and postable_type = 'Depotwarehouse\YEGVotes\Model\Election\Tweet' and approved_at is not null;
+Empty set (0.00 sec)
+
+MariaDB [yegvotes]> select * from election_postable_content where postable_id = 1 and postable_type = 'Depotwarehouse\YEGVotes\Model\Election\Tweet ' and approved_at is not null;
+Empty set (0.00 sec)
+
+MariaDB [yegvotes]> select * from election_postable_content where postable_id = 1 and approved_at is not null;
++----+--------------+-------------+-----------------------------------------------------+---------------------+
+| id | candidate_id | postable_id | postable_type                                       | approved_at         |
++----+--------------+-------------+-----------------------------------------------------+---------------------+
+|  1 |          274 |           1 | Depotwarehouse\YEGVotes\Model\Election\Tweet        | 2016-01-14 13:24:05 |
+|  5 |          269 |           1 | Depotwarehouse\YEGVotes\Model\Election\FacebookPost | 2016-01-14 14:04:40 |
+|  6 |          280 |           1 | Depotwarehouse\YEGVotes\Model\Election\Youtube      | 2016-01-14 14:29:53 |
++----+--------------+-------------+-----------------------------------------------------+---------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [yegvotes]> select * from election_postable_content where postable_type = 'Depotwarehouse\YEGVotes\Model\Election\Tweet        ';
+Empty set (0.00 sec)
+
+MariaDB [yegvotes]> select * from election_postable_content where postable_type = 'Depotwarehouse\YEGVotes\Model\Election\Tweet';
+Empty set (0.00 sec)
+
+MariaDB [yegvotes]> select * from election_postable_content where postable_type = 'Depotwarehouse\\YEGVotes\\Model\\Election\\Tweet';
++----+--------------+-------------+----------------------------------------------+---------------------+
+| id | candidate_id | postable_id | postable_type                                | approved_at         |
++----+--------------+-------------+----------------------------------------------+---------------------+
+|  1 |          274 |           1 | Depotwarehouse\YEGVotes\Model\Election\Tweet | 2016-01-14 13:24:05 |
+|  2 |          274 |           2 | Depotwarehouse\YEGVotes\Model\Election\Tweet | 2016-01-14 13:28:05 |
+|  3 |          274 |           3 | Depotwarehouse\YEGVotes\Model\Election\Tweet | 2016-01-14 13:28:51 |
+|  4 |          274 |           4 | Depotwarehouse\YEGVotes\Model\Election\Tweet | 2016-01-14 13:28:52 |
+|  7 |          276 |           5 | Depotwarehouse\YEGVotes\Model\Election\Tweet | 2016-01-14 14:33:48 |
+|  8 |          274 |           6 | Depotwarehouse\YEGVotes\Model\Election\Tweet | 2016-01-14 14:41:09 |
+|  9 |          275 |           6 | Depotwarehouse\YEGVotes\Model\Election\Tweet | 2016-01-14 14:41:09 |
+| 10 |          276 |           6 | Depotwarehouse\YEGVotes\Model\Election\Tweet | 2016-01-14 14:41:09 |
++----+--------------+-------------+----------------------------------------------+---------------------+
+8 rows in set (0.00 sec)
+
+MariaDB [yegvotes]> select * from `election_tweets` where exists (select * from `election_postable_content` where `election_postable_content`.`postable_id` = election.tweets.id and `election_postable_content`.`approved_at` is not null)
+    -> ;
+ERROR 1054 (42S22): Unknown column 'election.tweets.id' in 'where clause'
+MariaDB [yegvotes]> select * from `election_tweets` where exists (select * from `election_postable_content` where `election_postable_content`.`postable_id` = election_tweets.id and `election_postable_content`.`approved_at` is not null)
+    -> ;
++----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+
+| id | content                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | created_at          | updated_at          |
++----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+
+|  1 | <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Has anyone put together an aggregate of info about the <a href="https://twitter.com/hashtag/ward12?src=hash">#ward12</a> candidates? Or is it still sort of a free-for-all? <a href="https://twitter.com/hashtag/yegcc?src=hash">#yegcc</a> <a href="https://twitter.com/hashtag/yegward12?src=hash">#yegward12</a></p>&mdash; Troy Pavlek (@troypavlek) <a href="https://twitter.com/troypavlek/status/687392869032706048">January 13, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>                                               | 2016-01-14 12:53:59 | 2016-01-14 12:53:59 |
+|  2 | <blockquote class="twitter-tweet"><p lang="ht" dir="ltr">Daniel Radcliffe on Alan Rickman <a href="https://t.co/Oo7wQfZnT4">pic.twitter.com/Oo7wQfZnT4</a></p>&mdash; Professor Snape (@_Snape_) <a href="https://twitter.com/_Snape_/status/687687249954246656">January 14, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>                                                                                                                                                                                                                                                                   | 2016-01-14 13:27:53 | 2016-01-14 13:27:53 |
+|  3 | <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Check out <a href="https://twitter.com/mYiPtitDrogo">@mYiPtitDrogo</a>,​ featured PRO <a href="https://twitter.com/StarCraft">@StarCraft</a> coach at the Xsolla <a href="https://twitter.com/hashtag/eSports?src=hash">#eSports</a> Academy! <a href="https://t.co/EAOZpaYT27">https://t.co/EAOZpaYT27</a> <a href="https://t.co/9f8QZlJQOn">pic.twitter.com/9f8QZlJQOn</a></p>&mdash; xsolla (@xsolla) <a href="https://twitter.com/xsolla/status/687732256853463041">January 14, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>   | 2016-01-14 13:28:31 | 2016-01-14 13:28:31 |
+|  4 | <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Coaching GM Zerg! <a href="https://t.co/e8DqtHI4z7">https://t.co/e8DqtHI4z7</a></p>&mdash; Jared &#39;PiG&#39; Krensel (@x5_PiG) <a href="https://twitter.com/x5_PiG/status/687731606807654400">January 14, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>                                                                                                                                                                                                                                                                           | 2016-01-14 13:28:45 | 2016-01-14 13:28:45 |
+|  5 | <blockquote class="twitter-tweet"><p lang="en" dir="ltr">How can I find out more about this,John ? <a href="https://t.co/nvEn3m2dk4">https://t.co/nvEn3m2dk4</a></p>&mdash; John Cleese (@JohnCleese) <a href="https://twitter.com/JohnCleese/status/687730580482568193">January 14, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>                                                                                                                                                                                                                                                           | 2016-01-14 14:30:46 | 2016-01-14 14:30:46 |
+|  6 | <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Learn how we keep Google’s cloud infrastructure secure and reliable. <a href="https://t.co/oOhKolVArl">https://t.co/oOhKolVArl</a> <a href="https://t.co/Jx2JnMvJ3M">pic.twitter.com/Jx2JnMvJ3M</a></p>&mdash; Google (@google) <a href="https://twitter.com/google/status/687719482631032833">January 14, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>                                                                                                                                                                            | 2016-01-14 14:41:00 | 2016-01-14 14:41:00 |
++----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+
+6 rows in set (0.00 sec)
+

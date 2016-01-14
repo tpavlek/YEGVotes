@@ -161,6 +161,7 @@ span[data-attendance-percent="100"] { color: green; }
 }
 
 .whitecard {
+  box-sizing: border-box;
   background-color: white;
   box-shadow: 0px 1px 1px black;
   padding: 1rem;
@@ -170,6 +171,10 @@ span[data-attendance-percent="100"] { color: green; }
     margin-left: 0;
     margin-right: 0;
     text-align:center;
+  }
+
+  a {
+    font-weight: bold;
   }
 }
 
@@ -566,4 +571,30 @@ $failed-motion-color: $no-vote-color;
     text-align: left;
   }
 }
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .column { max-width: 50% }
+}
+
+.flex-justified {
+  @extend .flex;
+  justify-content: center;
+}
+
+.candidate-image {
+  max-width: 200px;
+}
+
+.candidate-link-area:hover {
+  color: dodgerblue;
+}
+
+.candidate .media-link:not(:first-child) {
+  margin-left: 0.5rem;
+}
+
+
 
