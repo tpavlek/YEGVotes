@@ -15,4 +15,14 @@ class Candidate extends Model
         return "$last_name, {$this->first_name}";
     }
 
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function election()
+    {
+        return $this->belongsTo(Election::class, 'election_id', 'id');
+    }
+
 }

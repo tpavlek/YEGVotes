@@ -584,6 +584,10 @@ $failed-motion-color: $no-vote-color;
   max-width: 200px;
 }
 
+.candidate-link-area:hover {
+  color: dodgerblue;
+}
+
 .candidate .media-link:not(:first-child) {
   margin-left: 0.5rem;
 }
