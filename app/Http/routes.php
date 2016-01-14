@@ -12,4 +12,7 @@ get('/agenda/{agenda_item_id}', 'AgendaItems@show')->name('agenda_item.show');
 get('/councillor/{council_member}', 'Councillors@show')->name('councillor.show');
 get('councillor/{council_member}/no_votes', 'Councillors@noVotes')->name('councillor.no_votes');
 
+
+Route::get('elections/show/{name}', 'Elections@show')->name('elections.show');
+Route::get('candidate/{id}', 'Candidates@show')->name('candidate.show');
 //get('search/{term}', 'Search@search')->name('search');
