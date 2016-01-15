@@ -14,7 +14,7 @@
             <div class="whitecard">
                 <h3>About the By-Election</h3>
                 <p>
-                    When <a href="{{ URL::route('councillor.show', "A. Sohi - Councillor") }}">Amajeet Sohi</a> won a seat
+                    When <a href="{{ URL::route('councillor.show', "A. Sohi - Councillor") }}">Amarjeet Sohi</a> won a seat
                     in the federal election and earned his Infrastructure Minister position on cabinet, a municipal by-election
                     needed to be called to fill his seat on Council. This has quickly become the biggest by-election in
                     Edmonton's history, with over 29 candidates registered to run as of January 13, 2016.
