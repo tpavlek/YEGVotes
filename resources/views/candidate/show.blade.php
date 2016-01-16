@@ -19,7 +19,7 @@
     <div class="flex">
         @include('candidate.candidateDisplayPartial')
             @forelse($postable_content as $content)
-            <div class="whitecard">
+            <div class="whitecard" data-postable-id="{{ $content->id }}">
                 <h2>{{ $content->updated_at->format('M j, Y') }}</h2>
                 {!! $content->render() !!}
             </div>

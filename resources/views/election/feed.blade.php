@@ -29,7 +29,7 @@
 
     <div class="flex-justified">
         @foreach($postable_content as $content)
-            <div class="whitecard">
+            <div class="whitecard" data-postable-id="{{ $content->id }}">
                 {!! $content->render() !!}
 
                 <div style="text-align: left">
