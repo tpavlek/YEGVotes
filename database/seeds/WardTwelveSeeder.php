@@ -120,6 +120,8 @@ class WardTwelveSeeder extends \Illuminate\Database\Seeder
             'twitter' => 'yegventures',
             'facebook' => 'VoteLincolnHo',
             'website' => 'http://www.lincolnho.ca/',
+            'email' => 'voteho@telus.net',
+            'phone' => '587-710-3096'
         ]);
 
         Candidate::create([

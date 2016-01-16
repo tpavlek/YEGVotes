@@ -53,22 +53,22 @@ class Candidate extends Model
 
     public function tweets()
     {
-        return $this->morphedByMany(Tweet::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at')->whereNotNull('election_postable_content.approved_at');
+        return $this->morphedByMany(Tweet::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at', 'rejected_at')->whereNotNull('election_postable_content.approved_at');
     }
 
     public function facebook_posts()
     {
-        return $this->morphedByMany(FacebookPost::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at')->whereNotNull('election_postable_content.approved_at');
+        return $this->morphedByMany(FacebookPost::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at', 'rejected_at')->whereNotNull('election_postable_content.approved_at');
     }
 
     public function youtube_videos()
     {
-        return $this->morphedByMany(Youtube::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at')->whereNotNull('election_postable_content.approved_at');
+        return $this->morphedByMany(Youtube::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at', 'rejected_at')->whereNotNull('election_postable_content.approved_at');
     }
 
     public function arbitrary_posts()
     {
-        return $this->morphedByMany(ArbitraryPostable::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at')->whereNotNull('election_postable_content.approved_at');
+        return $this->morphedByMany(ArbitraryPostable::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at', 'rejected_at')->whereNotNull('election_postable_content.approved_at');
     }
 
 }
