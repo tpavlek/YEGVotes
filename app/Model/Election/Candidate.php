@@ -46,7 +46,8 @@ class Candidate extends Model
         return $getPostable->sort(
             $this->tweets()->get(),
             $this->facebook_posts()->get(),
-            $this->youtube_videos()->get()
+            $this->youtube_videos()->get(),
+            $this->arbitrary_posts()->get()
         );
     }
 
@@ -63,6 +64,11 @@ class Candidate extends Model
     public function youtube_videos()
     {
         return $this->morphedByMany(Youtube::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at')->whereNotNull('election_postable_content.approved_at');
+    }
+
+    public function arbitrary_posts()
+    {
+        return $this->morphedByMany(ArbitraryPostable::class, 'postable', 'election_postable_content', 'candidate_id', 'postable_id')->withPivot('approved_at')->whereNotNull('election_postable_content.approved_at');
     }
 
 }
