@@ -7,7 +7,12 @@
 @section('content')
 
     <h1>Edmonton Ward 12 By-Election <small style="color:goldenrod">{{ $election_date->format('M j, Y') }}</small></h1>
-    <h2>{{ \Carbon\Carbon::now()->diffInDays($election_date) }} days away</h2>
+	<div class="whitecard">
+	<h2>Moe Banga has won, with 2539 votes!</h2>
+<p>
+View full election results <a href="http://www.edmonton.ca/city_government/by-election.aspx">here</a>.
+</p>
+</div>
 
     <div class="flex-justified" style="text-align: center;">
         <div class="column">
