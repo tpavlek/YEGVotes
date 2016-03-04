@@ -26,6 +26,7 @@ class Ward
             'M. Walters - Councillor' => 10,
             'M. Nickel - Councillor' => 11,
             'A. Sohi - Councillor' => 12,
+            'M. Banga - Councillor' => 12,
             'D. Iveson - Mayor' => "Mayor"
         ];
 
