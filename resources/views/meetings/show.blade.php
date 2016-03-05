@@ -27,42 +27,59 @@
                     </div>
                 @endif
 
+                    @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER))
+                        <div class="whitecard">
+                            <h2>General</h2>
+
+                            @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER) as $agenda_item)
+
+                                @if ($agenda_item->hasVotes() && $agenda_item->isUnanimous())
+                                    <p style="text-align:left;">
+                                        <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
+                                        <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
+                                        &nbsp;
+                                        <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
+                                    </p>
+                                @else
+                                    @include('agendaItemPartial')
+                                @endif
+                            @endforeach
+
+                        </div>
+                    @endif
+
                 @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW))
                     <div class="whitecard">
                         <h2>Bylaws</h2>
 
                         @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW) as $agenda_item)
 
-                            <span>{!! $agenda_item->formattedTitle !!}</span>
                             @if ($agenda_item->hasVotes())
-                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
-                                    <i class="fa fa-arrow-right fa-sm"></i>
-                                </a>
+                                @if ($agenda_item->isUnanimous())
+                                    <p style="text-align:left;">
+                                        <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
+                                        <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
+                                        &nbsp;
+                                        <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
+                                    </p>
+
+                                @else
+                                    @include('agendaItemPartial')
+                                @endif
+                            @else
+                                <p style="text-align:left;">
+                                    <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
+                                    <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
+                                </p>
                             @endif
-                            <br />
+
                         @endforeach
 
                     </div>
                 @endif
 
 
-                @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER))
-                    <div class="whitecard">
-                        <h2>Other</h2>
 
-                        @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER) as $agenda_item)
-
-                            <span>{!! $agenda_item->formattedTitle !!}</span>
-                            @if ($agenda_item->hasVotes())
-                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
-                                    <i class="fa fa-arrow-right fa-sm"></i>
-                                </a>
-                            @endif
-                            <br />
-                        @endforeach
-
-                    </div>
-                @endif
 
                 @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE) or null)
                     <div class="whitecard">

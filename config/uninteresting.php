@@ -6,6 +6,7 @@ return [
         'COUNCILLOR INQUIRIES',
         'RESPONSES TO COUNCILLOR INQUIRIES - NONE',
         'REPORTS TO BE DEALT WITH AT A FUTURE MEETING - NONE',
+        'REPORT TO BE DEALT WITH AT A FUTURE MEETING - NONE',
         'STATUS REPORT',
         'STATUS REPORT - NONE',
         'REPORTS',
@@ -26,6 +27,7 @@ return [
         'Requests for Specific Time on Agenda',
         'EXPLANATION OF PUBLIC HEARING PROCESS',
         'Call for Persons to Speak',
-        'ADJOURNMENT'
+        'ADJOURNMENT',
+        'BYLAWS AND RELATED REPORTS - 2 P.M.'
     ]
 ];

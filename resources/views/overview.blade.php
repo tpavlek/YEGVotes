@@ -52,6 +52,27 @@
                     </div>
                 @endif
 
+                @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER))
+                    <div class="whitecard full">
+                        <h2>General</h2>
+
+                        @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER) as $agenda_item)
+
+                            @if ($agenda_item->hasVotes() && $agenda_item->isUnanimous())
+                                <p style="text-align:left;">
+                                    <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
+                                    <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
+                                    &nbsp;
+                                    <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
+                                </p>
+                            @else
+                                @include('agendaItemPartial')
+                            @endif
+                        @endforeach
+
+                    </div>
+                @endif
+
             @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW))
                 <div class="whitecard full">
                     <h2>Bylaws</h2>
@@ -73,26 +94,7 @@
             @endif
 
 
-            @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER))
-                <div class="whitecard full">
-                    <h2>Other</h2>
 
-                    @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER) as $agenda_item)
-
-                        @if ($agenda_item->hasVotes() && $agenda_item->isUnanimous())
-                            <p style="text-align:left;">
-                                <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
-                                <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
-                                &nbsp;
-                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
-                            </p>
-                        @else
-                            @include('agendaItemPartial')
-                        @endif
-                    @endforeach
-
-                </div>
-            @endif
 
 
         </div>
