@@ -6,10 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.1.*",
+        "laravel/framework": "5.2.*",
         "socrata/soda-php": "dev-develop as 2.0",
         "depotwarehouse/toolbox": "^3.0",
-        "league/url": "^3.3"
+        "league/url": "^3.3",
+        "fabpot/goutte": "^3.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -37,7 +38,6 @@
             "php artisan optimize"
         ],
         "pre-update-cmd": [
-            "php artisan clear-compiled"
         ],
         "post-update-cmd": [
             "php artisan optimize"

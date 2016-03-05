@@ -64,7 +64,7 @@ class Meeting extends Model
      */
     public function agenda_items()
     {
-        return $this->hasMany(AgendaItem::class, "meeting_id", "id");
+        return $this->hasMany(AgendaItem::class, "meeting_id", "id")->orderBy('agenda_items.id');
     }
 
     public function attendance()

@@ -16,6 +16,17 @@ use Illuminate\Database\Eloquent\Model;
 class AgendaItem extends Model
 {
 
+    const CATEGORY_OTHER = "uncategorized";
+    const CATEGORY_BYLAW = "bylaw";
+    const CATEGORY_PASSED_WITHOUT_DEBATE = "passed-without-debate";
+    const CATEGORY_INQUIRY = "councillor-inquiry";
+
+    const BYLAW_REGEX_MATCHER = '/^Bylaw \d+/';
+    // Councillor inquiries take the form of eg. '(S. McKeen)' at the end of the title.
+    // TODO currently protocol items take the same form. Once items are categorized in the catalogue this will be less
+    // of an issue
+    const INQUIRY_REGEX_MATCHER = '/\([A-Za-z]. [A-Za-z]+\)$/';
+
     use FiltersProtocolItems;
 
     public $table = "agenda_items";
@@ -33,6 +44,15 @@ class AgendaItem extends Model
     public function scopeWithoutProtocolItems(Builder $query)
     {
         return $this->filterProtocolItems($query);
+    }
+
+    public function getFormattedTitleAttribute()
+    {
+        if ($this->isBylaw()) {
+            return preg_replace(self::BYLAW_REGEX_MATCHER, "<strong>$0</strong>", $this->title);
+        }
+
+        return $this->title;
     }
 
     /**
@@ -85,6 +105,14 @@ class AgendaItem extends Model
         return $this->hasManyThrough(Vote::class, Motion::class, 'item_id');
     }
 
+    /**
+     * @param Builder $query
+     */
+    public function scopeInteresting($query)
+    {
+        return $query->whereNotIn('title', config('uninteresting.agenda_items'));
+    }
+
     public function scopeInterestingItems($query)
     {
         $query->bylaws()->whereHas('motions', function (Builder $query) {
@@ -135,9 +163,25 @@ class AgendaItem extends Model
 
     }
 
+    public function isCouncillorInquiry()
+    {
+        return preg_match(self::INQUIRY_REGEX_MATCHER, $this->title) === 1;
+    }
+
     public function isBylaw()
     {
-        return preg_match('/Bylaw [0-9](.*)/', $this->title) === 1;
+        return preg_match(self::BYLAW_REGEX_MATCHER, $this->title) === 1;
+    }
+
+    public function passedWithoutDebate()
+    {
+        return ($this->motions->count() > 3) &&
+            $this->motions->contains(function($key, Motion $motion) {
+                return $motion->isConsiderationForThirdReading();
+            }) &&
+            $this->motions->contains(function($key, Motion $motion) {
+                return $motion->isThirdReading();
+            });
     }
 
     public function isPrivateReport() {
@@ -252,6 +296,23 @@ class AgendaItem extends Model
     public function getDateAttribute()
     {
         return $this->meeting->date;
+    }
+
+    public function groupKey()
+    {
+        if ($this->isCouncillorInquiry()) {
+            return self::CATEGORY_INQUIRY;
+        }
+
+        if ($this->isBylaw()) {
+            if ($this->passedWithoutDebate()) {
+                return self::CATEGORY_PASSED_WITHOUT_DEBATE;
+            }
+
+            return self::CATEGORY_BYLAW;
+        }
+
+        return self::CATEGORY_OTHER;
     }
 
 }

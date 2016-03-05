@@ -10,22 +10,90 @@
         <div class="pure-u-1 pure-u-lg-1-2">
             <h1>{{ $meeting }}</h1>
             <div style="text-align: left; line-height:1.8em;">
-                @forelse($meeting->agenda_items as $agenda_item)
-                    <span>{{ $agenda_item->title }}</span>
-                    @if ($agenda_item->hasVotes())
-                        <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
-                            <i class="fa fa-arrow-right fa-sm"></i>
-                        </a>
-                    @endif
-                    <br />
-                @empty
+                @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY))
+                    <div class="whitecard">
+                        <h2>Councillor Inquiries and Protocol Items</h2>
+
+                        @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY) as $agenda_item)
+
+                            <span>{!! $agenda_item->formattedTitle !!}</span>
+                            @if ($agenda_item->hasVotes())
+                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
+                                    <i class="fa fa-arrow-right fa-sm"></i>
+                                </a>
+                            @endif
+                            <br />
+                        @endforeach
+                    </div>
+                @endif
+
+                @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW))
+                    <div class="whitecard">
+                        <h2>Bylaws</h2>
+
+                        @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW) as $agenda_item)
+
+                            <span>{!! $agenda_item->formattedTitle !!}</span>
+                            @if ($agenda_item->hasVotes())
+                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
+                                    <i class="fa fa-arrow-right fa-sm"></i>
+                                </a>
+                            @endif
+                            <br />
+                        @endforeach
+
+                    </div>
+                @endif
+
+
+                @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER))
+                    <div class="whitecard">
+                        <h2>Other</h2>
+
+                        @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER) as $agenda_item)
+
+                            <span>{!! $agenda_item->formattedTitle !!}</span>
+                            @if ($agenda_item->hasVotes())
+                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
+                                    <i class="fa fa-arrow-right fa-sm"></i>
+                                </a>
+                            @endif
+                            <br />
+                        @endforeach
+
+                    </div>
+                @endif
+
+                @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE) or null)
+                    <div class="whitecard">
+                        <h2>Bylaws Passed Without Debate</h2>
+
+                        @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE) as $agenda_item)
+
+                            <span>{!! $agenda_item->formattedTitle !!}</span>
+                            @if ($agenda_item->hasVotes())
+                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
+                                    <i class="fa fa-arrow-right fa-sm"></i>
+                                </a>
+                            @endif
+                            <br />
+                        @endforeach
+
+                    </div>
+                @endif
+
+                @if ($groupedAgendaItems->count() == 0)
                     <h2>There is nothing here!</h2>
                     <p>
                         This usually means that the city clerk has not yet updated the Edmonton Open Data API with
                         this meeting's minutes
                     </p>
                     <a href="{{ URL::to('/') }}" class="button xlarge">Go Home and Try Again</a>
-                @endforelse
+                @endif
+
+
+
+
             </div>
         </div>
         <div class="pure-u-1 pure-u-lg-1-2">

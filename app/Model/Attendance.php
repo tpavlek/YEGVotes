@@ -27,27 +27,8 @@ class Attendance extends Model
             ->first();
     }
 
-    public function getRecordForCouncilMember($council_member)
+    public function getRecordForCouncilMember(Councillor $councillor)
     {
-        $available_councillors = [
-            "A. Knack - Councillor",
-            "A. Sohi - Councillor",
-            "B. Anderson - Councillor",
-            "B. Esslinger - Councillor",
-            "B. Henderson - Councillor",
-            "D. Loken - Councillor",
-            "E. Gibbons - Councillor",
-            "M. Nickel - Councillor",
-            "M. Oshry - Councillor",
-            "M. Walters - Councillor",
-            "S. McKeen - Councillor",
-            "T. Caterina - Councillor",
-            "D. Iveson - Mayor"
-        ];
-        $council_member = (string)$council_member;
-        if (!in_array($council_member, $available_councillors)) {
-            throw new \InvalidArgumentException("Attempted to query an illegal council member");
-        }
 
         $results = $this->getConnection()->getPdo()->query("
             select a.attendee, vote_query.votes_present as votes_present, vote_query.total_votes as total_votes,
@@ -56,8 +37,8 @@ class Attendance extends Model
             from attendance as a,
             (select voter, count(v.id) as total_votes,
                 (select count(id) from votes where vote not in ('Absent', 'Off the Dais') and voter = v.voter) as votes_present
-                from votes v where voter like '%{$council_member}%') as vote_query
-            where a.attendee like '%{$council_member}%';
+                from votes v where voter like '%{$councillor->toString()}%') as vote_query
+            where a.attendee like '%{$councillor->toString()}%';
         ");
 
         foreach ($results as $row) {
@@ -86,8 +67,9 @@ class Attendance extends Model
             (select voter, count(v.id) as total_votes,
                 (select count(id) from votes where vote not in ('Absent', 'Off the Dais') and v.voter = voter) as votes_present
                 from votes v
-                group by voter) as vote_query
-            where (a.attendee like '%Coun%' or a.attendee like '%Mayor%') and vote_query.voter = a.attendee
+                group by voter) as vote_query,
+            councillors as c
+            where c.name = a.attendee and c.term is null and vote_query.voter = a.attendee
             group by attendee;
         ");
 

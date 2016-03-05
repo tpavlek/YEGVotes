@@ -120,4 +120,16 @@ class Motion extends Model
         return $this->description;
     }
 
+    public function isConsiderationForThirdReading()
+    {
+        // TODO ensure it also mentions bylaw name.
+        return str_contains($this->description, "be considered for third reading");
+    }
+
+    public function isThirdReading()
+    {
+        // TODO ensure it also mentions bylaw name.
+        return str_contains($this->description, "be read a third time");
+    }
+
 }

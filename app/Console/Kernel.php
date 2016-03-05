@@ -2,9 +2,11 @@
 
 namespace Depotwarehouse\YEGVotes\Console;
 
+use Depotwarehouse\YEGVotes\Console\Commands\CrawlAgendaCommand;
 use Depotwarehouse\YEGVotes\Console\Commands\UpdateAgendaCommand;
 use Depotwarehouse\YEGVotes\Console\Commands\UpdateAllData;
 use Depotwarehouse\YEGVotes\Console\Commands\UpdateAttendanceCommand;
+use Depotwarehouse\YEGVotes\Console\Commands\UpdateCouncillorsCommand;
 use Depotwarehouse\YEGVotes\Console\Commands\UpdateMeetingsCommand;
 use Depotwarehouse\YEGVotes\Console\Commands\UpdateMotionsCommand;
 use Depotwarehouse\YEGVotes\Console\Commands\UpdateVotesCommand;
@@ -25,6 +27,8 @@ class Kernel extends ConsoleKernel
         UpdateMotionsCommand::class,
         UpdateVotesCommand::class,
         UpdateAllData::class,
+        UpdateCouncillorsCommand::class,
+        CrawlAgendaCommand::class,
     ];
 
     /**
