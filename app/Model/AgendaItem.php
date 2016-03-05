@@ -49,7 +49,8 @@ class AgendaItem extends Model
     public function getFormattedTitleAttribute()
     {
         if ($this->isBylaw()) {
-            return preg_replace(self::BYLAW_REGEX_MATCHER, "<strong>$0</strong>", $this->title);
+            $withoutBreaks = preg_replace('/<br>$/', "", trim($this->title));
+            return preg_replace(self::BYLAW_REGEX_MATCHER, "<strong>$0</strong>", $withoutBreaks);
         }
 
         return $this->title;
@@ -160,7 +161,11 @@ class AgendaItem extends Model
         return $this->motions->contains(function ($key, Motion $motion) {
             return $motion->hasDissent();
         });
+    }
 
+    public function isUnanimous()
+    {
+        return !$this->hasDissent();
     }
 
     public function isCouncillorInquiry()

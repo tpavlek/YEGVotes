@@ -5,13 +5,96 @@
 @stop
 
 @section('content')
+    <h1>
+        {{ $last_meeting->title }}
+        <a href="{{ URL::route('meetings.show', $last_meeting->id) }}" class="button small">
+            <i class="fa fa-arrow-right"></i>
+        </a>
+    </h1>
+
     <div class="overview-wrapper">
+
+
+
         <div class="items">
-            @forelse ($voting_items as $agenda_index => $agenda_item)
-                @include('agendaItemPartial', [ 'agenda_item' => $agenda_item ])
-            @empty
-                <em>Sorry, we don't have any records on file right now!</em>
-            @endforelse
+            @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY))
+                <div class="whitecard half">
+                    <h2>Councillor Inquiries and Protocol Items</h2>
+
+                    @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY) as $agenda_item)
+
+                        <span>{!! $agenda_item->formattedTitle !!}</span>
+                        @if ($agenda_item->hasVotes())
+                            <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
+                                <i class="fa fa-arrow-right fa-sm"></i>
+                            </a>
+                        @endif
+                        <br />
+                    @endforeach
+                </div>
+            @endif
+
+                @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE) or null)
+                    <div class="whitecard half">
+                        <h2>Bylaws Passed Without Debate</h2>
+
+                        @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE) as $agenda_item)
+
+                            <span>{!! $agenda_item->formattedTitle !!}</span>
+                            @if ($agenda_item->hasVotes())
+                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
+                                    <i class="fa fa-arrow-right fa-sm"></i>
+                                </a>
+                            @endif
+                            <br />
+                        @endforeach
+
+                    </div>
+                @endif
+
+            @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW))
+                <div class="whitecard full">
+                    <h2>Bylaws</h2>
+                    @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW) as $agenda_item)
+
+                        @if ($agenda_item->hasVotes() && $agenda_item->isUnanimous())
+                            <p style="text-align:left;">
+                                <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
+                                <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
+                                &nbsp;
+                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
+                            </p>
+                        @else
+                            @include('agendaItemPartial')
+                        @endif
+                    @endforeach
+                </div>
+
+            @endif
+
+
+            @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER))
+                <div class="whitecard full">
+                    <h2>Other</h2>
+
+                    @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER) as $agenda_item)
+
+                        @if ($agenda_item->hasVotes() && $agenda_item->isUnanimous())
+                            <p style="text-align:left;">
+                                <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
+                                <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
+                                &nbsp;
+                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
+                            </p>
+                        @else
+                            @include('agendaItemPartial')
+                        @endif
+                    @endforeach
+
+                </div>
+            @endif
+
+
         </div>
 
         <div class="attendance-record">

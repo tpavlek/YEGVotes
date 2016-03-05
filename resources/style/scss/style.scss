@@ -394,13 +394,30 @@ footer {
   flex-direction: row;
 
   .items {
+    height: 20%; // this is a hack but it works to get the blocks to not fill the height of the page.
     width: 70%;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    //justify-content: space-around;
+
+    .whitecard {
+      text-align: left;
+      line-height: 1.5em;
+
+      .item-title {
+        display: block;
+      }
+    }
+
+    .full {
+      width: 100%;
+    }
+
+    .half {
+      width: 45%;
+    }
 
     .item-container {
-      width: 45%;
       margin-right: 2%;
     }
   }
