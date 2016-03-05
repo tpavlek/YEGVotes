@@ -33,15 +33,23 @@
 
                             @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER) as $agenda_item)
 
-                                @if ($agenda_item->hasVotes() && $agenda_item->isUnanimous())
+                                @if ($agenda_item->hasVotes())
+                                    @if ($agenda_item->isUnanimous())
+                                        <p style="text-align:left;">
+                                            <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
+                                            <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
+                                            &nbsp;
+                                            <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
+                                        </p>
+
+                                    @else
+                                        @include('agendaItemPartial')
+                                    @endif
+                                @else
                                     <p style="text-align:left;">
                                         <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
-                                        <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
-                                        &nbsp;
                                         <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
                                     </p>
-                                @else
-                                    @include('agendaItemPartial')
                                 @endif
                             @endforeach
 
