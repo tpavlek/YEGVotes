@@ -14,89 +14,16 @@
 
     <div class="overview-wrapper">
 
-
-
         <div class="items">
-            @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY))
-                <div class="whitecard half">
-                    <h2>Councillor Inquiries and Protocol Items</h2>
-
-                    @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY) as $agenda_item)
-
-                        <span>{!! $agenda_item->formattedTitle !!}</span>
-                        @if ($agenda_item->hasVotes())
-                            <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
-                                <i class="fa fa-arrow-right fa-sm"></i>
-                            </a>
-                        @endif
-                        <br />
-                    @endforeach
-                </div>
-            @endif
-
-                @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE) or null)
-                    <div class="whitecard half">
-                        <h2>Bylaws Passed Without Debate</h2>
-
-                        @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE) as $agenda_item)
-
-                            <span>{!! $agenda_item->formattedTitle !!}</span>
-                            @if ($agenda_item->hasVotes())
-                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
-                                    <i class="fa fa-arrow-right fa-sm"></i>
-                                </a>
-                            @endif
-                            <br />
-                        @endforeach
-
-                    </div>
-                @endif
-
-                @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER))
-                    <div class="whitecard full">
-                        <h2>General</h2>
-
-                        @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER) as $agenda_item)
-
-                            @if ($agenda_item->hasVotes() && $agenda_item->isUnanimous())
-                                <p style="text-align:left;">
-                                    <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
-                                    <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
-                                    &nbsp;
-                                    <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
-                                </p>
-                            @else
-                                @include('agendaItemPartial')
-                            @endif
-                        @endforeach
-
-                    </div>
-                @endif
-
-            @if ($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW))
-                <div class="whitecard full">
-                    <h2>Bylaws</h2>
-                    @foreach($groupedAgendaItems->get(\Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW) as $agenda_item)
-
-                        @if ($agenda_item->hasVotes() && $agenda_item->isUnanimous())
-                            <p style="text-align:left;">
-                                <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
-                                <span style="color:green; font-weight:bold;"><i class="fa fa-check"></i> Unanimous</span>
-                                &nbsp;
-                                <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">More Info</a>
-                            </p>
-                        @else
-                            @include('agendaItemPartial')
-                        @endif
-                    @endforeach
-                </div>
-
-            @endif
 
 
+            @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY, 'section_name' => "Councillor Inquiries and Protocol Items", 'card_class' => "half" ])
 
+            @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE, 'section_name' => "Bylaws Passed Without Debate", 'card_class' => "half" ])
 
+            @include('agendaSectionWithVotesPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER, 'section_name' => "General", 'card_class' => "full" ])
 
+            @include('agendaSectionWithVotesPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW, 'section_name' => "Bylaws", 'card_class' => "full"])
         </div>
 
         <div class="attendance-record">
