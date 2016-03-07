@@ -34,8 +34,6 @@
             @endforeach
         </div>
 
-
-
     </div>
 
 @stop
