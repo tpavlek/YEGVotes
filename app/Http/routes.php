@@ -9,6 +9,7 @@ Route::get('/meetings/{meeting_id}', 'Meetings@show')->name('meetings.show');
 Route::get('/motions/{motion_id}', 'Motions@show')->name('motion.show');
 
 Route::get('/embed/about/attendance', 'Embed@attendanceInfo')->name('embed.about.attendance');
+Route::get('/embed/agenda_item/{agendaItem}', 'Embed@agendaItem')->name('embed.agenda_item');
 
 Route::get('/agenda/{agenda_item_id}', 'AgendaItems@show')->name('agenda_item.show');
 Route::get('/councillor/{councillor}', 'Councillors@show')->name('councillor.show');

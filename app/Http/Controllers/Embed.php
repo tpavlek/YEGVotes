@@ -2,6 +2,7 @@
 
 namespace Depotwarehouse\YEGVotes\Http\Controllers;
 
+use Depotwarehouse\YEGVotes\Model\AgendaItem;
 use Depotwarehouse\YEGVotes\Model\Attendance;
 use Depotwarehouse\YEGVotes\Model\AttendanceRecord;
 
@@ -20,6 +21,12 @@ class Embed extends Controller
 
         return view('embed')
             ->with('view', view('about.attendance')->with('attendance_records', $attendance_records));
+    }
+
+    public function agendaItem(AgendaItem $agendaItem)
+    {
+        return view('embed')
+            ->with('view', view('agendaItemPartial')->with('agenda_item', $agendaItem));
     }
 
 }
