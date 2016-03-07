@@ -14,5 +14,20 @@
 </head>
 <body>
 @yield('body')
+
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("input[type='checkbox']").click(function() {
+            var thisId = $(this).attr('id');
+            var otherChecks = $(this).parents('.motions').find('input:checked:not(#' + thisId + ')');
+            otherChecks.each(function (index) {
+                $(otherChecks[index]).removeAttr('checked');
+            });
+
+        });
+    });
+</script>
+@yield('root_scripts')
 </body>
 </html>

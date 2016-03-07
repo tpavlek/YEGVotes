@@ -26,7 +26,7 @@ class Embed extends Controller
     public function agendaItem(AgendaItem $agendaItem)
     {
         return view('embed')
-            ->with('view', view('agendaItemPartial')->with('agenda_item', $agendaItem));
+            ->with('view', view('agendaItemPartial')->with('agenda_item', $agendaItem)->with('checkFirst', true));
     }
 
 }

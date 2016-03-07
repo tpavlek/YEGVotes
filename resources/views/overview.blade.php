@@ -39,16 +39,5 @@
 @stop
 
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            $("input[type='checkbox']").click(function() {
-                var thisId = $(this).attr('id');
-                var otherChecks = $(this).parents('.motions').find('input:checked:not(#' + thisId + ')');
-                otherChecks.each(function (index) {
-                    $(otherChecks[index]).removeAttr('checked');
-                });
 
-            });
-        });
-    </script>
 @stop
