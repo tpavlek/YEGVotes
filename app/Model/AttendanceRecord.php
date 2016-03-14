@@ -56,9 +56,23 @@ class AttendanceRecord
         return number_format(($this->days_in_attendance / $this->total_meetings) * 100);
     }
 
+    /**
+     * The value for sorting an attendance record. Lower is better attendance.
+     *
+     * If two records have perfect attendance (a value of zero) the one who has attended more meetings will have a negative
+     * value equal to the number of meetings they attended times -1.
+     *
+     * @return float
+     */
     public function sortValue()
     {
         // Because the attended over the total will be 1 or less, a value of 0 signals perfect attendance
-        return 1 - ($this->votes_in_attendance / $this->total_votes);
+        $meetingAttendance = 1 - ($this->votes_in_attendance / $this->total_votes);
+
+        if ($meetingAttendance != 0) {
+            return $meetingAttendance;
+        }
+
+        return $this->total_meetings * -1;
     }
 }

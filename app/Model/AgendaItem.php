@@ -186,7 +186,12 @@ class AgendaItem extends Model
             }) &&
             $this->motions->contains(function($key, Motion $motion) {
                 return $motion->isThirdReading();
-            });
+            }) &&
+
+            // If any of the motions have dissent, then they did not pass without debate.
+            $this->motions->first(function($key, Motion $motion) {
+                return $this->hasDissent();
+            }) == null;
     }
 
     public function isPrivateReport() {

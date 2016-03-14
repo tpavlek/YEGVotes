@@ -6,12 +6,15 @@
 
 @section('content')
 
-<h2>Meetings</h2>
-<p>
-    Not every meeting contains recorded votes, some are just agendas, and some are incomplete based on the data
-    provided so far by the city clerk. For your convenience, we've bolded all meetings in the past three months that
-    contain votes.
-</p>
+<div class="whitecard">
+    <h2>Meetings</h2>
+    <p>
+        Not every meeting contains recorded votes, some are just agendas, and some are incomplete based on the data
+        provided so far by the city clerk. For your convenience, we've bolded all meetings in the past three months that
+        contain votes.
+    </p>
+</div>
+
 <div class="pure-g">
     @foreach ($meetings as $yearMonth => $meetingGroup)
         <div class="pure-u-1 pure-u-md-1-3">

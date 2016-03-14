@@ -12,7 +12,7 @@
         @foreach ($agenda_item->motions as $index => $motion)
             <div class="motion {{ $motion->getIndicatorString() }}">
                 <div class="motion-indicator">
-                    <input type="checkbox" name="tabs" id="motion{{$motion->id}}" />
+                    <input type="checkbox" name="tabs" id="motion{{$motion->id}}" @if ($index == 0 && isset($checkFirst) && $checkFirst) checked @endif />
                     <label for="motion{{$motion->id}}">
                         @if ($motion->getIndicatorString() == "Failed")
                             <i class="fa fa-times-circle"></i>
