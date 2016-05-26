@@ -613,5 +613,66 @@ $failed-motion-color: $no-vote-color;
   margin-left: 0.5rem;
 }
 
+.potato-select {
+  .option-select {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 2rem;
+    width: 350px;
+    height: 350px;
 
+    position: relative;
+    vertical-align: top;
+    line-height: 250px;
+    border-radius: 50%;
+    border: 8px solid transparent;
+
+    img {
+      max-width: 100%;
+      line-height: normal;
+      vertical-align: middle;
+    }
+  }
+
+  .option-select:first-child {
+    margin-right: 2rem;
+  }
+
+  .option-select:first-child:hover:after, .option-select.selected:first-child:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "\274c"; /* use the hex value here... */
+    font-size: 350px;
+    color: red;
+    line-height: 350px;
+    text-align: center;
+  }
+
+  .option-select:nth-child(2):hover, .option-select.selected:nth-child(2) {
+    border: 8px solid green;
+  }
+}
+
+.agreement {
+  display: none;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  min-width: 50%;
+
+  background:lightpink;
+  border-radius: 2px;
+  padding: 1em;
+}
+
+.agreement.display {
+  display:inline-block;
+}
+
+.agreement-amount {
+  font-weight: bold;
+}
 
