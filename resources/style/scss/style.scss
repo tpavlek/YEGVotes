@@ -676,3 +676,19 @@ $failed-motion-color: $no-vote-color;
   font-weight: bold;
 }
 
+
+.potato-demo {
+  display:inline-block;
+
+  span {
+    font-size:3rem; font-weight: bold; margin-left:1rem; margin-right:1rem;
+  }
+}
+
+@media screen and (max-width: 60em) {
+  .potato-demo {
+    span {
+      display: block;
+    }
+  }
+}

@@ -24,10 +24,10 @@
 
 
     </div>
-    <div class="whitecard" style="display:inline-block;">
+    <div class="whitecard potato-demo"">
         <h3>So the real question is which do you want to see more?</h3>
         <img src="/img/potato/potato-cam.jpg" style="vertical-align: middle;"/>
-        <span style="margin-left:1rem;margin-right:1rem; font-size:3rem; font-weight: bold;">or</span>
+        <span>or</span>
         <img src="/img/potato/iveson-fabio.jpg" style="max-width:400px;vertical-align: middle;"/>
     </div>
 
