@@ -28,7 +28,9 @@ Route::get('admin/dashboard', 'Admin@dashboard')->name('admin.dashboard')->middl
 Route::get('elections/update/submit', 'Postable@submit')->name('postable.submit');
 Route::post('elections/update/submit', 'Postable@store')->name('postable.store');
 Route::post('postable/{id}/approve', 'Postable@approve')->name('postable.approve');
-Route::Post('postable/{id}/deny', 'Postable@deny')->name('postable.deny');
+Route::post('postable/{id}/deny', 'Postable@deny')->name('postable.deny');
 
 Route::get('potato', 'Potato@show')->name('potato');
 Route::post('potato/vote', 'Potato@vote')->name('potato.vote');
+
+Route::get('search/{term}', 'Search@search')->name('search');
