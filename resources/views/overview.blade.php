@@ -5,11 +5,6 @@
 @stop
 
 @section('content')
-    <div class="whitecard">
-        <h1>It's time to upgrade the potato used to film city council meetings</h1>
-
-        <a href="{{ URL::route('potato') }}" class="button">Sign the Potato Pledge</a>
-    </div>
     <h1>
         {{ $last_meeting->title }}
         <a href="{{ URL::route('meetings.show', $last_meeting->id) }}" class="button small">

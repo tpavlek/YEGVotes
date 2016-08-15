@@ -7,8 +7,24 @@
 @section('content')
 
     <h2 class="section-header">
-        It's time to upgrade the potato used to broadcast Edmonton City Council Meetings
+        We did it! The City Council camera in the river valley room was upgraded <a href="https://twitter.com/troypavlek/status/765209405654695936">August 15th, 2016</a>
     </h2>
+
+    <div class="section" style="max-width:900px; margin: 0 auto; line-height: 1.5em;">
+        Thanks to everyone that offered to lend support, and kept the cameras in the conversation. The cameras have now been upgraded
+        so there is no need to play <strong>Who's That Councillor</strong>
+
+        <br />
+
+        <img src="/img/potato/whos-that-councillor.png" style="width:400px;"/>
+
+        <br />
+
+        The rest of this website will be preserved below for posterity.
+
+    </div>
+
+    <hr />
 
     <div class="section" style="max-width:900px; margin: 0 auto; line-height: 1.5em;">
         <p>
@@ -24,7 +40,7 @@
 
 
     </div>
-    <div class="whitecard potato-demo"">
+    <div class="whitecard potato-demo">
         <h3>So the real question is which do you want to see more?</h3>
         <img src="/img/potato/potato-cam.jpg" style="vertical-align: middle;"/>
         <span>or</span>
