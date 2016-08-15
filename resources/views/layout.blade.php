@@ -17,9 +17,6 @@
             <li>
                 <a href="https://basketofyegs.com">Podcast</a>
             </li>
-            <li>
-                <a href="{{ URL::route('elections.show', "ward12") }}">Ward 12</a>
-            </li>
             @yield('additional_nav', '')
         </ul>
     </nav>
