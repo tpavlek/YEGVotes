@@ -10,12 +10,20 @@
 @stop
 
 @section('content')
+    <style>
+        li { padding-top: 0.5rem; padding-bottom: 0.5rem;}
+    </style>
     <h1>Some Questions about Council to explore</h1>
     <div style="text-align: left;">
         <ul>
             <li>
                 <a href="{{ URL::route('stats.movers') }}">
                     Who makes the most motions/seconds?
+                </a>
+            </li>
+            <li>
+                <a href="{{ URL::route('stats.private') }}">
+                    How often does Council meet in private?
                 </a>
             </li>
         </ul>

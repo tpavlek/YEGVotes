@@ -81,6 +81,24 @@
         </div>
     </div>
 
+    <br />
+    <hr />
+    <br />
+
+    <div class="footnote" style="font-size:90%; max-width: 60em; margin: 0 auto;">
+        <p><em>How was this calculated?</em></p>
+        <p>
+            The open data catalogue was used to pull all motions, agenda items and meetings from the Open Data Catalogue.
+            A meeting was determined to be in private if it met either of two criteria: there was a vote to meet in private
+            that was carried (<em>note: there has <strong>never</strong> been a motion to meet in private that was not carried</em>)
+            or there was a private report in which a vote was carried to have the report remain private.
+        </p>
+        <p>
+            Due to the text-based nature of the data in the open data catalogue, this data is presented as best-effort and mistakes
+            are endeavoured to be corrected, however there may be slight issues with source data integrity and some of the calculations.
+            If anything is noticed to be suspect, please reach out as soon as possible!
+        </p>
+    </div>
 
 
 @stop
