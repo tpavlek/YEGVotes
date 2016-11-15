@@ -31,6 +31,7 @@ class StatisticsService
                     ->orWhere('description', 'like', '%remain private%');
             })
             ->where('mover', 'not like', '%Board Member%')
+            ->where('mover', 'not like', '%Committee Member%')
             ->where('meeting_type', 'not like', '%LRT Governance%')
             ->select([
                 'item_id',
@@ -66,7 +67,8 @@ class StatisticsService
                 return $section;
             })->map(function ($sectionGroup) {
                 return $sectionGroup->count();
-            });
+            })
+            ->sort()->reverse();
 
         $meetingsInPrivate = $privateMotions->pluck('meeting_id')->unique();
         $totalMeetings = DB::table('meetings')->where('meeting_type', 'not like', '%LRT Governance%')->count();
@@ -78,12 +80,21 @@ class StatisticsService
         })
             ->map(function ($perMonth) {
                 return $perMonth->pluck('meeting_id')->unique()->count();
+            })
+            ->sortBy(function ($value, $key) {
+                $pieces = explode('-', $key);
+                return $pieces[0] * 1000 + $pieces[1];
             });
 
-        dd($meetingsInPrivate->count() . " //   " . $totalMeetings );
+        $start = new Carbon('2013-11-01');
+        while ($start->addMonth()->lt(Carbon::now()))
+        {
+            if (!$perMonth->has($start->year . '-' . $start->month)) {
+                $perMonth->put($start->year . '-' . $start->month, 0);
+            }
+        }
 
-
-        return [ 'movers' => $movers, 'sections' => $sections, 'meetings' => $meetingsInPrivate, 'total_meetings' => $totalMeetings ];
+        return [ 'movers' => $movers, 'sections' => $sections, 'private_meetings' => $meetingsInPrivate, 'total_meetings' => $totalMeetings, 'per_month' => $perMonth ];
     }
 
     /**

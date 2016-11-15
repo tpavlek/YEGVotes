@@ -34,6 +34,7 @@
 @stop
 
 @section('root_scripts')
+    @include('javascript')
     @yield('scripts', "")
     <div id="fb-root"></div>
     <script>

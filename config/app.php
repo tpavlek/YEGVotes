@@ -138,6 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         \Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         \Depotwarehouse\Toolbox\FrameworkIntegration\Laravel\ErrorPartialServiceProvider::class,
+        Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
 
         /*
          * Application Service Providers...

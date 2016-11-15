@@ -2,7 +2,9 @@
 
 namespace Depotwarehouse\YEGVotes\Http\Controllers;
 
+use Carbon\Carbon;
 use Depotwarehouse\YEGVotes\Model\StatisticsService;
+use Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer;
 
 class Stats extends Controller
 {
@@ -32,9 +34,38 @@ class Stats extends Controller
             ->with('pairings', $pairings);
     }
 
-    public function inPrivate()
+    public function inPrivate(PHPToJavaScriptTransformer $javascript)
     {
         $privateMotions = $this->statisticsService->privateMotions();
+
+        $labels = $privateMotions['per_month']->keys()->map(function ($key) {
+            $date = new Carbon($key);
+
+            return $date->format('M (y)');
+        });
+
+        $fills = [];
+        $borders = [];
+
+        foreach ($privateMotions['per_month'] as $month) {
+            $r = random_int(0, 255);
+            $g = random_int(0, 255);
+            $b = random_int(0, 255);
+
+            $fills[] = "rgba($r,$g,$b,0.2)";
+            $borders[] = "rgba($r,$g,$b,1)";
+        }
+
+        $javascript->put('labels', $labels);
+        $javascript->put('data', $privateMotions['per_month']->values());
+        $javascript->put('fills', $fills);
+        $javascript->put('borders', $borders);
+        $javascript->put('section_labels', $privateMotions['sections']->keys()->map(function($key) { return "$key"; }));
+        $javascript->put('section_data', $privateMotions['sections']->values());
+        $javascript->put('section_fills', array_slice($fills, 0, $privateMotions['sections']->count()));
+        $javascript->put('section_borders', array_slice($borders, 0, $privateMotions['sections']->count()));
+
+        return view('stats.private', $privateMotions);
     }
 
 }

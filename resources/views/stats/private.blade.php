@@ -11,51 +11,141 @@
 @section('content')
     <h1 style="margin-bottom:3rem;">How often does Edmonton City Council meet in private?</h1>
 
-    In <strong>{{ $privateMeetings->count() }}</strong> of {{ $totalMeetings }} total council/committee, council voted to
-    meet in private.
+    In <strong>{{ $private_meetings->count() }}</strong> of {{ $total_meetings }} total council/committee, council voted to
+    meet in private. That means that the number of meetings that have a private component is:
+
+    <div class="large-percentage" style="font-size:25vh;color:dodgerblue;">
+        {{ number_format(($private_meetings->count() / $total_meetings) * 100, 0) }}%
+    </div>
+
+    <br />
+    <br />
+
+    <div>
+        <h2>The most often cited section of FOIP is Section {{ $sections->keys()->first() }}</h2>
+        <p>
+            <em>You may click on any section of this pie chart to get an overview of that FOIP section</em>
+        </p>
+        <canvas id="sections" style="max-height:60vh"></canvas>
+
+        @include('stats.foip-sections')
+    </div>
+
+    <hr />
+
+    <div>
+        <h2>On average, there are {{ round($per_month->sum() / $per_month->count()) }} private meetings or confidential documents per month</h2>
+        <canvas id="motions" style="max-height:60vh"></canvas>
+    </div>
+
+    <hr />
+    <br />
+
 
     <div style="display:flex">
         <div style="flex-grow:1">
-            With <strong>{{ $movers->first()['motions'] }}</strong> motions the councillor with the most <strong>motions</strong> is:
+            With <strong>{{ $movers->first() }}</strong> motions <strong>{{ $movers->keys()->first() }}</strong> moves to meet in private and keep reports private
+            the most.
             <div class="small-person-details">
-                @include('councilMemberPartial', [ 'council_member' => $movers->first()['mover'], 'link' => true ])
+                @include('councilMemberPartial', [ 'council_member' => new \Depotwarehouse\YEGVotes\Model\CouncilMember($movers->keys()->first()), 'link' => true ])
             </div>
 
-            The second-highest councillor is {{ $movers->get(1)['mover'] }} with {{ $movers->get(1)['motions'] }}
-        </div>
-
-        <div style="flex-grow:1">
-            With <strong>{{ $seconders->first()['motions'] }}</strong> seconds the councillor with the most <strong>seconds</strong> is:
-            <div class="small-person-details">
-                @include('councilMemberPartial', [ 'council_member' => $seconders->first()['seconder'], 'link' => true ])
-            </div>
-            The second-highest councillor is {{ $seconders->get(1)['seconder'] }} with {{ $seconders->get(1)['motions'] }}
+            <style>
+                table {
+                    margin: 0 auto;
+                    margin-top: 2rem;
+                    text-align: left;
+                }
+                td {
+                    padding: 0.5rem;
+                    padding-right: 2rem;
+                }
+            </style>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Councillor</th>
+                        <th># of Motions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($movers->slice(1) as $mover => $num_motions)
+                        <tr>
+                            <td>{{ $mover }}</td>
+                            <td>{{ $num_motions }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <h2 style="margin-top:4rem; margin-bottom:4rem;">So, why do the top mover and seconder have roughly 5x the number of motions compared to their peers?</h2>
-
-    <div style="display:flex">
-        <div style="flex:1">
-            When looking at motions to read bylaws, two councillors come up as a mover-seconder power team <em>very often</em>
-            <div>
-                <div class="small-person-details" style="display:inline-block;">
-                    @include('councilMemberPartial', [ 'council_member' => $pairings->first()['mover'], 'link' => true ])
-                </div>
-                <div class="small-person-details" style="display:inline-block;">
-                    @include('councilMemberPartial', [ 'council_member' => $pairings->first()['seconder'], 'link' => true ])
-                </div>
-            </div>
 
 
-            In fact, in motions to read bylaws this team moves and seconds
+@stop
 
-            <div class="large-percentage" style="font-size:25vh;color:dodgerblue;">
-                {{ number_format(($pairings->first()['motions'] / $pairings->sum('motions')) * 100, 0) }}%
-            </div>
+@section('scripts')
+    <script src="/scripts/Chart.min.js"></script>
+    <script>
 
-            of the time.
-        </div>
-    </div>
+        var ctz = document.getElementById("sections");
+        var sections = new Chart(ctz, {
+            type: 'pie',
+            data: {
+                labels: section_labels,
+                datasets: [{
+                    data: section_data,
+                    backgroundColor: section_fills,
+                    borderColor: section_borders,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false
+            }
+        });
 
+        document.getElementById("sections").onclick = function(evt)
+        {
+            var activePoints = sections.getElementsAtEvent(evt);
+
+            if(activePoints.length > 0)
+            {
+                //get the internal index of slice in pie chart
+                var clickedElementindex = activePoints[0]["_index"];
+
+                //get specific label by index
+                var label = sections.data.labels[clickedElementindex];
+
+                //get value by index
+                var value = sections.data.datasets[0].data[clickedElementindex];
+
+                $('.foip-section').hide('fast');
+                var newElement = $('[data-foip-number="' + label + '"]');
+                if (newElement.length == 0) {
+                    $('[data-foip-number="unknown"]').show('fast');
+                } else {
+                    newElement.show('fast');
+                }
+            }
+        };
+
+        var ctx = document.getElementById("motions");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '# of Votes',
+                    data: data,
+                    backgroundColor: fills,
+                    borderColor: borders,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false
+            }
+        });
+    </script>
 @stop
