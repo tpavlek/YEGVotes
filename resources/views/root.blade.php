@@ -11,6 +11,22 @@
     <meta name="theme-color" content="#d4dad0">
     <link rel="stylesheet" href="/css/all.css"/>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@troypavlek" />
+
+    <meta name="twitter:title" content="@yield('title', 'Main Page') - YEGVotes.info" />
+    <meta property="og:title" content="@yield('title', 'Main Page') - YEGVotes.info" />
+
+    <meta name="twitter:description" content="@yield('meta_description', "Track the voting record and attendance of Edmonton City Councillors")" />
+    <meta property="og:description" content="@yield('meta_description', "Track the voting record and attendance of Edmonton City Councillors")" />
+
+    <meta name="twitter:image" content="@yield('meta_image', '/img/vote.png')" />
+    <meta property="og:image" content="@yield('meta_image', '/img/vote.png')" />
+
+
+    <meta property="og:url" content="{{ Request::url() }}" />
+    <meta property="og:type" content="article" />
 </head>
 <body>
 @yield('body')
