@@ -21,8 +21,8 @@
     <meta name="twitter:description" content="@yield('meta_description', "Track the voting record and attendance of Edmonton City Councillors")" />
     <meta property="og:description" content="@yield('meta_description', "Track the voting record and attendance of Edmonton City Councillors")" />
 
-    <meta name="twitter:image" content="@yield('meta_image', '/img/vote.png')" />
-    <meta property="og:image" content="@yield('meta_image', '/img/vote.png')" />
+    <meta name="twitter:image" content="{{ URL::to('/') }}@yield('meta_image', '/img/vote.png')" />
+    <meta property="og:image" content="{{ URL::to('/') }}@yield('meta_image', '/img/vote.png')" />
 
 
     <meta property="og:url" content="{{ Request::url() }}" />
