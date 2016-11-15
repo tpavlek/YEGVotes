@@ -2,6 +2,7 @@
 
 namespace Depotwarehouse\YEGVotes\Model;
 
+use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
@@ -18,6 +19,71 @@ class StatisticsService
     {
         $this->agendaModel = $agendaModel;
         $this->motionModel = $motionModel;
+    }
+
+    public function privateMotions()
+    {
+        $privateMotions = collect(DB::table('motions')
+            ->join('agenda_items', 'agenda_items.id', '=', 'motions.item_id')
+            ->join('meetings', 'meetings.id', '=', 'agenda_items.meeting_id')
+            ->where(function($query) {
+                $query->orWhere('description', 'like', '%meet in private%')
+                    ->orWhere('description', 'like', '%remain private%');
+            })
+            ->where('mover', 'not like', '%Board Member%')
+            ->where('meeting_type', 'not like', '%LRT Governance%')
+            ->select([
+                'item_id',
+                'mover',
+                'seconder',
+                'description',
+                'meeting_id',
+                'date'
+            ])
+            ->get());
+
+        $movers = $privateMotions->groupBy('mover')->map(function ($moverGroup) {
+            return $moverGroup->count();
+        })->sort()->reverse();
+
+        $sections = $privateMotions->flatMap(function ($motion) {
+            $match = preg_match('/(?<=sections|section|sectons) [\d (and)]+/', $motion->description, $matches);
+            if (!$match) {
+                return ['none'];
+            }
+
+            $result = [];
+            foreach (explode(' ', $matches[0]) as $section) {
+                if (!is_numeric(trim($section))) {
+                    continue;
+                }
+                $result[] = trim($section);
+            }
+
+            return $result;
+        })
+            ->groupBy(function ($section) {
+                return $section;
+            })->map(function ($sectionGroup) {
+                return $sectionGroup->count();
+            });
+
+        $meetingsInPrivate = $privateMotions->pluck('meeting_id')->unique();
+        $totalMeetings = DB::table('meetings')->where('meeting_type', 'not like', '%LRT Governance%')->count();
+
+        $perMonth = $privateMotions->groupBy(function ($privateMotion) {
+            $date = (new Carbon($privateMotion->date, new \DateTimeZone('America/Edmonton')));
+
+            return $date->year . "-" . $date->month;
+        })
+            ->map(function ($perMonth) {
+                return $perMonth->pluck('meeting_id')->unique()->count();
+            });
+
+        dd($meetingsInPrivate->count() . " //   " . $totalMeetings );
+
+
+        return [ 'movers' => $movers, 'sections' => $sections, 'meetings' => $meetingsInPrivate, 'total_meetings' => $totalMeetings ];
     }
 
     /**

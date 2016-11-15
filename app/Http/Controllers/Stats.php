@@ -32,4 +32,9 @@ class Stats extends Controller
             ->with('pairings', $pairings);
     }
 
+    public function inPrivate()
+    {
+        $privateMotions = $this->statisticsService->privateMotions();
+    }
+
 }

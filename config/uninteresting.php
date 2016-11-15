@@ -17,7 +17,6 @@ return [
         'BYLAWS',
         'BYLAWS AND RELATED REPORTS - 1:30 P.M.',
         'MOTIONS PENDING',
-        'PRIVATE REPORTS',
         'PRIVATE REPORTS - NONE',
         'NOTICES OF MOTION AND MOTIONS WITHOUT CUSTOMARY NOTICE',
         'Call to Order',
