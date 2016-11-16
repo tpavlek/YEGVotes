@@ -45,7 +45,9 @@ class StatisticsService
 
         $movers = $privateMotions->groupBy('mover')->map(function ($moverGroup) {
             return $moverGroup->count();
-        })->sort()->reverse();
+        })->sortByDesc(function ($motions) {
+            return $motions + (1 / random_int(2, 255));
+        });
 
         $sections = $privateMotions->flatMap(function ($motion) {
             $match = preg_match('/(?<=sections|section|sectons) [\d (and)]+/', $motion->description, $matches);
