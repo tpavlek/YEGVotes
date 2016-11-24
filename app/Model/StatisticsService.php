@@ -39,7 +39,8 @@ class StatisticsService
                 'seconder',
                 'description',
                 'meeting_id',
-                'date'
+                'date',
+                'meeting_type'
             ])
             ->get());
 
@@ -73,6 +74,7 @@ class StatisticsService
             ->sort()->reverse();
 
         $meetingsInPrivate = $privateMotions->pluck('meeting_id')->unique();
+        $privateMeetingTypes = $privateMotions->unique('meeting_id')->groupBy('meeting_type')->map(function ($group) { return $group->count(); })->sort()->reverse();
         $totalMeetings = DB::table('meetings')->where('meeting_type', 'not like', '%LRT Governance%')->count();
 
         $perMonth = $privateMotions->groupBy(function ($privateMotion) {
@@ -96,7 +98,7 @@ class StatisticsService
             }
         }
 
-        return [ 'movers' => $movers, 'sections' => $sections, 'private_meetings' => $meetingsInPrivate, 'total_meetings' => $totalMeetings, 'per_month' => $perMonth ];
+        return [ 'movers' => $movers, 'sections' => $sections, 'private_meetings' => $meetingsInPrivate, 'private_meeting_types' => $privateMeetingTypes, 'total_meetings' => $totalMeetings, 'per_month' => $perMonth ];
     }
 
     /**

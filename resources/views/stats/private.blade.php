@@ -39,6 +39,25 @@
         <canvas id="motions" style="max-height:60vh"></canvas>
     </div>
 
+    <h2>These most frequently occurred during <span style="font-weight: 900">{{ $private_meeting_types->keys()->first() }}</span> ({{ $private_meeting_types->first() }} meetings)</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Meeting Type</th>
+            <th># of Meetings</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($private_meeting_types->slice(1) as $meeting_type => $num_meetings)
+            <tr>
+                <td>{{ $meeting_type }}</td>
+                <td>{{ $num_meetings }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+
     <hr />
     <br />
 
