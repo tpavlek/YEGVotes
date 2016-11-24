@@ -685,6 +685,21 @@ $failed-motion-color: $no-vote-color;
   }
 }
 
+.private {
+  background: repeating-linear-gradient(
+                  45deg,
+                  #000000,
+                  #000000 30px,
+                  #eddd53 30px,
+                  #eddd53 60px
+  );
+
+  .card-content {
+    padding: 1rem;
+    background: white;
+  }
+}
+
 @media screen and (max-width: 60em) {
   .potato-demo {
     span {

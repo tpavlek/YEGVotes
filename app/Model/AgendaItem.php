@@ -20,6 +20,7 @@ class AgendaItem extends Model
     const CATEGORY_BYLAW = "bylaw";
     const CATEGORY_PASSED_WITHOUT_DEBATE = "passed-without-debate";
     const CATEGORY_INQUIRY = "councillor-inquiry";
+    const CATEGORY_PRIVATE = "private";
 
     const BYLAW_REGEX_MATCHER = '/^Bylaw \d+/';
     // Councillor inquiries take the form of eg. '(S. McKeen)' at the end of the title.
@@ -48,12 +49,12 @@ class AgendaItem extends Model
 
     public function getFormattedTitleAttribute()
     {
+        $title = preg_replace('/(^<br>)|(^<BR>)|(<BR>$)|(<br>$)/', "", trim($this->title));
         if ($this->isBylaw()) {
-            $withoutBreaks = preg_replace('/<br>$/', "", trim($this->title));
-            return preg_replace(self::BYLAW_REGEX_MATCHER, "<strong>$0</strong>", $withoutBreaks);
+            return preg_replace(self::BYLAW_REGEX_MATCHER, "<strong>$0</strong>", $title);
         }
 
-        return $this->title;
+        return $title;
     }
 
     /**
@@ -111,7 +112,7 @@ class AgendaItem extends Model
      */
     public function scopeInteresting($query)
     {
-        return $query->whereNotIn('title', config('uninteresting.agenda_items'));
+        return $query->whereNotIn($this->getConnection()->raw('upper(trim(title))'), config('uninteresting.agenda_items'));
     }
 
     public function scopeInterestingItems($query)
@@ -192,6 +193,14 @@ class AgendaItem extends Model
             $this->motions->first(function($key, Motion $motion) {
                 return $this->hasDissent();
             }) == null;
+    }
+
+    public function isPrivate()
+    {
+        return $this->motions->contains(function ($_, Motion $motion) {
+            return str_contains(strtolower($motion->description), 'meet in private') ||
+                str_contains(strtolower($motion->description), 'remain private');
+            });
     }
 
     public function isPrivateReport() {
@@ -320,6 +329,10 @@ class AgendaItem extends Model
             }
 
             return self::CATEGORY_BYLAW;
+        }
+
+        if ($this->isPrivate()) {
+            return self::CATEGORY_PRIVATE;
         }
 
         return self::CATEGORY_OTHER;
