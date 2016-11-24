@@ -39,7 +39,7 @@
         <canvas id="motions" style="max-height:60vh"></canvas>
     </div>
 
-    <h2>These most frequently occurred during <span style="font-weight: 900">{{ $private_meeting_types->keys()->first() }}</span> ({{ $private_meeting_types->first() }} meetings)</h2>
+    <h2>These most frequently occurred during <span style="font-weight: 900">{{ $private_meeting_types->keys()->first() }}</span> ({{ $private_meeting_types->first() }} meetings) ({{$all_meeting_types->get($private_meeting_types->keys()->first())}} total)</h2>
     <table>
         <thead>
         <tr>
@@ -51,7 +51,7 @@
         @foreach($private_meeting_types->slice(1) as $meeting_type => $num_meetings)
             <tr>
                 <td>{{ $meeting_type }}</td>
-                <td>{{ $num_meetings }}</td>
+                <td>{{ $num_meetings }} / {{$all_meeting_types->get($meeting_type) }}</td>
             </tr>
         @endforeach
         </tbody>

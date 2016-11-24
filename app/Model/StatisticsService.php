@@ -76,6 +76,7 @@ class StatisticsService
         $meetingsInPrivate = $privateMotions->pluck('meeting_id')->unique();
         $privateMeetingTypes = $privateMotions->unique('meeting_id')->groupBy('meeting_type')->map(function ($group) { return $group->count(); })->sort()->reverse();
         $totalMeetings = DB::table('meetings')->where('meeting_type', 'not like', '%LRT Governance%')->count();
+        $allMeetingTypes = collect(DB::table('meetings')->where('meeting_type', 'not like', '%LRT Governance%')->select([ 'meeting_type' ])->get())->groupBy('meeting_type')->map(function ($group) { return $group->count(); });
 
         $perMonth = $privateMotions->groupBy(function ($privateMotion) {
             $date = (new Carbon($privateMotion->date, new \DateTimeZone('America/Edmonton')));
@@ -98,7 +99,7 @@ class StatisticsService
             }
         }
 
-        return [ 'movers' => $movers, 'sections' => $sections, 'private_meetings' => $meetingsInPrivate, 'private_meeting_types' => $privateMeetingTypes, 'total_meetings' => $totalMeetings, 'per_month' => $perMonth ];
+        return [ 'movers' => $movers, 'sections' => $sections, 'private_meetings' => $meetingsInPrivate, 'all_meeting_types' => $allMeetingTypes, 'private_meeting_types' => $privateMeetingTypes, 'total_meetings' => $totalMeetings, 'per_month' => $perMonth ];
     }
 
     /**
