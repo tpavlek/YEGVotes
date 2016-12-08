@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
 class Meeting extends Model
 {
 
+    const TYPE_CITY_COUNCIL = "City Council";
+
     public $table = "meetings";
     public $timestamps = false;
     public $incrementing = false;
@@ -43,13 +45,29 @@ class Meeting extends Model
         $tomorrow = Carbon::now()->addDay();
         return $this->newQuery()
             ->where('date', '<=', $tomorrow->toDateTimeString())
-            ->whereHas('agenda_items', function(Builder $query) {
-                $query->whereHas('motions', function (Builder $query) {
-                    $query->has('votes');
-                });
-            })
             ->orderBy('date', 'DESC')
             ->firstOrFail();
+    }
+
+    /**
+     * City Council meetings typicallly go over two days, and if they do the first day is more interesting.
+     *
+     * We'll return that.
+     * @return self
+     */
+    public function latestBigCouncilMeeting()
+    {
+        $meetings = $this->newQuery()
+            ->where('date', '<=', Carbon::now()->addDay()->toDateTimeString())
+            ->orderBy('date', 'DESC')
+            ->take(2)
+            ->get();
+
+        if ($meetings->first()->meeting_type == Meeting::TYPE_CITY_COUNCIL && $meetings->last()->meeting_type == Meeting::TYPE_CITY_COUNCIL) {
+            return $meetings->last();
+        }
+
+        return $meetings->first();
     }
 
     public function hasVotes()

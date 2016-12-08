@@ -11,7 +11,7 @@
             <h1>{{ $meeting }} <a href="http://sirepub.edmonton.ca/sirepub/mtgviewer.aspx?meetid={{$meeting->id}}&doctype=MINUTES" class="button small">Official Minutes <i class="fa fa-arrow-right"></i></a></h1>
             <div style="text-align: left; line-height:1.8em;">
 
-                @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY, 'section_name' => "Councillor Inquiries and Protocol Items" ])
+                @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY, 'section_name' => "Councillor Inquiries" ])
 
                 @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PRIVATE, 'section_name' => 'Private/FOIP', 'card_class' => 'private' ])
 

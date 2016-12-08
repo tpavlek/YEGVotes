@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 class AgendaItem extends Model
 {
 
+    const CATEGORY_IGNORE = "ignore";
     const CATEGORY_OTHER = "uncategorized";
     const CATEGORY_BYLAW = "bylaw";
     const CATEGORY_PASSED_WITHOUT_DEBATE = "passed-without-debate";
@@ -23,10 +24,11 @@ class AgendaItem extends Model
     const CATEGORY_PRIVATE = "private";
 
     const BYLAW_REGEX_MATCHER = '/^Bylaw \d+/';
-    // Councillor inquiries take the form of eg. '(S. McKeen)' at the end of the title.
-    // TODO currently protocol items take the same form. Once items are categorized in the catalogue this will be less
-    // of an issue
-    const INQUIRY_REGEX_MATCHER = '/\([A-Za-z]. [A-Za-z]+\)$/';
+    /*
+     * Councillor inquiries and protocol items take the same form. A councillor inquiry is an agenda item that matches
+     * the protocol item regex, and includes a motion.
+     */
+    const PROTOCOL_REGEX_MATCHER = '/\([A-Za-z]. [A-Za-z]+\)$/';
 
     use FiltersProtocolItems;
 
@@ -40,6 +42,13 @@ class AgendaItem extends Model
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getTitleAttribute()
+    {
+        $title = trim($this->attributes['title']);
+        $title = str_replace('<br>', '', $title);
+        return str_replace('<BR>', '', $title);
     }
 
     public function scopeWithoutProtocolItems(Builder $query)
@@ -169,9 +178,14 @@ class AgendaItem extends Model
         return !$this->hasDissent();
     }
 
+    public function isProtocolItem()
+    {
+        return preg_match(self::PROTOCOL_REGEX_MATCHER, $this->title) === 1;
+    }
+
     public function isCouncillorInquiry()
     {
-        return preg_match(self::INQUIRY_REGEX_MATCHER, $this->title) === 1;
+         return $this->isProtocolItem() && $this->hasMotions();
     }
 
     public function isBylaw()
@@ -182,15 +196,15 @@ class AgendaItem extends Model
     public function passedWithoutDebate()
     {
         return ($this->motions->count() > 3) &&
-            $this->motions->contains(function($key, Motion $motion) {
+            $this->motions->contains(function ($key, Motion $motion) {
                 return $motion->isConsiderationForThirdReading();
             }) &&
-            $this->motions->contains(function($key, Motion $motion) {
+            $this->motions->contains(function ($key, Motion $motion) {
                 return $motion->isThirdReading();
             }) &&
 
             // If any of the motions have dissent, then they did not pass without debate.
-            $this->motions->first(function($key, Motion $motion) {
+            $this->motions->first(function ($key, Motion $motion) {
                 return $this->hasDissent();
             }) == null;
     }
@@ -200,10 +214,16 @@ class AgendaItem extends Model
         return $this->motions->contains(function ($_, Motion $motion) {
             return str_contains(strtolower($motion->description), 'meet in private') ||
                 str_contains(strtolower($motion->description), 'remain private');
-            });
+        });
     }
 
-    public function isPrivateReport() {
+    public function hasMotions()
+    {
+        return $this->motions()->count() > 0;
+    }
+
+    public function isPrivateReport()
+    {
         return str_contains(strtolower($this->title), "private reports");
     }
 
@@ -321,6 +341,10 @@ class AgendaItem extends Model
     {
         if ($this->isCouncillorInquiry()) {
             return self::CATEGORY_INQUIRY;
+        }
+
+        if ($this->isProtocolItem()) {
+            return self::CATEGORY_IGNORE;
         }
 
         if ($this->isBylaw()) {

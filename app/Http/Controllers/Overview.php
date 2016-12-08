@@ -22,19 +22,17 @@ class Overview extends Controller
 
     public function show()
     {
-        $last_meeting = (new Meeting())->findLatestMeeting();
-        //$voting_items = $this->agendaModel->getInterestingAgendaItems($last_meeting);
-        //$voting_items = $this->agendaModel->bylaws()->take(10)->get();
+        $last_meeting = (new Meeting())->latestBigCouncilMeeting();
 
         $groupedAgendaItems = $last_meeting->agenda_items()->interesting()->get()->groupBy(function (AgendaItem $agendaItem) {
             return $agendaItem->groupKey();
         });
+
         $records = $this->attendanceModel->getRecordsForCouncil();
         return view('overview')
             ->with('attendance', $records)
             ->with('last_meeting', $last_meeting)
             ->with('groupedAgendaItems', $groupedAgendaItems);
-            //->with('voting_items', $voting_items);
     }
 
     public function about()

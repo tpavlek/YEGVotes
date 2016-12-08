@@ -6,7 +6,7 @@
             @foreach($groupedAgendaItems->get($section_key) as $agenda_item)
 
                 <span>{!! $agenda_item->formattedTitle !!}</span>
-                @if ($agenda_item->hasVotes())
+                @if ($agenda_item->hasMotions())
                     <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall">
                         <i class="fa fa-arrow-right fa-sm"></i>
                     </a>
