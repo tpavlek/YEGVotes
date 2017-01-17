@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#d4dad0">
     <link rel="stylesheet" href="/css/all.css"/>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <script src="https://use.fontawesome.com/91c9d3ddd3.js"></script>
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@troypavlek" />
