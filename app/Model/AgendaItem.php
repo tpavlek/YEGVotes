@@ -111,6 +111,11 @@ class AgendaItem extends Model
         });
     }
 
+    public function scopeHasMotions($query)
+    {
+        return $query->has('motions');
+    }
+
     public function votes()
     {
         return $this->hasManyThrough(Vote::class, Motion::class, 'item_id');
