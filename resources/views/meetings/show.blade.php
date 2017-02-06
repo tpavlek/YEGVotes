@@ -21,6 +21,8 @@
 
                 @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE, 'section_name' => "Bylaws Passed Without Debate" ])
 
+                @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_REVISED_DUE_DATE, 'section_name' => 'Reports with a Revised Due Date'])
+
                 @if ($groupedAgendaItems->count() == 0)
                     <h2>There is nothing here!</h2>
                     <p>

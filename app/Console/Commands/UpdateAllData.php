@@ -7,6 +7,7 @@ use Depotwarehouse\YEGVotes\Jobs\UpdateAttendance;
 use Depotwarehouse\YEGVotes\Jobs\UpdateMeetings;
 use Depotwarehouse\YEGVotes\Jobs\UpdateMotions;
 use Depotwarehouse\YEGVotes\Jobs\UpdateVotes;
+use Depotwarehouse\YEGVotes\Model\Motion;
 use Illuminate\Console\Command;
 
 class UpdateAllData extends Command
@@ -56,6 +57,25 @@ class UpdateAllData extends Command
      */
     public function handle()
     {
+
+        $item = \Depotwarehouse\YEGVotes\Model\AgendaItem::first();
+
+        $motions = \Depotwarehouse\YEGVotes\Model\Motion::query()->where('description', 'like', '%revised due date%')->where('description', 'not like', '%motion be reconsidered%')->get();
+
+        //$motion = Motion::find('6cc1687a-5751-4961-b56f-4abaa5b43e6d');
+
+        $revision = (new \Depotwarehouse\YEGVotes\Model\DueDateRevision($item));
+
+        foreach ($motions as $motion) {
+            try {
+                $revision->extractDate($motion->description);
+            } catch (\Exception $exception) {
+                dd($exception->getMessage() . "        " . $motion->id);
+            }
+
+        }
+        dd("done");
+
         $this->updateMeetings->setOutputHandler($this->output);
         $this->updateAttendance->setOutputHandler($this->output);
         $this->updateAgenda->setOutputHandler($this->output);

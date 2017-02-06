@@ -5,10 +5,15 @@ namespace Depotwarehouse\YEGVotes\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string description
+ */
 class Motion extends Model
 {
 
     use FiltersProtocolItems;
+
+    public $timestamps = false;
 
     public $table = "motions";
     public $incrementing = false;
@@ -43,6 +48,11 @@ class Motion extends Model
         return $this->votes->contains(function ($key, Vote $vote) {
             return ((string)$vote == "No" || (string)$vote == "Abstain");
         });
+    }
+
+    public function isRevisedDueDate()
+    {
+        return str_contains(strtolower($this->description), 'revised due date') && ! str_contains(strtolower($this->description), 'motion be reconsidered');
     }
 
     public function getMoverAttribute()

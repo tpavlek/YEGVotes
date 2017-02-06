@@ -6,9 +6,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class AgendaItem
+ * @property Collection motions
  * @package Depotwarehouse\YEGVotes\Model
  *
  * @method Builder bylaws()
@@ -22,6 +24,8 @@ class AgendaItem extends Model
     const CATEGORY_PASSED_WITHOUT_DEBATE = "passed-without-debate";
     const CATEGORY_INQUIRY = "councillor-inquiry";
     const CATEGORY_PRIVATE = "private";
+    const CATEGORY_REVISED_DUE_DATE = "revised-due-date";
+
 
     const BYLAW_REGEX_MATCHER = '/^Bylaw \d+/';
     /*
@@ -222,6 +226,14 @@ class AgendaItem extends Model
         });
     }
 
+    public function isDueDateRevision()
+    {
+        return $this->motions->contains(function ($_, Motion $motion) {
+            return $motion->isRevisedDueDate();
+        });
+    }
+
+
     public function hasMotions()
     {
         return $this->motions()->count() > 0;
@@ -242,10 +254,18 @@ class AgendaItem extends Model
         return $this->hasOne(Motion::class, 'item_id', 'id');
     }
 
+    /**
+     * @return HasMany
+     */
     public function motions()
     {
         return $this->hasMany(Motion::class, 'item_id', 'id')
             ->orderBy('item_id', 'desc');
+    }
+
+    public function getRevisedDueDateAttribute()
+    {
+        return (new DueDateRevision($this))->revisedDueDate();
     }
 
     /**
@@ -350,6 +370,10 @@ class AgendaItem extends Model
 
         if ($this->isProtocolItem()) {
             return self::CATEGORY_IGNORE;
+        }
+
+        if ($this->isDueDateRevision()) {
+            return self::CATEGORY_REVISED_DUE_DATE;
         }
 
         if ($this->isBylaw()) {
