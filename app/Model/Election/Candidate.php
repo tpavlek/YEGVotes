@@ -8,6 +8,7 @@ class Candidate extends Model
 {
 
     public $table = "election_candidates";
+    protected $guarded = [];
 
     public function getRunningNameAttribute()
     {
@@ -20,13 +21,33 @@ class Candidate extends Model
         return "{$this->first_name} {$this->last_name}";
     }
 
+    public function getAbbreviatedNameAttribute()
+    {
+        return strtolower(substr($this->first_name, 0, 1) . $this->last_name);
+    }
+
     public function getImgUrlAttribute($value)
     {
-        if ($value === null) {
+        if (empty($value)) {
+            if ($this->election_id == '2017') {
+                $path = "/img/election/2017/{$this->abbreviated_name}.jpg";
+                if (file_exists(public_path() . $path)) {
+                    return $path;
+                }
+            }
             return "/img/election/ward12/none.png";
         }
 
         return $value;
+    }
+
+    public function getDisplayWardAttribute()
+    {
+        if ($this->ward == "mayor") {
+            return "Mayor";
+        }
+
+        return "Ward {$this->ward}";
     }
 
     public function getSlugAttribute()

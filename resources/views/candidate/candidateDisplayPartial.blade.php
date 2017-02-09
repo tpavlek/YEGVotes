@@ -31,7 +31,12 @@
         @else
             <em>Not Provided</em>
         @endif
-
     </p>
+
+    @if($candidate->ward)
+        <p>
+            <strong>Running for {{ $candidate->display_ward }}</strong>
+        </p>
+    @endif
 
 </div>

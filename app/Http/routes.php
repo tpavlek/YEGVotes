@@ -16,7 +16,9 @@ Route::get('/agenda/{agenda_item_id}', 'AgendaItems@show')->name('agenda_item.sh
 Route::get('/councillor/{councillor}', 'Councillors@show')->name('councillor.show');
 Route::get('councillor/{councillor}/no_votes', 'Councillors@noVotes')->name('councillor.no_votes');
 
+Route::get('election', function() { return redirect()->route('elections.show', '2017'); });
 Route::get('elections/{id}', 'Elections@show')->name('elections.show');
+Route::get('elections/{election_id}/ward/{ward_number}', 'Ward@show');
 Route::get('elections/{id}/feed', 'Elections@feed')->name('elections.feed');
 
 Route::get('candidate/{name}', 'Candidates@show')->name('candidate.show');

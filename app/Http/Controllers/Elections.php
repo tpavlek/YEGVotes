@@ -15,13 +15,13 @@ class Elections extends Controller
     public function show($id, Election $elections)
     {
         $election = $elections->findOrFail($id);
-        $candidates = new Candidate();
 
-        $running = $candidates->orderBy('last_name')->get();
+        $view = ($election->id == "ward12") ? view('election.ward12') : view('election.2017');
+        $candidates = $election->candidates;
 
-        return view('election.show')
+        return $view
             ->with('election', $election)
-            ->with('candidates', $running)
+            ->with('candidates', $candidates)
             ->with('election_date', Carbon::create(2016, 2, 22));
     }
 
