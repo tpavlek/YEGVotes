@@ -306,7 +306,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => 'http://daveloken.com/',
             'email' => '',
             'phone' => '',
-            'ward' => '4',
+            'ward' => '3',
         ]);
 
         Candidate::create([
