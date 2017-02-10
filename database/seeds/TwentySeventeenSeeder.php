@@ -136,9 +136,21 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'twitter' => 'JustinDraperYEG',
             'facebook' => 'Justin-Draper-Candidate-for-City-Council-Ward-4-304497176598170',
             'website' => 'https://www.electjustindraper.com/',
-            'email' => '',
-            'phone' => '',
+            'email' => 'Contact@ElectJustinDraper.com',
+            'phone' => '780-270-7276',
             'ward' => '4',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Jon',
+            'last_name' => 'Dziadyk',
+            'twitter' => 'JonDziadyk',
+            'facebook' => 'EdmontonElection',
+            'website' => 'http://www.jondziadyk.com',
+            'email' => 'Jon@JonDziadyk.com',
+            'phone' => '',
+            'ward' => '3',
         ]);
 
         Candidate::create([
