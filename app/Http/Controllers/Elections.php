@@ -17,11 +17,13 @@ class Elections extends Controller
         $election = $elections->findOrFail($id);
 
         $view = ($election->id == "ward12") ? view('election.ward12') : view('election.2017');
-        $candidates = $election->candidates;
+        $mayoralCandidates = $election->candidates->filter(function (Candidate $candidate) { return $candidate->ward == "mayor"; });
+        $undeclaredCandidates = $election->candidates->filter(function (Candidate $candidate) { return empty($candidate->ward); });
 
         return $view
             ->with('election', $election)
-            ->with('candidates', $candidates)
+            ->with('mayoral_candidates', $mayoralCandidates)
+            ->with('undeclared', $undeclaredCandidates)
             ->with('election_date', Carbon::create(2016, 2, 22));
     }
 

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    Edmonton Ward 12 By-Election
+    Ward {{ $ward_number }} Candidates - {{ $election->name }}
 @stop
 
 @section('content')
