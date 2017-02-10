@@ -1,8 +1,12 @@
 @extends('layout')
 
 @section('title')
-    Edmonton Ward 12 By-Election
+    {{ $election->name }}
 @stop
+
+@section('meta_description', "Track everyone running in the {$election->name} on YEGVotes.info")
+
+@section('meta_image', '/img/election/2017/election-map.png')
 
 @section('content')
 
