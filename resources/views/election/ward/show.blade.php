@@ -16,9 +16,11 @@
 
     <div class="flex-justified">
 
-        @foreach($candidates as $candidate)
+        @forelse($candidates as $candidate)
             @include('candidate.candidateDisplayPartial')
-        @endforeach
+        @empty
+            <em>There doesn't seem to be anyone declared yet!</em>
+        @endforelse
 
 
 
