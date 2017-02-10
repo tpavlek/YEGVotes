@@ -5,7 +5,7 @@
     <meta name="description" content="@yield('meta_description', "Track the voting record and attendance of Edmonton City Councillors")">
     <meta name="author" content="Troy Pavlek">
 
-    <title>YEGVOTES @yield('title', "")</title>
+    <title>@yield('title', "") - YEGVOTES.info</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#d4dad0">
