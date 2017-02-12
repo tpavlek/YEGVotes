@@ -472,7 +472,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'twitter' => 'ElectMimiWard7',
             'facebook' => 'ElectMimiWard7',
             'website' => 'http://www.mimiwilliams.ca/',
-            'email' => '',
+            'email' => 'mimi@mimiwilliams.ca',
             'phone' => '780-479-8868',
             'ward' => '7',
         ]);
