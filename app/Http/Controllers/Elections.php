@@ -38,4 +38,9 @@ class Elections extends Controller
             ->with('election', $election);
     }
 
+    public function wardFinder()
+    {
+        return view('election.wardfinder');
+    }
+
 }

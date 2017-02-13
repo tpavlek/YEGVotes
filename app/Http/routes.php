@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/', 'Overview@show')->name('home.index');
+Route::get('/ward-finder', 'Elections@wardFinder')->name('wardfinder');
 Route::get('/about', 'Overview@about')->name('about');
 Route::get('/stats', 'Stats@show')->name('stats');
 Route::get('/movers', 'Stats@movers')->name('stats.movers');
