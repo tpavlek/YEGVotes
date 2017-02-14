@@ -18,7 +18,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '9',
         ]);
 
         Candidate::create([
@@ -102,7 +102,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '9',
         ]);
 
         Candidate::create([
@@ -342,7 +342,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '10',
         ]);
 
         Candidate::create([
@@ -366,7 +366,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '9',
         ]);
 
         Candidate::create([
