@@ -66,7 +66,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => 'Info@robbernshaw.com',
             'phone' => '',
-            'ward' => '',
+            'ward' => '3',
         ]);
 
         Candidate::create([
