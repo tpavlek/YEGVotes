@@ -16,7 +16,7 @@ class Elections extends Controller
     {
         $election = $elections->findOrFail($id);
 
-        $view = ($election->id == "ward12") ? view('election.ward12') : view('election.2017');
+        $view = ($election->id == "ward12") ? view('election.ward12')->with('candidates', $election->candidates) : view('election.2017');
         $mayoralCandidates = $election->candidates->filter(function (Candidate $candidate) { return $candidate->ward == "mayor"; });
         $undeclaredCandidates = $election->candidates->filter(function (Candidate $candidate) { return empty($candidate->ward); });
 
