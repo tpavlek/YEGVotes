@@ -77,6 +77,11 @@ class Meeting extends Model
         });
     }
 
+    public function motions()
+    {
+        return $this->hasManyThrough(Motion::class, AgendaItem::class, 'meeting_id', 'item_id', 'id');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

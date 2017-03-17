@@ -64,6 +64,11 @@ class Motion extends Model
         return new CouncilMember($this->attributes['mover']);
     }
 
+    public function getYearAttribute()
+    {
+        return $this->meeting->date->year;
+    }
+
     public function getSeconderAttribute()
     {
         if (!isset($this->attributes['seconder'])) {
@@ -123,6 +128,11 @@ class Motion extends Model
         }
 
         return "Unknown";
+    }
+
+    public function parseSpeakers()
+    {
+        return (new SpeakerParser($this->description))->parse();
     }
 
     public function __toString()

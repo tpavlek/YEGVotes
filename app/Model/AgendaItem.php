@@ -55,6 +55,11 @@ class AgendaItem extends Model
         return str_replace('<BR>', '', $title);
     }
 
+    public function scopeRequestsToSpeak(Builder $query)
+    {
+        return $query->where('title', '=', 'Requests to Speak');
+    }
+
     public function scopeWithoutProtocolItems(Builder $query)
     {
         return $this->filterProtocolItems($query);
