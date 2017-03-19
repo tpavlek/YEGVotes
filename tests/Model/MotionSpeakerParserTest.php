@@ -3,7 +3,7 @@
 namespace Depotwarehouse\YEGVotes\Tests\Model;
 
 use Depotwarehouse\YEGVotes\Model\Motion;
-use Depotwarehouse\YEGVotes\Model\SpeakerParser;
+use Depotwarehouse\YEGVotes\Model\MotionSpeakerParser;
 
 class SpeakerParserTest extends \TestCase
 {
@@ -18,7 +18,7 @@ class SpeakerParserTest extends \TestCase
         $this->assertEquals([
             'B. Ray  Canadian Union of Postal Workers',
             'S. Cowtan  Canadian Union of Postal Workers',
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
 
 
     }
@@ -33,7 +33,7 @@ class SpeakerParserTest extends \TestCase
         $this->assertEquals([
             'J. Executive Director of Edmonton Women’s Shelters Ltd.',
             'P. Garrett  Executive Director of Wings of Providence',
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
     /**
@@ -50,7 +50,7 @@ class SpeakerParserTest extends \TestCase
             "J. Brown  Edmonton Downtown Academic & Cultural Centre Foundation",
             "I. Kipnes  Edmonton Downtown Academic & Cultural Centre Foundation",
             "D. Kipnes  Edmonton Downtown Academic & Cultural Centre Foundation",
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
     /**
@@ -77,7 +77,7 @@ class SpeakerParserTest extends \TestCase
             'P. Wishart',
             'E. Beaudien  University of Alberta',
             'C. Richmond  Sierra Club Canada - Edmonton',
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
     /**
@@ -90,7 +90,7 @@ class SpeakerParserTest extends \TestCase
         $this->assertEquals([
             'M. Johnson  Royal Architectural Institute of Canada',
             'G. Stoyke  Carbon Busters Inc.'
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
 
         $text = 'That the Special Executive Committee hear from the following speakers  in panels when appropriate: 3.1 West Rossdale Redevelopment 1. Lynn Parish  Rossdale Community League 2. Dwayne Good Striker  Sovereign Blackfoot Nation 3. Phillip Coutue  Metis 4. Sol Rolingher  Rossdale Canal Project 5. Terry O\'Riordan  Edmonton Heritage Council 6. Gerald Delorme  Edmonton Stragglers and Descendants 7. Michael Phair  Rossdale Regeneration Group';
 
@@ -102,7 +102,7 @@ class SpeakerParserTest extends \TestCase
             "Terry O'Riordan  Edmonton Heritage Council",
             'Gerald Delorme  Edmonton Stragglers and Descendants',
             'Michael Phair  Rossdale Regeneration Group',
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
     /**
@@ -115,7 +115,7 @@ class SpeakerParserTest extends \TestCase
         $this->assertEquals([
             'S. Hallett  Edmonton Seniors Coordinating Council',
             'P. Faid  Edmonton Seniors Coordinating Council'
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
     /**
@@ -132,7 +132,7 @@ class SpeakerParserTest extends \TestCase
             'R. Morrow  River City Credit Union Ltd.',
             'M. Tetterington  Amalgmated Transit Union'
 
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
     /**
@@ -146,7 +146,7 @@ class SpeakerParserTest extends \TestCase
             'F. Jameson',
             'S. Sobon',
             'B. Rose-Drolet',
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
     /**
@@ -166,7 +166,7 @@ class SpeakerParserTest extends \TestCase
             'B. Klassen  Obam Properties Ltd.',
             'R. McCulloch',
             'C. Richmond  Sierra Club Canada',
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
     /**
@@ -181,7 +181,7 @@ class SpeakerParserTest extends \TestCase
             'Chris Nelson  Aquatic Council of Edmonton',
             'Jennifer Parker  Aquatic Council of Edmonton',
             'Allan Bolstad  Edmonton Federation of Community Leagues'
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
     /**
@@ -200,7 +200,7 @@ class SpeakerParserTest extends \TestCase
             'T. Janes  Nuit Blanche Edmonton Society',
             'G. Latham  Nuit Blanche Edmonton Society',
             'E. Huculak  Alberta Tennis',
-        ], (new SpeakerParser($text))->parse());
+        ], (new MotionSpeakerParser($text))->parse());
     }
 
 }

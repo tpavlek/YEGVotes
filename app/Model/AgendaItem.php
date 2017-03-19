@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Class AgendaItem
@@ -106,6 +107,18 @@ class AgendaItem extends Model
         return $query->join("meetings", "agenda_items.meeting_id", '=', 'meetings.id')
             ->select("agenda_items.*")
             ->orderBy('meetings.date', 'DESC');
+    }
+
+    public function addMotion($description)
+    {
+        return Motion::create([
+            'id' => Uuid::uuid4()->toString(),
+            'item_id' => $this->id,
+            'description' => $description,
+            'mover' => null,
+            'seconder' => null,
+            'status' => 'Carried'
+        ]);
     }
 
     /**

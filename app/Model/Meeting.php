@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package Depotwarehouse\YEGVotes\Model
  *
  * @property \Illuminate\Database\Eloquent\Collection voting_items
+ * @property string meeting_type
  */
 class Meeting extends Model
 {
@@ -116,6 +117,29 @@ class Meeting extends Model
             ->with('motions.votes');
 
         return $relation->get();
+    }
+
+    public function speakers()
+    {
+        if ($this->meeting_type == "City Council Public Hearing") {
+            $call = $this->agenda_items->filter(function (AgendaItem $item) {
+                return $item->title == "Call for Persons to Speak" && $item->hasMotions();
+            })->first();
+
+            if ($call == null) {
+                return [];
+            }
+
+            $description = $call->motions->first()->description;
+
+            return (new PublicHearingSpeakerParser($description))->parse();
+        }
+
+        return $this->agenda_items()->requestsToSpeak()->get()->flatMap(function (AgendaItem $item) {
+            return $item->motions->flatMap(function (Motion $motion) {
+                return $motion->parseSpeakers();
+            });
+        });
     }
 
 }

@@ -32,6 +32,18 @@
                     <a href="{{ URL::to('/') }}" class="button xlarge">Go Home and Try Again</a>
                 @endif
 
+                @if(count($speakers))
+
+                    <div class="whitecard">
+                        <h2>Speakers from the Public</h2>
+                        <ul>
+                            @foreach ($speakers as $speaker)
+                                <li>{{ $speaker }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
             </div>
         </div>
         <div class="pure-u-1 pure-u-lg-1-2">

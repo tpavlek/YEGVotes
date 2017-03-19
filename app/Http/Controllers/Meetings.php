@@ -29,6 +29,8 @@ class Meetings extends Controller
     {
         $meeting = $this->model->with('agenda_items.motions.votes')->findOrFail($meeting_id);
 
+        $speakers = $meeting->speakers();
+
         $groupedAgendaItems = $meeting->agenda_items()->interesting()->get()->groupBy(function (AgendaItem $agendaItem) {
             return $agendaItem->groupKey();
         })->map(function($group, $key) {
@@ -52,6 +54,7 @@ class Meetings extends Controller
             ->with('meeting', $meeting)
             ->with('groupedAgendaItems', $groupedAgendaItems)
             ->with('attendance', $attendance)
-            ->with('future_meetings', $futureMeetings);
+            ->with('future_meetings', $futureMeetings)
+            ->with('speakers', $speakers);
     }
 }

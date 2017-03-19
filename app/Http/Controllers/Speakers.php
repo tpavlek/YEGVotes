@@ -5,7 +5,7 @@ namespace Depotwarehouse\YEGVotes\Http\Controllers;
 use Depotwarehouse\YEGVotes\Model\AgendaItem;
 use Depotwarehouse\YEGVotes\Model\Meeting;
 use Depotwarehouse\YEGVotes\Model\Motion;
-use Depotwarehouse\YEGVotes\Model\SpeakerParser;
+use Depotwarehouse\YEGVotes\Model\MotionSpeakerParser;
 
 class Speakers extends Controller
 {
@@ -19,7 +19,7 @@ class Speakers extends Controller
 
         $motion = Motion::find('916413f7-72cc-406a-b2ee-b3bbc5f13f99');
 
-        (new SpeakerParser($motion->description));
+        (new MotionSpeakerParser($motion->description));
 
         $motions = Motion::query()->with('agenda_item.meeting')
             ->whereIn('item_id', $item_ids)->get();

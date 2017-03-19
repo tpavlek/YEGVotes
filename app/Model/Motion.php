@@ -132,7 +132,7 @@ class Motion extends Model
 
     public function parseSpeakers()
     {
-        return (new SpeakerParser($this->description))->parse();
+        return (new MotionSpeakerParser($this->description))->parse();
     }
 
     public function __toString()

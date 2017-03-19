@@ -2,7 +2,7 @@
 
 namespace Depotwarehouse\YEGVotes\Model;
 
-class SpeakerParser
+class MotionSpeakerParser
 {
 
     public $shouldMatchByNumber = false;
