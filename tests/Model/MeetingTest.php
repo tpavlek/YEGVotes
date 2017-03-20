@@ -88,7 +88,6 @@ D. Hasinoff, S. McNaughton, on behalf of H. Herchen and C. Marple and W. Gupta, 
 
         $speakers = $meeting->speakers();
 
-        dd($speakers);
         $this->assertContains('T. McGrandle', $speakers);
         $this->assertContains('T. Young, Stantec Consulting Ltd.', $speakers);
         $this->assertContains('A. M. Lizaire-Szostak', $speakers);

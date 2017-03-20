@@ -77,9 +77,8 @@ D. Owens, Sherbrooke Liquor; S. Baisley, Abbottsfield Project Limited Partnershi
      */
     public function it_does_not_include_the_clerk()
     {
-        $motion = Motion::find('f31c89a0-1fb6-4a55-9094-8b913ff467dc');
+        $motion = Motion::find('d875cc13-1a30-4190-865f-ece3fe4c0496');
 
-        dd($motion->parseSpeakers());
     }
 
 }

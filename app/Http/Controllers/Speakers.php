@@ -3,6 +3,7 @@
 namespace Depotwarehouse\YEGVotes\Http\Controllers;
 
 use Depotwarehouse\YEGVotes\Model\AgendaItem;
+use Depotwarehouse\YEGVotes\Model\Meeting;
 use Depotwarehouse\YEGVotes\Model\Motion;
 
 class Speakers extends Controller
@@ -17,17 +18,36 @@ class Speakers extends Controller
             ->whereIn('item_id', $item_ids)->get();
 
 
+        /*
+        $pub_hearing = $motions->filter(function ($motion) {
+            return $motion->meeting->meeting_type == Meeting::TYPE_PUBLIC_HEARING;
+        })
+            ->map(function ($motion) {
+                return $motion->parseSpeakers();
+            });
+
+        dd($pub_hearing);*/
+
+
+
+
         $speakersByYear = $motions->groupBy('year')
             ->map(function ($year) {
                 return $year->groupBy(function ($motion) {
                     return $motion->meeting->meeting_type;
                 })
-                    ->map(function ($groupedByMeeting) {
-                        return $groupedByMeeting->sum(function ($motion) {
-                            return count($motion->parseSpeakers());
-                        });
+                    ->flatMap(function ($groupedByMeeting) {
+
+                        return $groupedByMeeting->flatMap(function ($motion) {
+                            return $motion->parseSpeakers();
+                        })->reject(function ($speaker) {
+                            return (str_contains(strtolower($speaker), '(to answer question'));
+                        })
+                            ->unique();
                     });
             });
+
+        dd($speakersByYear);
 
         $speakersByEngagement = $motions->flatMap(function ($motion) {
             return $motion->parseSpeakers();
@@ -49,7 +69,7 @@ class Speakers extends Controller
 
         dd($speakersByEngagement);
 
-        dd($speakersByYear);
+
 
         return view('stats.speakers')->with('speakersByYear', $speakersByYear);
 

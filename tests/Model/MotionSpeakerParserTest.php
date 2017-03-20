@@ -203,4 +203,34 @@ class SpeakerParserTest extends \TestCase
         ], (new MotionSpeakerParser($text))->parse());
     }
 
+    /**
+     * @test
+     */
+    public function it_works_with_councillor_inquiries()
+    {
+        $text = "That Urban Planning Committee hear from the following speaker: 6.1 - High Level Analysis on the Buildability of Garage Suites - Analysis and draft amendments to Zoning Bylaw 12800&nbsp;- K. Taft - S. Kamp  Belgravia Community League - G. Montgomery  Parkallen Community League&nbsp;6.2 - High Level Bridge Pathways (S. McKeen) - C. Chan  Edmonton Bicycle Commuters Society";
+
+        $this->assertEquals([
+            'K. Taft',
+            'S. Kamp  Belgravia Community League',
+            'G. Montgomery  Parkallen Community League',
+            'C. Chan  Edmonton Bicycle Commuters Society'
+        ], (new MotionSpeakerParser($text))->parse());
+    }
+
+    /**
+     * @test
+     */
+    public function it_works_with_numbered_agenda_items()
+    {
+        $text = "That the Committee hear from the following speakers  in panels when appropriate: 6.2 Edmonton Soccer Association – South Soccer Centre Expansion A. Newman  Edmonton Soccer Association 6.4 Framework for Partnership Agreement with the Edmonton Federation of Community Leagues D. Jakubec  Edmonton Federation of Community Leagues G. Martinson  Edmonton Federation of Community Leagues Homelessness Camps (S. McKeen) A. Inglis  Boyle Street Community Services";
+
+        $this->assertEquals([
+            'A. Newman  Edmonton Soccer Association',
+            'D. Jakubec  Edmonton Federation of Community Leagues',
+            'G. Martinson  Edmonton Federation of Community Leagues Homelessness Camps (S. McKeen)', // TODO there shouldn't be Homlessness Camps here, but there's nothing we can do about it
+            'A. Inglis  Boyle Street Community Services'
+        ], (new MotionSpeakerParser($text))->parse());
+    }
+
 }
