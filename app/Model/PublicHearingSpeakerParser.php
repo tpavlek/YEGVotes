@@ -43,6 +43,14 @@ class PublicHearingSpeakerParser
             ->map(function ($block) {
                 return trim(preg_replace('/^and/', '', trim($block)));
             })
+            ->reject(function ($block) { return empty(trim($block)); })
+            ->map(function ($block) {
+                if (ends_with($block, '.') && ! ends_with($block, 'Ltd.')) {
+                    return substr($block, 0, strlen($block) - 1);
+                }
+
+                return $block;
+            })
             ->all();
     }
 
