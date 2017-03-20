@@ -132,6 +132,10 @@ class Motion extends Model
 
     public function parseSpeakers()
     {
+        if ($this->agenda_item->title == "Call for Persons to Speak") {
+            return (new PublicHearingSpeakerParser($this->description));
+        }
+
         return (new MotionSpeakerParser($this->description))->parse();
     }
 
