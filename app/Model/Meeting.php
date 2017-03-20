@@ -131,7 +131,11 @@ class Meeting extends Model
                     return $item->motions->flatMap(function (Motion $motion) {
                         return (new PublicHearingSpeakerParser($motion->description))->parse();
                     });
-                });
+                })
+                ->reject(function ($speaker) {
+                    return str_contains(strtolower($speaker), '(to answer question'));
+                })
+                ->unique();
 
             return $result->all();
         }
