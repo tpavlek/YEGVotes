@@ -13,13 +13,7 @@ class Speakers extends Controller
     public function index()
     {
 
-        dd(Meeting::find(1826)->motions);
-
         $item_ids = AgendaItem::requestsToSpeak()->get()->pluck('id');
-
-        $motion = Motion::find('916413f7-72cc-406a-b2ee-b3bbc5f13f99');
-
-        (new MotionSpeakerParser($motion->description));
 
         $motions = Motion::query()->with('agenda_item.meeting')
             ->whereIn('item_id', $item_ids)->get();
