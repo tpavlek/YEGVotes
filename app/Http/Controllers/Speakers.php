@@ -3,9 +3,7 @@
 namespace Depotwarehouse\YEGVotes\Http\Controllers;
 
 use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\Meeting;
 use Depotwarehouse\YEGVotes\Model\Motion;
-use Depotwarehouse\YEGVotes\Model\MotionSpeakerParser;
 
 class Speakers extends Controller
 {
@@ -30,6 +28,26 @@ class Speakers extends Controller
                         });
                     });
             });
+
+        $speakersByEngagement = $motions->flatMap(function ($motion) {
+            return $motion->parseSpeakers();
+        })
+            ->map(function ($speaker) {
+                $parts = explode('  ', $speaker);
+                return [
+                    'speaker' => $parts[0],
+                    'group' => (isset($parts[1])) ? $parts[1] : ""
+                ];
+            })
+            ->groupBy('speaker')
+            ->map(function ($group) {
+                return $group->count();
+            })
+            ->sortByDesc(function ($group) {
+                return $group;
+            });
+
+        dd($speakersByEngagement);
 
         dd($speakersByYear);
 
