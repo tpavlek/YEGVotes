@@ -133,7 +133,7 @@ class Meeting extends Model
                     });
                 })
                 ->reject(function ($speaker) {
-                    return str_contains(strtolower($speaker), '(to answer question'));
+                    return str_contains(strtolower($speaker), '(to answer question');
                 })
                 ->unique();
 
