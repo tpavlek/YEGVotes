@@ -9,7 +9,7 @@ class PublicHearingSpeakerParser
 
     public function __construct($motion_description)
     {
-        $blocks = preg_split('/(Bylaw|Bylaws) \d{5}.*\n/', $motion_description);
+        $blocks = preg_split('/(Item [\d\.]+ and )?(Bylaw|Bylaws) \d{5}.*\n/', $motion_description);
 
         // We don't need the preamble about calling for persons to speak
         unset($blocks[0]);
