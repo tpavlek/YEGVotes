@@ -24,7 +24,7 @@ class Elections extends Controller
             ->with('election', $election)
             ->with('mayoral_candidates', $mayoralCandidates)
             ->with('undeclared', $undeclaredCandidates)
-            ->with('election_date', Carbon::create(2016, 2, 22));
+            ->with('election_date', $election->date);
     }
 
     public function feed($id, Election $elections, GetPostable $getPostable)
