@@ -17,6 +17,7 @@ class Meeting extends Model
 {
 
     const TYPE_CITY_COUNCIL = "City Council";
+    const TYPE_PUBLIC_HEARING = "City Council Public Hearing";
 
     public $table = "meetings";
     public $timestamps = false;
@@ -121,18 +122,22 @@ class Meeting extends Model
 
     public function speakers()
     {
-        if ($this->meeting_type == "City Council Public Hearing") {
-            $call = $this->agenda_items->filter(function (AgendaItem $item) {
-                return $item->title == "Call for Persons to Speak" && $item->hasMotions();
-            })->first();
+        if ($this->meeting_type == self::TYPE_PUBLIC_HEARING) {
+            $result = $this->agenda_items->filter(function (AgendaItem $item) {
+                    return $item->title == "Call for Persons to Speak" && $item->hasMotions();
+                })
+                ->flatMap(function (AgendaItem $item) {
 
-            if ($call == null) {
-                return [];
-            }
+                    return $item->motions->flatMap(function (Motion $motion) {
+                        return (new PublicHearingSpeakerParser($motion->description))->parse();
+                    });
+                })
+                ->reject(function ($speaker) {
+                    return str_contains(strtolower($speaker), '(to answer question');
+                })
+                ->unique();
 
-            $description = $call->motions->first()->description;
-
-            return (new PublicHearingSpeakerParser($description))->parse();
+            return $result->all();
         }
 
         return $this->agenda_items()->requestsToSpeak()->get()->flatMap(function (AgendaItem $item) {

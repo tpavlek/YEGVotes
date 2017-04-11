@@ -68,8 +68,17 @@ D. Owens, Sherbrooke Liquor; S. Baisley, Abbottsfield Project Limited Partnershi
             'R. Noce',
             'Alberta Liquor Store Association',
             'M. Burgess',
-            'A. Koziak, Chateau Louis Liquor Store.'
+            'A. Koziak, Chateau Louis Liquor Store'
         ], $speakers);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_include_the_clerk()
+    {
+        $motion = Motion::find('d875cc13-1a30-4190-865f-ece3fe4c0496');
+
     }
 
 }

@@ -58,7 +58,10 @@ class AgendaItem extends Model
 
     public function scopeRequestsToSpeak(Builder $query)
     {
-        return $query->where('title', '=', 'Requests to Speak');
+        return $query->where(function ($query) {
+            $query->orWhere('title', '=', 'Requests to Speak')
+                ->orWhere('title', '=', 'Call for Persons to Speak');
+        });
     }
 
     public function scopeWithoutProtocolItems(Builder $query)

@@ -37,11 +37,20 @@ class MotionSpeakerParser
         }
 
         if (count($lines) == 1 && !$this->shouldMatchByNumber) {
-            $lines = preg_split('/(?=([A-Za-z]\. ))/', $this->text, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+            $lines = preg_split('/(?=(?<!\()([A-Za-z]\. ))/', $this->text, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
             $lines = collect($lines)->filter(function($value, $key) {
-                return $key % 2 == 0;
-            })->all();
+                    return $key % 2 == 0;
+                })->reject(function ($line) {
+                    return preg_match('/^That ([A-Za-z].*?) Committee hear/', $line) === 1;
+                })
+                ->map(function ($line) {
+                    return preg_replace('/\d\.\d+? .*$/', '', $line);
+                })
+                ->map(function ($line) {
+                    return trim($line, ' -');
+                })
+                ->all();
         }
 
         if (count($lines) == 1 && $this->shouldMatchByNumber) {
