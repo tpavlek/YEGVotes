@@ -14,7 +14,19 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'first_name' => 'Robert',
             'last_name' => 'Agostinis',
             'twitter' => 'ragostinis',
-            'facebook' => '',
+            'facebook' => 'RobAgostinis',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '9',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Jesse',
+            'last_name' => 'Allen',
+            'twitter' => 'jdallen76',
+            'facebook' => 'jesseallenforward9',
             'website' => '',
             'email' => '',
             'phone' => '',
@@ -83,13 +95,25 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
 
         Candidate::create([
             'election_id' => '2017',
-            'first_name' => 'Brandy',
-            'last_name' => 'Burdeniuk',
-            'twitter' => 'votebrandy',
+            'first_name' => 'Nafisa',
+            'last_name' => 'Bowen',
+            'twitter' => 'nafisabowen',
             'facebook' => '',
             'website' => '',
             'email' => '',
             'phone' => '',
+            'ward' => '',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Brandy',
+            'last_name' => 'Burdeniuk',
+            'twitter' => 'votebrandy',
+            'facebook' => 'votebrandy',
+            'website' => 'www.votebrandy.ca',
+            'email' => 'team@votebrandy.ca',
+            'phone' => '780-719-1629',
             'ward' => '11',
         ]);
 
@@ -139,6 +163,18 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'email' => 'Contact@ElectJustinDraper.com',
             'phone' => '780-270-7276',
             'ward' => '4',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Shafi Unsar',
+            'last_name' => 'Chaudhary',
+            'twitter' => '',
+            'facebook' => '',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '',
         ]);
 
         Candidate::create([
@@ -198,7 +234,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '4',
         ]);
 
         Candidate::create([
@@ -215,9 +251,21 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
 
         Candidate::create([
             'election_id' => '2017',
+            'first_name' => 'Sarah',
+            'last_name' => 'Hamilton',
+            'twitter' => 'sjlhamilton',
+            'facebook' => '',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
             'first_name' => 'Ali',
             'last_name' => 'Haymour',
-            'twitter' => '',
+            'twitter' => 'alihaymour',
             'facebook' => '',
             'website' => '',
             'email' => '',
@@ -229,13 +277,15 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'election_id' => '2017',
             'first_name' => 'Sam',
             'last_name' => 'Haymour',
-            'twitter' => '',
+            'twitter' => 'hassan_haymour',
             'facebook' => '',
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '3',
         ]);
+
+
 
         Candidate::create([
             'election_id' => '2017',
@@ -253,7 +303,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'election_id' => '2017',
             'first_name' => 'Hakin',
             'last_name' => 'Isse',
-            'twitter' => '',
+            'twitter' => 'hakinisse',
             'facebook' => '',
             'website' => '',
             'email' => '',
@@ -291,10 +341,10 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'last_name' => 'Kleywegt',
             'twitter' => '',
             'facebook' => '',
-            'website' => '',
+            'website' => 'https://mattkleywegt.ca/',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '7',
         ]);
 
         Candidate::create([
@@ -307,6 +357,18 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'email' => '',
             'phone' => '',
             'ward' => '1',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'James',
+            'last_name' => 'Kosowan',
+            'twitter' => '',
+            'facebook' => '',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '',
         ]);
 
         Candidate::create([
@@ -351,10 +413,22 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'last_name' => 'Mughal',
             'twitter' => '',
             'facebook' => '',
-            'website' => '',
+            'website' => 'http://fahadmughal.ca/',
             'email' => '',
             'phone' => '',
             'ward' => '10',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Dawn',
+            'last_name' => 'Newton',
+            'twitter' => 'dawn_d_newton',
+            'facebook' => '',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '',
         ]);
 
         Candidate::create([
@@ -422,11 +496,11 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'first_name' => 'Tish',
             'last_name' => 'Prouse',
             'twitter' => '',
-            'facebook' => '',
+            'facebook' => 'Tish-Prouse-Ward-6-Edmonton-City-Council-Candidate-239676779839005',
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '7',
+            'ward' => '6',
         ]);
 
         Candidate::create([
@@ -434,7 +508,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'first_name' => 'Sarmad',
             'last_name' => 'Rasheed',
             'twitter' => 'sarmadyeg',
-            'facebook' => '',
+            'facebook' => 'SarmadRasheedYEG',
             'website' => 'http://www.sarmadrasheed.ca/',
             'email' => 'sarmad@sarmadrasheed.ca',
             'phone' => '780-707-6878',
@@ -469,7 +543,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'election_id' => '2017',
             'first_name' => 'Tricia',
             'last_name' => 'Velthuizen',
-            'twitter' => '',
+            'twitter' => 'vote_tricia',
             'facebook' => '',
             'website' => '',
             'email' => '',
@@ -537,9 +611,6 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'phone' => '',
             'ward' => '',
         ]);*/
-
-
-
     }
 
 
