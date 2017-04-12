@@ -16,12 +16,6 @@ $subtle-background-color: rgba(187, 187, 187, 0.270588);
   font-family: 'Raleway', sans-serif;
 }
 
-/* Changes font for pure grids */
-html, button, input, select, textarea,
-.pure-g [class *= "pure-u"] {
-  font-family: 'Raleway', sans-serif;
-}
-
 body {
   background-color: $background-color;
 }
@@ -114,12 +108,19 @@ span[data-attendance-percent="100"] { color: green; }
   .mover, .seconder { width: auto; }
 }
 
+.vote-status {
+  display: block;
+}
+
+.unanimous-status {
+  color: green;
+  font-weight: bold;
+}
+
 .vote.Yes { background-color: green; }
 .vote.No { background-color: darkred; color: white; }
 .vote.Absent { background-color: goldenrod;}
 .vote.Abstain, .vote.No-Vote { background-color: lightgrey; }
-
-.vote-container { margin-bottom: 1rem; margin-top: 2rem; display:inline-block; }
 
 .tabular-votes {
   display: flex;
@@ -160,6 +161,14 @@ span[data-attendance-percent="100"] { color: green; }
   justify-content: space-around;
 }
 
+.meeting {
+  display: flex;
+}
+
+.agenda-wrapper {
+  max-width: 66%;
+}
+
 .whitecard {
   box-sizing: border-box;
   background-color: white;
@@ -197,7 +206,7 @@ span[data-attendance-percent="100"] { color: green; }
   position: relative;
   padding: 1rem;
 
-  a:hover { border-bottom: none;}
+  a:not(.button):hover { border-bottom: none; }
   a .person-details:hover {  background: darken($subtle-background-color, 15%); }
 
   .person-details {
@@ -309,10 +318,19 @@ header nav {
   li { display: inline-block; margin-right: 1rem; }
 }
 
-.motion-summary {
-  box-sizing: border-box;
+.motion-summary-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.motion-summary-wrapper {
+  width: 33%;
   padding: 1rem;
-  margin: 1rem;
+}
+
+.motion-summary {
+  box-sizing: content-box;
+  padding: 1rem;
   background-color: $subtle-background-color;
 
   .vote-container { display: none; }
@@ -342,9 +360,14 @@ header nav {
 
 
 
+.meetings-listing {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 .meetings-list {
   line-height: 1.8em;
-
+  width: 33%;
 }
 
 .pagination {
@@ -403,10 +426,6 @@ footer {
     .whitecard {
       text-align: left;
       line-height: 1.5em;
-
-      .item-title {
-        display: block;
-      }
     }
 
     .full {

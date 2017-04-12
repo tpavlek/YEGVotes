@@ -5,27 +5,25 @@
 @stop
 
 @section('content')
-    <div class="pure-g">
-        <div class="pure-u-1 pure-u-md-1-2">
-            <h1>
-                {{ $agenda_item->meeting->title }}
-                <a href="{{ URL::route('meetings.show', $agenda_item->meeting->id) }}" class="button primary small">
-                    <i class="fa fa-arrow-right"></i>
-                </a>
-            </h1>
-        </div>
-        <div class="pure-u-1 pure-u-md-1-2">
-            <h1>Agenda Item:</h1>
-            <p>
-                {!! $agenda_item !!}
-            </p>
-        </div>
+    <div>
+        <h1>
+            {{ $agenda_item->meeting->title }}
+            <a href="{{ URL::route('meetings.show', $agenda_item->meeting->id) }}" class="button primary small">
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </h1>
+    </div>
+    <div>
+        <h1>Agenda Item:</h1>
+        <p>
+            {!! $agenda_item !!}
+        </p>
     </div>
 
     <h2>Motions</h2>
-    <div class="pure-g">
+    <div class="motion-summary-container">
         @forelse ($agenda_item->motions as $motion)
-            <div class="pure-u-1 pure-u-md-1-3 motion-summary-container">
+            <div class="motion-summary-wrapper">
                 <div class="motion-summary">
                     <p>
                         <a href="{{ URL::route('motion.show', $motion->id) }}" class="button secondary xsmall">
@@ -55,10 +53,11 @@
                 </div>
             </div>
         @empty
-            <div class="pure-u-1">
+            <div>
                 <em>No motions here!</em>
             </div>
         @endforelse
+
     </div>
 
 

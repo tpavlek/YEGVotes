@@ -3,7 +3,6 @@
 namespace Depotwarehouse\YEGVotes\Http\Controllers;
 
 use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\Meeting;
 use Depotwarehouse\YEGVotes\Model\Motion;
 
 class Speakers extends Controller
@@ -29,8 +28,6 @@ class Speakers extends Controller
         dd($pub_hearing);*/
 
 
-
-
         $speakersByYear = $motions->groupBy('year')
             ->map(function ($year) {
                 return $year->groupBy(function ($motion) {
@@ -40,11 +37,22 @@ class Speakers extends Controller
 
                         return $groupedByMeeting->flatMap(function ($motion) {
                             return $motion->parseSpeakers();
-                        })->reject(function ($speaker) {
-                            return (str_contains(strtolower($speaker), '(to answer question'));
-                        })
-                            ->unique();
-                    });
+                        });
+
+                    })
+                    ->map(function ($speaker) {
+                        return explode('  ', $speaker)[0];
+                    })
+                    ->map(function ($speaker) {
+                        return explode(',', $speaker)[0];
+                    })
+                    ->map(function ($speaker) {
+                        return trim(explode(' and', $speaker)[0]);
+                    })
+                    ->reject(function ($speaker) {
+                        return (str_contains(strtolower($speaker), '(to answer question'));
+                    })
+                    ->unique();
             });
 
         dd($speakersByYear);
@@ -68,7 +76,6 @@ class Speakers extends Controller
             });
 
         dd($speakersByEngagement);
-
 
 
         return view('stats.speakers')->with('speakersByYear', $speakersByYear);

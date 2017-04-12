@@ -15,19 +15,17 @@
     </p>
 </div>
 
-<div class="pure-g">
+<div class="meetings-listing">
     @foreach ($meetings as $yearMonth => $meetingGroup)
-        <div class="pure-u-1 pure-u-md-1-3">
+        <div class="meetings-list">
             <h2>{{ \Carbon\Carbon::createFromFormat("Y-m", $yearMonth)->format("F Y") }}</h2>
-            <div class="meetings-list">
-                @foreach ($meetingGroup as $meeting)
-                    <a href="{{ URL::route('meetings.show', $meeting->id) }}" @if (\Carbon\Carbon::now()->subMonths(3)->lt(\Carbon\Carbon::createFromFormat("Y-m", $yearMonth)) && $meeting->hasVotes()) style="font-weight:800;" @endif>
-                        {{ $meeting->meeting_type }}
-                    </a> <br />
-                @endforeach
-            </div>
+            @foreach ($meetingGroup as $meeting)
+                <a href="{{ URL::route('meetings.show', $meeting->id) }}" @if (\Carbon\Carbon::now()->subMonths(3)->lt(\Carbon\Carbon::createFromFormat("Y-m", $yearMonth)) && $meeting->hasVotes()) style="font-weight:800;" @endif>
+                    {{ $meeting->meeting_type }}
+                </a> <br />
+            @endforeach
         </div>
     @endforeach
-
 </div>
+
 @stop
