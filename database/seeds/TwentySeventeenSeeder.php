@@ -544,11 +544,11 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'first_name' => 'Tricia',
             'last_name' => 'Velthuizen',
             'twitter' => 'vote_tricia',
-            'facebook' => '',
+            'facebook' => 'Tricia-Velthuizen-for-Ward-4-1778048745846284',
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '4',
         ]);
 
         Candidate::create([
