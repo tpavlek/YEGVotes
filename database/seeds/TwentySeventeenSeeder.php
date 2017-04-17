@@ -454,6 +454,18 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'phone' => '',
             'ward' => '5',
         ]);
+        
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Aaron',
+            'last_name' => 'Paquette',
+            'twitter' => 'aaronpaquette',
+            'facebook' => '',
+            'website' => 'http://www.aaronpaquette.net/',
+            'email' => '',
+            'phone' => '',
+            'ward' => '9',
+        ]);
 
         Candidate::create([
             'election_id' => '2017',
