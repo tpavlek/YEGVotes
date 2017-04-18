@@ -460,7 +460,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'first_name' => 'Aaron',
             'last_name' => 'Paquette',
             'twitter' => 'aaronpaquette',
-            'facebook' => '',
+            'facebook' => 'aaronforward4',
             'website' => 'http://www.aaronpaquette.net/',
             'email' => '',
             'phone' => '',
