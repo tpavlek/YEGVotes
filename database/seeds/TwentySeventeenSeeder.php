@@ -258,7 +258,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '5',
         ]);
 
         Candidate::create([
@@ -270,7 +270,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '2',
         ]);
 
         Candidate::create([
@@ -500,7 +500,31 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '5',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Sandy',
+            'last_name' => 'Pon',
+            'twitter' => '',
+            'facebook' => '',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '9',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Alison',
+            'last_name' => 'Poste',
+            'twitter' => '',
+            'facebook' => 'alisonposte',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '4',
         ]);
 
         Candidate::create([
@@ -525,6 +549,18 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'email' => 'sarmad@sarmadrasheed.ca',
             'phone' => '780-707-6878',
             'ward' => '3',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Sam',
+            'last_name' => 'Ruediger',
+            'twitter' => '',
+            'facebook' => '',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '',
         ]);
 
         Candidate::create([
