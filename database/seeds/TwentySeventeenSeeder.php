@@ -102,7 +102,7 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'website' => '',
             'email' => '',
             'phone' => '',
-            'ward' => '',
+            'ward' => '5',
         ]);
 
         Candidate::create([
