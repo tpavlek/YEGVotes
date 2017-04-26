@@ -29,14 +29,14 @@ class SpeakerService
                 return $groupedByType->flatMap(function (Motion $motion) {
                     return $motion->parseSpeakers();
                 })
+                    ->reject(function ($speaker) {
+                        return (str_contains(strtolower($speaker), '(to answer question'));
+                    })
                     ->map(function ($speaker) {
                         $speaker = explode('  ', $speaker)[0];
                         $speaker = explode(',', $speaker)[0];
                         $speaker = trim(explode(' and', $speaker)[0]);
                         return $speaker;
-                    })
-                    ->reject(function ($speaker) {
-                        return (str_contains(strtolower($speaker), '(to answer question'));
                     })
                     ->unique();
             })
@@ -58,14 +58,14 @@ class SpeakerService
                         return $motion->parseSpeakers();
 
                     })
+                    ->reject(function ($speaker) {
+                        return (str_contains(strtolower($speaker), '(to answer question'));
+                    })
                     ->map(function ($speaker) {
                         $speaker = explode('  ', $speaker)[0];
                         $speaker = explode(',', $speaker)[0];
                         $speaker = trim(explode(' and', $speaker)[0]);
                         return $speaker;
-                    })
-                    ->reject(function ($speaker) {
-                        return (str_contains(strtolower($speaker), '(to answer question'));
                     })
                     ->unique();
             })
