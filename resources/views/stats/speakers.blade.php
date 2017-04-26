@@ -48,7 +48,9 @@
             <tbody>
             @foreach($topSpeakers as $speaker => $count)
                 <tr>
-                    <td>{{ $speaker }}</td>
+                    <td>
+                        <a href="{{ URL::route('speakers.show', $speaker) }}">{{ $speaker }}</a>
+                    </td>
                     <td>{{ $count }}</td>
                 </tr>
             @endforeach
