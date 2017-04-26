@@ -4,12 +4,15 @@ namespace Depotwarehouse\YEGVotes\Http\Controllers;
 
 use Depotwarehouse\YEGVotes\Model\AgendaItem;
 use Depotwarehouse\YEGVotes\Model\Motion;
+use Depotwarehouse\YEGVotes\Model\SpeakerService;
 
 class Speakers extends Controller
 {
 
-    public function index()
+    public function index(SpeakerService $speakerService)
     {
+
+        dd($speakerService->topSpeakers());
 
         $item_ids = AgendaItem::requestsToSpeak()->get()->pluck('id');
 

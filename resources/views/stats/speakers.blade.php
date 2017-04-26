@@ -11,8 +11,9 @@
 @section('content')
     <h1 style="margin-bottom:3rem;">How many people speak at City Council each year?</h1>
 
+    <h2>Speakers this term, by committee</h2>
 
-
+    <h2>Who speaks most often?</h2>
 @stop
 
 @section('scripts')
