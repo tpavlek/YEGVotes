@@ -11,6 +11,12 @@ class Speakers extends Controller
 
     public function index(SpeakerService $speakerService)
     {
+        return view('stats.speakers')
+            ->with('speakersByYear', $speakerService->speakersByYear())
+            ->with('speakersByCommittee', $speakerService->speakersByCommittee())
+            ->with('topSpeakers', $speakerService->topSpeakers());
+
+        dd($speakerService->speakersByYear());
 
         dd($speakerService->topSpeakers());
 
