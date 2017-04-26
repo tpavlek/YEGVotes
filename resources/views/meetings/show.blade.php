@@ -38,7 +38,9 @@
                     <h2>Speakers from the Public</h2>
                     <ul>
                         @foreach ($speakers as $speaker)
-                            <li>{{ $speaker }}</li>
+                            <li>
+                                <a href="{{ URL::route('speakers.show', $speaker) }}">{{ $speaker }}</a>
+                            </li>
                         @endforeach
                     </ul>
                 </div>

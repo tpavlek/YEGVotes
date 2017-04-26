@@ -26,6 +26,11 @@
                     How often does Council meet in private?
                 </a>
             </li>
+            <li>
+                <a href="{{ URL::route('stats.speakers') }}">
+                    Who speaks to City Council and Committee and how often?
+                </a>
+            </li>
         </ul>
     </div>
 
