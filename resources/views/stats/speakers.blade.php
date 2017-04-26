@@ -65,10 +65,10 @@
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [ "2014", "2015", "2016" ],
+                labels: [ {{ $speakersByYear->keys()->implode(',') }} ],
                 datasets: [{
                     label: 'Speakers at Council/Committee',
-                    data: [ {{ implode(',', $speakersByYear->get('overview')) }} ],
+                    data: [ {{ $speakersByYear->map(function ($group) { return $group->count(); })->implode(',') }} ],
                     fill: false,
                     backgroundColor: "rgba(211, 88, 82, 0.4)",
                     borderColor: "rgba(216, 54, 54,1)"

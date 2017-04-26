@@ -68,16 +68,10 @@ class SpeakerService
                         return (str_contains(strtolower($speaker), '(to answer question'));
                     })
                     ->unique();
+            })
+            ->sortBy(function ($value, $key) {
+                return $key;
             });
-
-        $overview = $grouped->sortBy(function ($value, $key) {
-            return $key;
-        })
-            ->map(function ($group) {
-                return $group->count();
-            });
-
-        $grouped->put('overview', $overview->all());
 
         return $grouped;
     }
