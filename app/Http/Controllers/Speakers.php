@@ -2,7 +2,6 @@
 
 namespace Depotwarehouse\YEGVotes\Http\Controllers;
 
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
 use Depotwarehouse\YEGVotes\Model\Motion;
 use Depotwarehouse\YEGVotes\Model\SpeakerService;
 
@@ -15,6 +14,12 @@ class Speakers extends Controller
             ->with('speakersByYear', $speakerService->speakersByYear())
             ->with('speakersByCommittee', $speakerService->speakersByCommittee())
             ->with('topSpeakers', $speakerService->topSpeakers());
+    }
+
+    public function fullList(SpeakerService $speakerService)
+    {
+        return view('speakers.list')
+            ->with('speakers', $speakerService->allSpeakers());
     }
 
     public function show($speaker)

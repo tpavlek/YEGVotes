@@ -40,4 +40,5 @@ Route::post('potato/vote', 'Potato@vote')->name('potato.vote');
 Route::get('search/{term}', 'Search@search')->name('search');
 
 Route::get('speakers', 'Speakers@index')->name('stats.speakers');
+Route::get('speakers/list', 'Speakers@fullList')->name('speakers.list');
 Route::get('speaker/{speaker}', 'Speakers@show')->name('speakers.show');

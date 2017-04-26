@@ -58,6 +58,8 @@
             @endforeach
             </tbody>
         </table>
+
+        <a href="{{ URL::route('speakers.list') }}" class="button">View Full List</a>
     </div>
 
 @stop

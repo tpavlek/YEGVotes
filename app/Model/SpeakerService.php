@@ -78,6 +78,12 @@ class SpeakerService
 
     public function topSpeakers()
     {
+        return $this->allSpeakers()
+            ->slice(0, 10);
+    }
+
+    public function allSpeakers()
+    {
         return $this->motions
             ->flatMap(function ($motion) {
                 return $motion->parseSpeakers();
@@ -99,8 +105,7 @@ class SpeakerService
             })
             ->sortByDesc(function ($group) {
                 return $group;
-            })
-            ->slice(0, 10);
+            });
     }
 
 }
