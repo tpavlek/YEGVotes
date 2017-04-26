@@ -82,14 +82,14 @@ class SpeakerService
             ->flatMap(function ($motion) {
                 return $motion->parseSpeakers();
             })
+            ->reject(function ($speaker) {
+                return (str_contains(strtolower($speaker), '(to answer question'));
+            })
             ->map(function ($speaker) {
                 $speaker = explode('  ', $speaker)[0];
                 $speaker = explode(',', $speaker)[0];
                 $speaker = trim(explode(' and', $speaker)[0]);
                 return $speaker;
-            })
-            ->reject(function ($speaker) {
-                return (str_contains(strtolower($speaker), '(to answer question'));
             })
             ->groupBy(function ($speaker) {
                 return $speaker;
