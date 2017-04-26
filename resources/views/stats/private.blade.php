@@ -4,6 +4,8 @@
     How often does Edmonton City Council meet in Private?
 @stop
 
+@section('meta_image', '/img/speakers.png')
+
 @section('meta_description')
     Edmonton City Council has a private component in {{ number_format(($private_meetings->count() / $total_meetings) * 100, 0) }}% of meetings.
     The most-often cited FOIP section for these private meetings and documents is FOIP section {{ $sections->keys()->first() }}
