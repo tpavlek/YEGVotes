@@ -1,8 +1,10 @@
 @extends('layout')
 
 @section('title')
-    How many people speak at City Council each year?
+    How many people speak at City Council each year? -
 @stop
+
+@section('meta_image', '/img/speakers.png')
 
 @section('meta_description')
     Last year {{ $speakersByYear->get(\Carbon\Carbon::now()->subYear()->year)->count() }} people spoke at Edmonton City Council or Committee meetings.
