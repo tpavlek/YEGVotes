@@ -275,14 +275,14 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
 
         Candidate::create([
             'election_id' => '2017',
-            'first_name' => 'Sam',
+            'first_name' => 'Hassan',
             'last_name' => 'Haymour',
             'twitter' => 'hassan_haymour',
             'facebook' => '',
-            'website' => '',
-            'email' => '',
-            'phone' => '',
-            'ward' => '3',
+            'website' => 'https://hassanhaymour.nationbuilder.com/',
+            'email' => 'hassan@hassanhaymour.ca',
+            'phone' => '780-916-0644',
+            'ward' => '4',
         ]);
 
 
@@ -594,8 +594,8 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'twitter' => 'vote_tricia',
             'facebook' => 'Tricia-Velthuizen-for-Ward-4-1778048745846284',
             'website' => '',
-            'email' => '',
-            'phone' => '',
+            'email' => 'votetricia@gmail.com',
+            'phone' => '780-667-8683',
             'ward' => '4',
         ]);
 
