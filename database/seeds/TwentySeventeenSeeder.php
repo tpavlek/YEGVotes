@@ -239,6 +239,18 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
 
         Candidate::create([
             'election_id' => '2017',
+            'first_name' => 'Andrezej',
+            'last_name' => 'Gudanowski',
+            'twitter' => 'agudanowski',
+            'facebook' => 'andrzej.gudanowski.9',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '7',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
             'first_name' => 'Sam',
             'last_name' => 'Hachem',
             'twitter' => 'samHhachem',
