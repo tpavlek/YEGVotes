@@ -74,9 +74,21 @@ class StatisticsService
             ->sort()->reverse();
 
         $meetingsInPrivate = $privateMotions->pluck('meeting_id')->unique();
-        $privateMeetingTypes = $privateMotions->unique('meeting_id')->groupBy('meeting_type')->map(function ($group) { return $group->count(); })->sort()->reverse();
-        $totalMeetings = DB::table('meetings')->where('meeting_type', 'not like', '%LRT Governance%')->count();
-        $allMeetingTypes = collect(DB::table('meetings')->where('meeting_type', 'not like', '%LRT Governance%')->select([ 'meeting_type' ])->get())->groupBy('meeting_type')->map(function ($group) { return $group->count(); });
+        $privateMeetingTypes = $privateMotions->unique('meeting_id')
+            ->groupBy('meeting_type')
+            ->map(function (Collection $group) { return $group->count(); })
+            ->sort()
+            ->reverse();
+        $totalMeetings = DB::table('meetings')
+            ->where('meeting_type', 'not like', '%LRT Governance%')
+            ->count();
+        $meetings = DB::table('meetings')
+            ->where('meeting_type', 'not like', '%LRT Governance%')
+            ->select([ 'meeting_type' ])
+            ->get();
+        $allMeetingTypes = collect($meetings)
+            ->groupBy('meeting_type')
+            ->map(function ($group) { return $group->count(); });
 
         $perMonth = $privateMotions->groupBy(function ($privateMotion) {
             $date = (new Carbon($privateMotion->date, new \DateTimeZone('America/Edmonton')));
