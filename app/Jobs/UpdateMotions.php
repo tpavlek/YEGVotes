@@ -59,7 +59,7 @@ class UpdateMotions extends SocrataSync
             'item_id' => $entry['item_id'],
             'mover' => (isset($entry['motion_mover'])) ? $entry['motion_mover'] : null,
             'seconder' => (isset($entry['motion_seconder'])) ? $entry['motion_seconder'] : null,
-            'description' => $entry['motion_description'],
+            'description' => ($entry['motion_description']) ? $entry['motion_description'] : "",
             'status' => $entry['motion_status']
         ];
     }
