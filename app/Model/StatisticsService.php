@@ -76,7 +76,7 @@ class StatisticsService
         $meetingsInPrivate = $privateMotions->pluck('meeting_id')->unique();
         $privateMeetingTypes = $privateMotions->unique('meeting_id')
             ->groupBy('meeting_type')
-            ->map(function (Collection $group) { return $group->count(); })
+            ->map(function (\Illuminate\Support\Collection $group) { return $group->count(); })
             ->sort()
             ->reverse();
         $totalMeetings = DB::table('meetings')
