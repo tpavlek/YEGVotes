@@ -4,6 +4,10 @@
     Ward {{ $ward_number }} Candidates - {{ $election->name }}
 @stop
 
+@section('meta_description', "List of candidates running in Ward " . $ward_number)
+
+@section('meta_image', '/img/election/2017/election-map.png')
+
 @section('content')
 
     <h1>{{ $election->name }} <small style="color:goldenrod">Ward {{ $ward_number }}</small></h1>
