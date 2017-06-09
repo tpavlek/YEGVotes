@@ -61,6 +61,7 @@ class Meeting extends Model
     {
         $meetings = $this->newQuery()
             ->where('date', '<=', Carbon::now()->addDay()->toDateTimeString())
+            ->where('meeting_type', 'like', '%City Council%')
             ->orderBy('date', 'DESC')
             ->take(2)
             ->get();

@@ -179,6 +179,18 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
 
         Candidate::create([
             'election_id' => '2017',
+            'first_name' => 'Lenore',
+            'last_name' => 'Dilts',
+            'twitter' => 'LenoreDilts',
+            'facebook' => '',
+            'website' => 'https://lenoredilts.com/',
+            'email' => '',
+            'phone' => '',
+            'ward' => '8',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
             'first_name' => 'Jon',
             'last_name' => 'Dziadyk',
             'twitter' => 'JonDziadyk',
@@ -235,6 +247,18 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'email' => '',
             'phone' => '',
             'ward' => '4',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Andrezej',
+            'last_name' => 'Gudanowski',
+            'twitter' => 'agudanowski',
+            'facebook' => 'andrzej.gudanowski.9',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '7',
         ]);
 
         Candidate::create([
@@ -609,6 +633,18 @@ class TwentySeventeenSeeder extends \Illuminate\Database\Seeder
             'email' => '',
             'phone' => '',
             'ward' => '10',
+        ]);
+
+        Candidate::create([
+            'election_id' => '2017',
+            'first_name' => 'Liz John',
+            'last_name' => 'West',
+            'twitter' => 'lizjohnwest',
+            'facebook' => '',
+            'website' => '',
+            'email' => '',
+            'phone' => '',
+            'ward' => '7',
         ]);
 
         Candidate::create([
