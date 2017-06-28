@@ -1,40 +1,65 @@
-<div class="vote-container">
-    <div class="tabular-votes">
-        @if ($votes->get('Yes'))
-            <div class="vote-column Yes">
-                <h4 class="vote-type">Yes</h4>
-                @foreach ($votes->get('Yes') as $vote)
-                    <div class="vote">{{ $vote->voter }}</div>
-                @endforeach
-            </div>
-        @endif
+@if (isset($display_votes) && !$display_votes && !$motion->hasDissent())
+    <a class="waves-effect waves-light btn vote-display-button"><i class="fa fa-expand"></i> Show Votes</a>
+@endif
 
-        @if ($votes->get('No'))
-            <div class="vote-column No">
-                <h4 class="vote-type">No</h4>
-                @foreach ($votes->get('No') as $vote)
-                    <div class="vote">{{ $vote->voter }}</div>
-                @endforeach
-            </div>
-        @endif
+@if($motion->isUnanimous())
+    <p>
+        <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
+        <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall"><i class="fa fa-arrow-right fa-sm"></i></a>
 
-        @if ($votes->get('Abstain'))
-            <div class="vote-column Abstain">
-                <h4 class="vote-type">Abstain</h4>
-                @foreach ($votes->get('Abstain') as $vote)
-                    <div class="vote">{{ $vote->voter }}</div>
-                @endforeach
-            </div>
-        @endif
+        <span class="unanimous-status vote-status"><i class="fa fa-check"></i> Unanimous</span>
+    </p>
+@else
 
-        @if ($votes->get('Absent'))
-            <div class="vote-column Absent">
-                <h4 class="vote-type">Absent</h4>
-                @foreach ($votes->get('Absent') as $vote)
-                    <div class="vote">{{ $vote->voter }}</div>
-                @endforeach
-            </div>
-        @endif
+    <div class="vote-container" @if (isset($display_votes) && !$display_votes) style="display:none;" @endif>
+        <div class="tabular-votes">
+            @if ($votes->get('Yes'))
+                <div class="vote-column Yes">
+                    <h4 class="vote-type">Yes</h4>
+                    @foreach ($votes->get('Yes') as $vote)
+                        <div class="vote">{{ $vote->voter }}</div>
+                    @endforeach
+                </div>
+            @endif
 
+            @if ($votes->get('No'))
+                <div class="vote-column No">
+                    <h4 class="vote-type">No</h4>
+                    @foreach ($votes->get('No') as $vote)
+                        <div class="vote">{{ $vote->voter }}</div>
+                    @endforeach
+                </div>
+            @endif
+
+            @if ($votes->get('Abstain'))
+                <div class="vote-column Abstain">
+                    <h4 class="vote-type">Abstain</h4>
+                    @foreach ($votes->get('Abstain') as $vote)
+                        <div class="vote">{{ $vote->voter }}</div>
+                    @endforeach
+                </div>
+            @endif
+
+            @if ($votes->get('Absent'))
+                <div class="vote-column Absent">
+                    <h4 class="vote-type">Absent</h4>
+                    @foreach ($votes->get('Absent') as $vote)
+                        <div class="vote">{{ $vote->voter }}</div>
+                    @endforeach
+                </div>
+            @endif
+
+        </div>
     </div>
-</div>
+@endif
+
+@section('scripts')
+
+<script>
+    $('.vote-display-button').click(function() {
+        $(this).siblings().filter('.vote-container').show('fast');
+        $(this).hide('fast');
+    })
+</script>
+
+@stop

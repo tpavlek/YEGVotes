@@ -1,0 +1,105 @@
+$background-color: lighten(#D4DAD0, 10%);
+$yes-vote-color: green;
+$absent-vote-color: #daa520;
+$no-vote-color: #D44141;
+
+$row-highlight-color: #1F1F1F;
+
+body {
+  background-color: $background-color;
+}
+
+.body-wrapper {
+  padding: 1rem;
+}
+
+a { text-decoration: none; color: inherit; }
+a:not(.btn):hover { border-bottom: 3px solid slategray; box-sizing: border-box; }
+
+.motions {
+  display: flex;
+  flex-flow: row wrap;
+
+}
+
+.motion.card {
+  max-width: 50rem;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.motion-status {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.mover-text {
+  margin-right: 1rem;
+  color: grey;
+  font-weight: bold;
+}
+
+.mover {
+  display: inline-block;
+  position:relative;
+}
+
+.mover a {
+  margin-left: 2rem;
+}
+
+.motion-label {
+  font-weight: bold;
+}
+
+.vote.Yes { background-color: green; }
+.vote.No { background-color: $no-vote-color; color: white; }
+.vote.Absent { background-color: goldenrod;}
+.vote.Abstain, .vote.No-Vote { background-color: lightgrey; }
+
+.tabular-votes {
+  display: flex;
+}
+
+.vote-type { margin: 0; padding: 0.5rem; box-shadow: 0 1px 5px $row-highlight-color; }
+.vote-column.Yes .vote-type { color: whitesmoke; background: darken($yes-vote-color, 10%);   }
+.vote-column.Absent .vote-type { background: darken($absent-vote-color, 10%); }
+.vote-column.No .vote-type { color:whitesmoke; background: darken($no-vote-color, 10%); }
+
+.vote-column.Yes { background-color: $yes-vote-color; }
+.vote-column.Absent { background-color: $absent-vote-color; }
+.vote-column.No { background-color: $no-vote-color; }
+
+.vote-column {
+  flex-grow: 1;
+  text-align: left;
+  padding-bottom: 0.5rem;
+}
+
+.vote { padding: 0.5rem; display: block;}
+
+footer {
+  background-color: #111;
+  color: whitesmoke;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 10%;
+
+  a { font-weight: 600; }
+}
+
+.private {
+  padding: 1rem;
+  background: repeating-linear-gradient(
+                  45deg,
+                  #000000,
+                  #000000 30px,
+                  #eddd53 30px,
+                  #eddd53 60px
+  );
+
+  .card-content {
+    background: white;
+  }
+}

@@ -1,27 +1,31 @@
 @extends('root')
 
 @section('body')
+
+
 <header>
-    <nav>
-        <h1><a href="{{ URL::to('/') }}">YEGVotes</a></h1>
-        <ul>
-            <li>
-                <a href="{{ URL::route('elections.2017') }}">2017 Election</a>
-            </li>
-            <li>
-                <a href="{{ URL::route('meetings.list') }}">Meetings</a>
-            </li>
-            <li>
-                <a href="{{ URL::route('about') }}">About</a>
-            </li>
-            <li>
-                <a href="{{ URL::route('stats') }}">Stats</a>
-            </li>
-            <li>
-                <a href="https://basketofyegs.com">Podcast</a>
-            </li>
-            @yield('additional_nav', '')
-        </ul>
+    <nav class="grey darken-4">
+        <div class="nav-wrapper">
+            <a href="{{ URL::to('/') }}" class="brand-logo">YEGVotes</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="{{ URL::route('elections.2017') }}">2017 Election</a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('meetings.list') }}">Meetings</a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('about') }}">About</a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('stats') }}">Stats</a>
+                </li>
+                <li>
+                    <a href="https://basketofyegs.com">Podcast</a>
+                </li>
+                @yield('additional_nav', '')
+            </ul>
+        </div>
     </nav>
 </header>
 @include('vendor.toolbox.errors.errorPartial')

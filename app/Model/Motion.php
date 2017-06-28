@@ -50,6 +50,11 @@ class Motion extends Model
         });
     }
 
+    public function isUnanimous()
+    {
+        return ! $this->hasDissent();
+    }
+
     public function isRevisedDueDate()
     {
         return str_contains(strtolower($this->description), 'revised due date') && ! str_contains(strtolower($this->description), 'motion be reconsidered');

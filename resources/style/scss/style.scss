@@ -293,20 +293,6 @@ span[data-attendance-percent="100"] { color: green; }
   h3 { font-size: 100%; text-align: center; }
 }
 
-
-
-
-
-.motion-status {
-  font-size: 4em;
-  height: 150px;
-  line-height: 150px;
-}
-
-.motion-status.smaller {
-  font-size: 2em;
-}
-
 header nav {
   padding-left: 2rem;
   background: darken($background-color, 10%);

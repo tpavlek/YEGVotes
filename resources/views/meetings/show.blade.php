@@ -32,7 +32,7 @@
 
             @if(count($speakers))
 
-                <div class="whitecard">
+                <div class="card">
                     <h2>Speakers from the Public</h2>
                     <ul>
                         @foreach ($speakers as $speaker)

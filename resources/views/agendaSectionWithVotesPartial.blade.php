@@ -1,12 +1,14 @@
 @if ($groupedAgendaItems->get($section_key))
-    <div class="whitecard {{ $card_class or "" }}">
-        <h2>{{ $section_name }}</h2>
+    <div class="card {{ $card_class or "" }}">
+        <div class="card-content">
+            <span class="card-title">{{ $section_name }}</span>
+
 
         @foreach($groupedAgendaItems->get($section_key) as $agenda_item)
 
             @if ($agenda_item->hasVotes())
                 @if ($agenda_item->isUnanimous())
-                    <p style="text-align:left;">
+                    <p>
                         <span class="item-title">{!! $agenda_item->formattedTitle !!}</span>
                         <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button xsmall"><i class="fa fa-arrow-right fa-sm"></i></a>
 
@@ -24,5 +26,6 @@
             @endif
         @endforeach
 
+        </div>
     </div>
 @endif

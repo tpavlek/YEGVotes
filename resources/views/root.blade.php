@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="/css/all.css"/>
     <script src="https://use.fontawesome.com/91c9d3ddd3.js"></script>
 
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+
+
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@troypavlek" />
 
@@ -43,6 +49,7 @@
         });
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
 @yield('root_scripts')
 </body>
 </html>

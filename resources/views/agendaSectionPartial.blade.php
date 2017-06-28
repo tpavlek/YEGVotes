@@ -1,7 +1,7 @@
 @if ($groupedAgendaItems->get($section_key))
-    <div class="whitecard {{ $card_class or "" }}">
+    <div class="card {{ $card_class or "" }}">
         <div class="card-content">
-            <h2>{{ $section_name }}</h2>
+            <span class="card-title section-title">{{ $section_name }}</span>
 
             @foreach($groupedAgendaItems->get($section_key) as $agenda_item)
 
