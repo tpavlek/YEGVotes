@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    - Track Edmonton City Councillors
-@stop
+@section('title', "Track Edmonton City Councillors -")
 
 @section('content')
     <h1>

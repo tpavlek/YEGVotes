@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    Find Your Ward
-@stop
+@section('title', "Find Your Ward -")
 
 @section('meta_description', "Easily find which Edmonton electoral ward you are in")
 

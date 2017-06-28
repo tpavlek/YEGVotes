@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', 'Overview@show')->name('home.index');
-Route::get('/ward-finder', 'Elections@wardFinder')->name('wardfinder');
+
 Route::get('/about', 'Overview@about')->name('about');
 Route::get('/stats', 'Stats@show')->name('stats');
 Route::get('/movers', 'Stats@movers')->name('stats.movers');
@@ -20,6 +20,7 @@ Route::get('councillor/{councillor}/no_votes', 'Councillors@noVotes')->name('cou
 Route::get('election', function() { return redirect()->route('elections.2017'); });
 Route::get('elections/2017', 'Elections@general2017')->name('elections.2017');
 Route::get('elections/ward12', 'Elections@ward12')->name('elections.ward12');
+Route::get('/ward-finder', 'Elections@wardFinder')->name('wardfinder');
 
 Route::get('potato', 'Potato@show')->name('potato');
 

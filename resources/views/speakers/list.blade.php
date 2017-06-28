@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', "All speakers at Edmonton City Council")
+@section('title', "All speakers at Edmonton City Council -")
 
 @section('content')
     <div class="whitecard" style="display: inline-block; width: 700px">

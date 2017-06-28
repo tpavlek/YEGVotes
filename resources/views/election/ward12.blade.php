@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    Edmonton Ward 12 By-Election
-@stop
+@section('title', "Edmonton Ward 12 By-Election")
 
 @section('content')
 

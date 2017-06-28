@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-- {{ $agenda_item }}
-@stop
+@section('title', "$agenda_item -")
 
 @section('content')
     <div>

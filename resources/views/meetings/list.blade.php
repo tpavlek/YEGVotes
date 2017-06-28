@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-- List Meetings
-@stop
+@section('title', "List Meetings -")
 
 @section('content')
 

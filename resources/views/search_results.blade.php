@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    Search for {{ $term }}
-@stop
+@section('title', "Search for $term -")
 
 @section('content')
     @forelse ($results as $agenda_item)

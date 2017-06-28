@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    - Feature Overview
-@stop
+@section('title', "Feature Overview -")
 
 @section('content')
     <h2 class="section-header">

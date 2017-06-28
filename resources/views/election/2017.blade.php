@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    {{ $election->name }}
-@stop
+@section('title', "{$election->name} -" )
 
 @section('meta_description', "Track everyone running in the 2017 General Election on YEGVotes.info")
 

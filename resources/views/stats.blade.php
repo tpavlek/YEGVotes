@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    Learn about Edmonton City Council
-@stop
+@section('title', "Learn about Edmonton City Council -")
 
 @section('meta_description')
     Track statistical information about Edmonton city council like: what types of bylaws does Council vote on? How often

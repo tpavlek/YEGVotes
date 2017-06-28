@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-- View Motion
-@stop
+@section('title', "View Motion -")
 
 @section('content')
     <div class="pure-g">

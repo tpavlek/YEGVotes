@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    When did {{ $speaker }} talk to City Council? -
-@stop
+@section('title', "When did $speaker talk to City Council? -")
 
 @section('content')
     <h1>{{ $speaker }} spoke {{ $meetings->count() }} times to Council</h1>

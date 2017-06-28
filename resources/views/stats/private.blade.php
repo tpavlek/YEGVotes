@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    How often does Edmonton City Council meet in Private?
-@stop
+@section('title', "How often does Edmonton City Council meet in Private? -")
 
 @section('meta_image', '/img/speakers.png')
 

@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-- {{ $attendanceRecord->getAttendee() }}
-@stop
+@section('title', "{$attendanceRecord->getAttendee()} -")
 
 @section('meta_description')
     About {{ $attendanceRecord->getAttendee() }}. {{ $attendanceRecord->getAttendee() }}'s attendance for City Council votes

@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-    How many people speak at City Council each year? -
-@stop
+@section('title', "How many people speak at City Council each year? -")
 
 @section('meta_image', '/img/speakers.png')
 

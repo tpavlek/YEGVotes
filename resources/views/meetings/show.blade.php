@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-- {{ $meeting }}
-@stop
+@section('title', "$meeting -")
 
 @section('content')
 
