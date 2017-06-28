@@ -50,17 +50,17 @@
     <h1>What should #yegcc use to film council meetings?</h1>
 
     <div class="potato-select">
-        <div class="option-select @if($vote && $vote->vote == "potato") selected @endif" data-vote-choice="potato" >
+        <div class="option-select" data-vote-choice="potato" >
             <img src="/img/potato/potato.png" />
         </div>
 
-        <div class="option-select @if($vote && $vote->vote == "camera") selected @endif" data-vote-choice="camera">
+        <div class="option-select selected" data-vote-choice="camera">
             <img src="/img/potato/red.png" />
         </div>
     </div>
 
-    <div class="agreement @if($agreement !== null) display @endif" >
-        <span class="agreement-amount">{{ $agreement or '' }}</span> people agree with you!
+    <div class="agreement display" >
+        <span class="agreement-amount">9000</span> people agree with you!
     </div>
     <br/>
 
@@ -114,19 +114,16 @@
             vote($(this).data('vote-choice'));
         });
 
+
+
         function vote(choice) {
-            $.ajax({
-                method: "POST",
-                url: "{{ URL::route('potato.vote') }}",
-                data: { vote: choice, _token: "{{ csrf_token() }}"},
-                success: function(data) {
-                    $('.agreement-amount').html(data[choice]);
-                    $('.agreement').show('fast');
-                },
-                error: function (jqxhr) {
-                    alert("An error occurred! Please email troy@tpavlek.me");
-                }
-            });
+            if (choice == "potato") {
+                $('.agreement-amount').html(1);
+                $('.agreement').show('fast');
+            } else {
+                $('.agreement-amount').html(9000);
+                $('.agreement').show('fast');
+            }
         }
     </script>
 @stop

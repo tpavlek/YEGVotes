@@ -4,41 +4,19 @@
     {{ $election->name }}
 @stop
 
-@section('meta_description', "Track everyone running in the {$election->name} on YEGVotes.info")
+@section('meta_description', "Track everyone running in the 2017 General Election on YEGVotes.info")
 
 @section('meta_image', '/img/election/2017/election-map.png')
 
 @section('content')
 
-    <h1>{{ $election->name }} <small style="color:goldenrod">{{ $election_date->format('M j, Y') }}</small></h1>
+    <h1>{{ $election->name }} <small style="color:goldenrod">{{ $election->date->format('M j, Y') }}</small></h1>
 	<div class="whitecard">
         @if (! $election->isFinished())
             Vote in {{ $election->daysLeft() }} days.
         @else
             Election finished!
         @endif
-    </div>
-    <div class="flex-justified" style="text-align: center;">
-        <div class="column">
-            <div class="whitecard">
-                <h3>About YEGVOTES.info</h3>
-                <p>
-                    <a href="https://yegvotes.info/about">YEGVotes.info</a> is a site run by <a href="http://tpavlek.me">Troy Pavlek</a>.
-                    It's chief purpose uses the Edmonton Open Data Catalogue to keep track of City Council voting records.
-                    However, during election time it provides an easy way for anyone to keep track of who is running.
-                </p>
-
-                <p>
-                    If there is data you want aggregated, or if you notice incorrect data, please let me know through one of
-                    the contact options below.
-                </p>
-                <p>
-                    <a href="https://twitter.com/troypavlek" class="button"><i class="fa fa-twitter"></i> Tweet @troypavlek</a>
-                    <a href="mailto:troy@tpavlek.me?subject=YEGVotes 2017 Election Feedback" class="button"><i class="fa fa-envelope"></i> Email troy@tpavlek.me</a>
-                </p>
-            </div>
-        </div>
-
     </div>
 
     <div class="flex-justified">
@@ -464,22 +442,42 @@
         </style>
     </div>
 
-    <h1>Mayoral Candidates</h1>
-    <div class="flex-justified">
-
-
-        @foreach($mayoral_candidates as $candidate)
-            @include('candidate.candidateDisplayPartial')
-        @endforeach
+    <div class="flex-justified" style="text-align: center;">
+        <div class="column">
+            <div class="whitecard" id="ward-display" style="display:none;">
+                <h1>Your ward: <span id="your-ward"></span></h1>
+            </div>
+        </div>
     </div>
 
-    <div class="whitecard" style="text-align:left">
-        <h3>The following candidates have not yet declared a ward</h3>
-        <ul>
-            @foreach($undeclared as $candidate)
-                <li>{{ $candidate->running_name }}</li>
-            @endforeach
-        </ul>
+    <div class="flex-justified" style="text-align: center;">
+        <div class="column">
+            <div class="whitecard">
+                <a href="http://daveberta.ca/edmonton-election/" class="button">View Candidates on Daveberta.ca</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-justified" style="text-align: center;">
+        <div class="column">
+            <div class="whitecard">
+                <h3>About YEGVOTES.info</h3>
+                <p>
+                    <a href="https://yegvotes.info/about">YEGVotes.info</a> is a site run by <a href="http://tpavlek.me">Troy Pavlek</a>.
+                    It's chief purpose uses the Edmonton Open Data Catalogue to keep track of City Council voting records.
+                    However, during election time it provides an easy way for anyone to keep track of who is running.
+                </p>
+
+                <p>
+                    If there is data you want aggregated, or if you notice incorrect data, please let me know through one of
+                    the contact options below.
+                </p>
+                <p>
+                    <a href="https://twitter.com/troypavlek" class="button"><i class="fa fa-twitter"></i> Tweet @troypavlek</a>
+                    <a href="mailto:troy@tpavlek.me?subject=YEGVotes 2017 Election Feedback" class="button"><i class="fa fa-envelope"></i> Email troy@tpavlek.me</a>
+                </p>
+            </div>
+        </div>
 
     </div>
 @stop
@@ -488,14 +486,20 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script>
+
+        function displayWard(ward) {
+            $('#your-ward').html(ward);
+            $('#ward-display').show('fast');
+        }
+
         $('#neighbourhood-select').select2({
             placeholder: "Select a Neighbourhood",
             allowClear: true
         });
 
         $('#neighbourhood-select').on("change", function (e) {
-            window.location = window.location + '/ward/' + $("#neighbourhood-select").val();
-        })
+            displayWard($("#neighbourhood-select").val());
+        });
     </script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script>
@@ -547,7 +551,7 @@
         function clicked(d,i) {
             var ward = d.properties.name.substring(5);
 
-            window.location = window.location + '/ward/' + ward;
+            displayWard(ward);
         }
 
 

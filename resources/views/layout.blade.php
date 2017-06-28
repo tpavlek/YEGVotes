@@ -6,7 +6,7 @@
         <h1><a href="{{ URL::to('/') }}">YEGVotes</a></h1>
         <ul>
             <li>
-                <a href="{{ URL::route('elections.show', '2017') }}">2017 Election</a>
+                <a href="{{ URL::route('elections.2017') }}">2017 Election</a>
             </li>
             <li>
                 <a href="{{ URL::route('meetings.list') }}">Meetings</a>

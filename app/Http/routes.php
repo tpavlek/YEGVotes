@@ -17,25 +17,11 @@ Route::get('/agenda/{agenda_item_id}', 'AgendaItems@show')->name('agenda_item.sh
 Route::get('/councillor/{councillor}', 'Councillors@show')->name('councillor.show');
 Route::get('councillor/{councillor}/no_votes', 'Councillors@noVotes')->name('councillor.no_votes');
 
-Route::get('election', function() { return redirect()->route('elections.show', '2017'); });
-Route::get('elections/{id}', 'Elections@show')->name('elections.show');
-Route::get('elections/{election_id}/ward/{ward_number}', 'Ward@show');
-Route::get('elections/{id}/feed', 'Elections@feed')->name('elections.feed');
-
-Route::get('candidate/{name}', 'Candidates@show')->name('candidate.show');
-
-Route::get('admin/login', 'Admin@login')->name('admin.login')->middleware('guest');
-Route::post('admin/auth', 'Admin@auth')->name('admin.auth')->middleware('guest');
-Route::get('admin/logout', 'Admin@logout')->name('admin.logout')->middleware('auth');
-Route::get('admin/dashboard', 'Admin@dashboard')->name('admin.dashboard')->middleware('auth');
-
-Route::get('elections/update/submit', 'Postable@submit')->name('postable.submit');
-Route::post('elections/update/submit', 'Postable@store')->name('postable.store');
-Route::post('postable/{id}/approve', 'Postable@approve')->name('postable.approve');
-Route::post('postable/{id}/deny', 'Postable@deny')->name('postable.deny');
+Route::get('election', function() { return redirect()->route('elections.2017'); });
+Route::get('elections/2017', 'Elections@general2017')->name('elections.2017');
+Route::get('elections/ward12', 'Elections@ward12')->name('elections.ward12');
 
 Route::get('potato', 'Potato@show')->name('potato');
-Route::post('potato/vote', 'Potato@vote')->name('potato.vote');
 
 Route::get('search/{term}', 'Search@search')->name('search');
 
