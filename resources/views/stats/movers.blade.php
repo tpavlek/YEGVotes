@@ -2,8 +2,6 @@
 
 @section('title', "Which Edmonton City Councillor makes the most motions? -")
 
-@stop
-
 @section('meta_description')
     The edmonton city councillor with the most motions is {{ $movers->first()['mover'] }}. The councillor with the most
     seconds is {{ $seconders->first()['seconder'] }}

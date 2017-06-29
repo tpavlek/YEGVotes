@@ -1,4 +1,4 @@
-<div class="card horizontal">
+<div class="card horizontal council-member">
     <div class="card-image">
         <img class="responsive-image" src="{{ $council_member->getImageUrl() }}">
     </div>
@@ -9,7 +9,7 @@
 
             @if (isset($attendance) and $attendance)
                 <div class="valign-wrapper">
-                    <div class="c100 p{{ $attendance->weightedVoteAttendancePercent() }}" data-attendance-percent="{{ $attendanceRecord->weightedVoteAttendancePercent() }}">
+                    <div class="c100 p{{ $attendance->weightedVoteAttendancePercent() }}" data-attendance-percent="{{ $attendance->weightedVoteAttendancePercent() }}">
                         <span>{{ $attendance->votePercent() }}%</span>
                         <div class="slice">
                             <div class="bar"></div>
@@ -18,15 +18,15 @@
                     </div>
                     <div class="attendance">
                         <p>
-                            Meetings: {{ $attendanceRecord->attendanceFraction() }}
-                            (<span data-attendance-percent="{{ $attendanceRecord->weightedAttendancePercent() }}">
-                    {{ $attendanceRecord->attendancePercent() }}%
+                            Meetings: {{ $attendance->attendanceFraction() }}
+                            (<span data-attendance-percent="{{ $attendance->weightedAttendancePercent() }}">
+                    {{ $attendance->attendancePercent() }}%
                 </span>)
                         </p>
                         <p>
-                            Votes: {{ $attendanceRecord->voteFraction() }}
-                            (<span data-attendance-percent="{{ $attendanceRecord->weightedVoteAttendancePercent() }}">
-                    {{ $attendanceRecord->votePercent() }}%
+                            Votes: {{ $attendance->voteFraction() }}
+                            (<span data-attendance-percent="{{ $attendance->weightedVoteAttendancePercent() }}">
+                    {{ $attendance->votePercent() }}%
                 </span>)
                         </p>
                     </div>

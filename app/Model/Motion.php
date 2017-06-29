@@ -94,6 +94,32 @@ class Motion extends Model
         return $this->hasMany(Vote::class, 'motion_id', 'id');
     }
 
+    public function voteSummary()
+    {
+        if ($this->isUnanimous()) {
+            return "Unanimous";
+        }
+
+        $for = $this->votes->filter(function (Vote $vote) {
+            return $vote->vote == "Yes";
+        })->count();
+        $against = $this->votes->filter(function (Vote $vote) {
+            return $vote->vote == "No";
+        })->count();
+
+        $parts = [];
+
+        if ($for) {
+            $parts[] = "{$for} for";
+        }
+
+        if ($against) {
+            $parts[] = "{$against} against";
+        }
+
+        return implode(", ", $parts);
+    }
+
     public function hasVotes()
     {
         return $this->votes->count();

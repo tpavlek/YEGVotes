@@ -4,9 +4,11 @@
 
 @section('content')
 
+<h1>{{ $meeting }} <a href="http://sirepub.edmonton.ca/sirepub/mtgviewer.aspx?meetid={{$meeting->id}}&doctype=MINUTES" class="btn">Official Minutes <i class="fa fa-arrow-right"></i></a></h1>
+
 <div class="meeting">
     <div class="agenda-wrapper">
-        <h1>{{ $meeting }} <a href="http://sirepub.edmonton.ca/sirepub/mtgviewer.aspx?meetid={{$meeting->id}}&doctype=MINUTES" class="button small">Official Minutes <i class="fa fa-arrow-right"></i></a></h1>
+
         <div style="text-align: left; line-height:1.8em;">
 
             @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY, 'section_name' => "Councillor Inquiries" ])
@@ -47,26 +49,31 @@
         </div>
     </div>
 
-    <div class="attendance-wrapper">
-        @if ($attendance->get(1))
-            <h2>Present</h2>
-            @foreach ($attendance->get(1) as $attendanceRecord)
-                <div class="small-person-details">
-                    @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'attendance' => false ])
+    @if ($attendance->count())
+        <div class="attendance-wrapper">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Attendance</span>
                 </div>
+                @foreach($attendance as $type => $records)
+                    <div class="card-content @if ($type) green @else red darken-2 @endif">
 
-            @endforeach
-        @endif
+                        @if ($type)
+                            <span class="card-title white-text"><small><i class="fa fa-check-circle"></i> &nbsp; Present</small></span>
+                        @else
+                            <span class="card-title white-text"><small><i class="fa fa-times-circle"></i> &nbsp; Absent</small></span>
+                        @endif
+                        @foreach ($records as $attendanceRecord)
+                            <div style="padding: 0.5rem;">
+                                <a href="{{ URL::route('councillor.show', (string)$attendanceRecord->getAttendee()) }}">{{ $attendanceRecord->getAttendee() }}</a>
+                            </div>
 
-        @if ($attendance->get(0))
-            <h2>Absent</h2>
-            @foreach ($attendance->get(0) as $attendanceRecord)
-                <div class="small-person-details">
-                    @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'attendance' => false ])
-                </div>
-            @endforeach
-        @endif
-    </div>
+                        @endforeach
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
 </div>
 
 

@@ -9,56 +9,72 @@
 @stop
 
 @section('content')
-    <h1 style="margin-bottom:3rem;">How many people speak at City Council each year?</h1>
-    <div class="whitecard" style="display: inline-block">
-        <canvas id="participation-chart" width="700px" style="max-width: 700px; margin: 0 auto;"></canvas>
 
-        <p>
-            So far, this year, <strong>{{ $speakersByYear->get(\Carbon\Carbon::now()->year)->count() }}</strong> speakers have spoken at council and committee.
-        </p>
+
+    <div class="center">
+        <h1>How many people speak at City Council each year?</h1>
+
+        <div class="card" style="display: inline-block; margin: 0 auto;">
+            <div class="card-content center">
+                <canvas id="participation-chart" width="700px" style="max-width: 700px; margin: 0 auto;"></canvas>
+
+                <p>
+                    So far, this year, <strong>{{ $speakersByYear->get(\Carbon\Carbon::now()->year)->count() }}</strong> speakers have spoken at council and committee.
+                </p>
+            </div>
+
+        </div>
+
+        <div></div>
+
+        <div class="card inline auto-margin">
+            <div class="card-content">
+                <span class="card-title">
+                    Speakers this term, by committee
+                </span>
+
+                <canvas id="by-committee" width="700px" style="max-width: 700px; margin: 0 auto;"></canvas>
+            </div>
+        </div>
+
+        <div></div>
+
+
+        <div class="card inline auto-margin">
+            <div class="card-content">
+                <span class="card-title">
+                    Who speaks most often?
+                </span>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Speaker</th>
+                        <th># of Times Speaking</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($topSpeakers as $speaker => $count)
+                        <tr>
+                            <td>
+                                <a href="{{ URL::route('speakers.show', $speaker) }}">{{ $speaker }}</a>
+                            </td>
+                            <td>{{ $count }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-action">
+                <a href="{{ URL::route('speakers.list') }}">View Full List</a>
+            </div>
+        </div>
+
     </div>
 
 
-    <h2>Speakers this term, by committee</h2>
 
-    <div class="whitecard" style="display: inline-block;">
-        <canvas id="by-committee" width="700px" style="max-width: 700px; margin: 0 auto;"></canvas>
-    </div>
 
-    <h2>Who speaks most often?</h2>
-    <div class="whitecard" style="display: inline-block; width: 700px">
-        <style>
-            table {
-                margin: 0 auto;
-                margin-top: 2rem;
-                text-align: left;
-            }
-            td {
-                padding: 0.5rem;
-                padding-right: 2rem;
-            }
-        </style>
-        <table>
-            <thead>
-            <tr>
-                <th>Speaker</th>
-                <th># of Times Speaking</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($topSpeakers as $speaker => $count)
-                <tr>
-                    <td>
-                        <a href="{{ URL::route('speakers.show', $speaker) }}">{{ $speaker }}</a>
-                    </td>
-                    <td>{{ $count }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-
-        <a href="{{ URL::route('speakers.list') }}" class="button">View Full List</a>
-    </div>
 
 @stop
 

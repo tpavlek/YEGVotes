@@ -118,7 +118,7 @@ footer {
   line-height: 2em;
 }
 
-.vote-summary-container {
+.vote-summary-container, .motion-summary-container {
   display: flex;
   flex-flow: row wrap;
 
@@ -162,4 +162,51 @@ span[data-attendance-percent^="5"] { color: #e05708; }
 [data-attendance-percent^="9"] { color: #118202; }
 [data-attendance-percent="100"] { color: #00772d; }
 
+.overview-wrapper {
+  display: flex;
+
+  .items {
+    margin-right: 2rem;
+  }
+}
+
+.meetings-listing {
+  line-height: 1.7em;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.meeting {
+  display: flex;
+
+  .card { margin-left: 2rem;}
+}
+
+.meetings-list {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.attendance-wrapper {
+  min-width: 30rem;
+}
+
+.attendance-record-wrapper {
+  min-width: 40rem;
+}
+
+.council-member {
+
+  .card-image img {
+    max-height: 100%;
+  }
+}
+
+.inline {
+  display: inline-block;
+}
+
+auto-margin {
+  margin: 0 auto;
+}
 

@@ -1,19 +1,25 @@
 <div class="item-container">
-    <header class="agenda-item-topic">
-        {{ $agenda_item }}
-        @if (isset($show_meeting) && $show_meeting)
-            <a href="{{ URL::route('meetings.show', $agenda_item->meeting->id) }}">
-                <small><br/>{{ $agenda_item->meeting }}</small>
-            </a>
-        @endif
-    </header>
-    <h4>Motions:</h4>
-    <div class="motions">
-        @foreach ($agenda_item->motions as $index => $motion)
-            @include('motion.motion_card', [ 'motion' => $motion, 'votes' => $motion->votes->groupBy('vote'), 'display_votes' => false ])
-        @endforeach
+    <div class="motion-summary-container">
+        <div class="card vote-summary">
+            <div class="card-content">
+                <span class="card-title">{{ $agenda_item }}</span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red" href="{{ URL::route('agenda_item.show', $agenda_item->id) }}">
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+            @foreach($agenda_item->motions as $motion)
+                <div class="card-content @if ($motion->status == "Carried") green @elseif($motion->status == "Failed") red darken-4 @else grey darken-3 @endif white-text">
+                    <div class="motion-status">
+                        @if ($motion->status == "Carried")
+                            <i class="fa fa-check-square-o"></i> {{ $motion->status }} ({{ $motion->voteSummary() }})
+                        @elseif ($key == "No")
+                            <i class="fa fa-times-circle-o"></i> {{ $key }} ({{ $votes->count() }} votes)
+                        @else
+                            <i class="fa fa-times-circle-o"></i> {{ $key }} ({{ $votes->count() }} votes)
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
-    <a href="{{ URL::route('agenda_item.show', $agenda_item->id) }}" class="button small">
-        <i class="fa fa-eye"></i> View Agenda
-    </a>
 </div>

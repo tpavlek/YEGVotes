@@ -25,11 +25,9 @@
             @include('agendaSectionWithVotesPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW, 'section_name' => "Bylaws", 'card_class' => "full"])
         </div>
 
-        <div class="attendance-record">
+        <div class="attendance-record-wrapper">
             @foreach ($attendance as $attendanceRecord)
-                <div class="small-person-details">
-                    @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'link' => true, 'attendance' => $attendanceRecord ])
-                </div>
+                @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'link' => true, 'attendance' => $attendanceRecord ])
             @endforeach
         </div>
 
