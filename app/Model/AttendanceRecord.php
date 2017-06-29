@@ -56,6 +56,20 @@ class AttendanceRecord
         return number_format(($this->days_in_attendance / $this->total_meetings) * 100);
     }
 
+    public function weightedAttendancePercent()
+    {
+        // We set 80% as a floor attendance for a councillor, and make the spread over the final 20%
+
+        return number_format((($this->attendancePercent() - 80) / 20) * 100);
+    }
+
+    public function weightedVoteAttendancePercent()
+    {
+        // We set 80% as a floor attendance for a councillor, and make the spread over the final 20%
+
+        return number_format((($this->votePercent() - 80) / 20) * 100);
+    }
+
     /**
      * The value for sorting an attendance record. Lower is better attendance.
      *

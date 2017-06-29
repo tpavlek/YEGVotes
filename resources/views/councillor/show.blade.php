@@ -10,14 +10,15 @@
 @section('content')
     <div class="person-summary">
         @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'attendance' => $attendanceRecord ])
+
         <div class="voting-summary">
             @if(\Illuminate\Support\Str::contains(URL::current(), "no_votes"))
-                <a href="{{ URL::route('councillor.show', (string)$attendanceRecord->getAttendee()) }}" class="button">
+                <a href="{{ URL::route('councillor.show', (string)$attendanceRecord->getAttendee()) }}" class="waves-effect waves-light btn">
                     <i class="fa fa-thumbs-up"></i> Show All Votes
                 </a>
             @else
-                <a href="{{ URL::route('councillor.no_votes', (string)$attendanceRecord->getAttendee()) }}" class="button">
-                    <i class="fa fa-thumbs-down"></i> Show Only No Votes
+                <a href="{{ URL::route('councillor.no_votes', (string)$attendanceRecord->getAttendee()) }}" class="waves-effect waves-light btn">
+                    <i class="fa fa-thumbs-down"></i> Show Only Against Votes
                 </a>
             @endif
 

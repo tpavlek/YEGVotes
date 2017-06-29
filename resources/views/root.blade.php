@@ -9,13 +9,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#d4dad0">
-    <link rel="stylesheet" href="/css/all.css"/>
+
     <script src="https://use.fontawesome.com/91c9d3ddd3.js"></script>
 
-    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/all.css"/>
 
-    <!-- Compiled and minified JavaScript -->
 
 
     <meta name="twitter:card" content="summary" />
@@ -37,18 +36,6 @@
 @yield('body')
 
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $("input[type='checkbox']").click(function() {
-            var thisId = $(this).attr('id');
-            var otherChecks = $(this).parents('.motions').find('input:checked:not(#' + thisId + ')');
-            otherChecks.each(function (index) {
-                $(otherChecks[index]).removeAttr('checked');
-            });
-
-        });
-    });
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
 @yield('root_scripts')
 </body>

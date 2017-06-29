@@ -52,7 +52,7 @@ class Motion extends Model
 
     public function isUnanimous()
     {
-        return ! $this->hasDissent();
+        return $this->votes->count() && ! $this->hasDissent();
     }
 
     public function isRevisedDueDate()

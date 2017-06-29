@@ -1,5 +1,5 @@
 <div class="motion card white">
-    <div class="card-content @if ($motion->status == "Carried") green @endif @if($motion->status == "Failed") red darken-4 @endif white-text">
+    <div class="card-content @if ($motion->status == "Carried") green @elseif($motion->status == "Failed") red darken-4 @else grey darken-3 @endif white-text">
         <span class="card-title white-text">
             {{ $motion->meeting }}
             <a href="{{ URL::route('meetings.show', $motion->meeting->id) }}" class="white-text">
@@ -23,23 +23,25 @@
             @endif
         </div>
     </div>
-    <div class="card-action blue-grey darken-1">
-        @if ($motion->mover)
-            <div class="mover">
+    @if ($motion->mover || $motion->seconder)
+        <div class="card-action blue-grey darken-1">
+            @if ($motion->mover)
+                <div class="mover">
 
-                <span class="motion-label">Mover</span>
-                <a href="{{ URL::route('councillor.show', (string)$motion->mover) }}">{{ $motion->mover }}</a>
-            </div>
-        @endif
+                    <span class="motion-label">Mover</span>
+                    <a href="{{ URL::route('councillor.show', (string)$motion->mover) }}">{{ $motion->mover }}</a>
+                </div>
+            @endif
 
-        @if ($motion->seconder)
-            <div class="mover">
-                <span class="motion-label">Second</span>
-                <a href="{{ URL::route('councillor.show', (string)$motion->seconder) }}">{{ $motion->seconder }}</a>
-            </div>
+            @if ($motion->seconder)
+                <div class="mover">
+                    <span class="motion-label">Second</span>
+                    <a href="{{ URL::route('councillor.show', (string)$motion->seconder) }}">{{ $motion->seconder }}</a>
+                </div>
 
-        @endif
-    </div>
+            @endif
+        </div>
+    @endif
     <div class="card-content white">
 
         <p>

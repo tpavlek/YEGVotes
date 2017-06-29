@@ -178,6 +178,17 @@ class AgendaItem extends Model
         return $containsVotes;
     }
 
+    public function getVotesForCouncillor($council_member)
+    {
+        if ($this->votes == null) {
+            throw new \Exception("Tried to get a vote group on a null vote for councillor: {$council_member}");
+        }
+
+        return $this->votes->filter(function (Vote $vote) use ($council_member) {
+            return $vote->voter == $council_member;
+        });
+    }
+
     public function getVoteGroupsForCouncillor($council_member)
     {
         if ($this->votes == null) {
