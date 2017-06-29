@@ -8,18 +8,19 @@
 
 @section('content')
 
-    <h1>{{ $election->name }} <small style="color:goldenrod">{{ $election->date->format('M j, Y') }}</small></h1>
-	<div class="whitecard">
-        @if (! $election->isFinished())
-            Vote in {{ $election->daysLeft() }} days.
-        @else
-            Election finished!
-        @endif
-    </div>
-
-    <div class="flex-justified">
-
-        <div class="whitecard">
+    <div class="center">
+	<div class="card center inline auto-margin">
+        <div class="card-content blue">
+            <span class="card-title white-text">{{ $election->name }} <small>{{ $election->date->format('M j, Y') }}</small></span>
+        </div>
+        <div class="card-content">
+            @if (! $election->isFinished())
+                <span class="card-title">Vote in {{ $election->daysLeft() }} days.</span>
+            @else
+                <span class="card-title">Election finished!</span>
+            @endif
+        </div>
+        <div class="card-content">
             <h2>Select a Ward</h2>
             <div id="ward-map"></div>
             <h2>Or choose a neighbourhood</h2>
@@ -408,6 +409,11 @@
                 <option value='12'>Wild Rose</option>
             </select>
         </div>
+        <div class="card-content">
+            <a href="http://daveberta.ca/edmonton-election/" class="btn">View Candidates on Daveberta.ca</a>
+        </div>
+    </div>
+</div>
 
 
 
@@ -438,7 +444,6 @@
             select { width: 300px; }
 
         </style>
-    </div>
 
     <div class="flex-justified" style="text-align: center;">
         <div class="column">
@@ -446,37 +451,6 @@
                 <h1>Your ward: <span id="your-ward"></span></h1>
             </div>
         </div>
-    </div>
-
-    <div class="flex-justified" style="text-align: center;">
-        <div class="column">
-            <div class="whitecard">
-                <a href="http://daveberta.ca/edmonton-election/" class="button">View Candidates on Daveberta.ca</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="flex-justified" style="text-align: center;">
-        <div class="column">
-            <div class="whitecard">
-                <h3>About YEGVOTES.info</h3>
-                <p>
-                    <a href="https://yegvotes.info/about">YEGVotes.info</a> is a site run by <a href="http://tpavlek.me">Troy Pavlek</a>.
-                    It's chief purpose uses the Edmonton Open Data Catalogue to keep track of City Council voting records.
-                    However, during election time it provides an easy way for anyone to keep track of who is running.
-                </p>
-
-                <p>
-                    If there is data you want aggregated, or if you notice incorrect data, please let me know through one of
-                    the contact options below.
-                </p>
-                <p>
-                    <a href="https://twitter.com/troypavlek" class="button"><i class="fa fa-twitter"></i> Tweet @troypavlek</a>
-                    <a href="mailto:troy@tpavlek.me?subject=YEGVotes 2017 Election Feedback" class="button"><i class="fa fa-envelope"></i> Email troy@tpavlek.me</a>
-                </p>
-            </div>
-        </div>
-
     </div>
 @stop
 
