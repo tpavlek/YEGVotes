@@ -1,30 +1,44 @@
-@if (isset($link) and $link)
-    <a href="{{ URL::route('councillor.show', (string)$council_member) }}">
-@endif
-    <div class="person-details">
-        <div class="council-member-img {{ $council_member->getShortWard() }}"></div>
-        <div class="text">
-            <h3>{{ $council_member->name }} @if($council_member->getWard() != "Mayor") <small>{{ $council_member->getWard() }}</small>@endif</h3>
+<div class="card horizontal small">
+    <div class="card-image">
+        <img class="responsive-image" src="{{ $council_member->getImageUrl() }}">
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            <span class="card-title">{{ $council_member }} @if($council_member->getWard() != "Mayor")
+                    <small>{{ $council_member->getWard() }}</small>@endif</span>
+
             @if (isset($attendance) and $attendance)
-                <h4>
-                    Meetings: {{ $attendance->attendanceFraction() }}
-                    (<span data-attendance-percent="{{ $attendance->attendancePercent() }}">
-                                {{ $attendance->attendancePercent() }}%
-                            </span>)
-                </h4>
-                <h4>
-                    Votes: {{ $attendance->voteFraction() }}
-                    (<span data-attendance-percent="{{ $attendance->votePercent() }}">
-                                {{ $attendance->votePercent() }}%
-                            </span>)
-                </h4>
+                <div class="valign-wrapper">
+                    <div class="c100 p{{ $attendance->attendancePercent() }}">
+                        <span>{{ $attendance->attendancePercent() }}%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="attendance">
+                        <p>
+                            Meetings: {{ $attendanceRecord->attendanceFraction() }}
+                            (<span data-attendance-percent="{{ $attendanceRecord->attendancePercent() }}">
+                    {{ $attendanceRecord->attendancePercent() }}%
+                </span>)
+                        </p>
+                        <p>
+                            Votes: {{ $attendanceRecord->voteFraction() }}
+                            (<span data-attendance-percent="{{ $attendanceRecord->votePercent() }}">
+                    {{ $attendanceRecord->votePercent() }}%
+                </span>)
+                        </p>
+                    </div>
+                </div>
+
+
             @endif
 
         </div>
-
+        <div class="card-action">
+            <a href="{{ URL::route('councillor.show', (string)$council_member) }}"><i class="fa fa-check"></i> Voting Record</a>
+        </div>
     </div>
-
-@if (isset($link) and $link)
-</a>
-@endif
+</div>
 

@@ -9,22 +9,8 @@
 
 @section('content')
     <div class="person-summary">
-        @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee() ])
+        @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'attendance' => $attendanceRecord ])
         <div class="voting-summary">
-            <div class="attendance">
-                <h3>
-                    Meetings: {{ $attendanceRecord->attendanceFraction() }}
-                    (<span data-attendance-percent="{{ $attendanceRecord->attendancePercent() }}">
-                    {{ $attendanceRecord->attendancePercent() }}%
-                </span>)
-                </h3>
-                <h3>
-                    Votes: {{ $attendanceRecord->voteFraction() }}
-                    (<span data-attendance-percent="{{ $attendanceRecord->votePercent() }}">
-                    {{ $attendanceRecord->votePercent() }}%
-                </span>)
-                </h3>
-            </div>
             @if(\Illuminate\Support\Str::contains(URL::current(), "no_votes"))
                 <a href="{{ URL::route('councillor.show', (string)$attendanceRecord->getAttendee()) }}" class="button">
                     <i class="fa fa-thumbs-up"></i> Show All Votes

@@ -16,6 +16,21 @@ class CouncilMember
         return $this->name;
     }
 
+    public function getImageUrl()
+    {
+        $record = Councillor::query()->where('name', 'like', $this->__toString())->first();
+
+        if ($record === null) {
+            return "/img/{$this->getShortWard()}.jpg";
+        }
+
+        if (empty($record->img_url)) {
+            return "/img/{$this->getShortWard()}.jpg";
+        }
+
+        return $record->img_url;
+    }
+
     public function getWardNumber()
     {
         if ($this->ward == "Mayor") return 0;

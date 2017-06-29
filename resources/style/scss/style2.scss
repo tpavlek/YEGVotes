@@ -78,6 +78,13 @@ a:not(.btn):hover { border-bottom: 3px solid slategray; box-sizing: border-box; 
 
 .vote { padding: 0.5rem; display: block;}
 
+.unanimous-status {
+  color: green;
+  font-weight: bold;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 footer {
   background-color: #111;
   color: whitesmoke;
@@ -102,4 +109,11 @@ footer {
   .card-content {
     background: white;
   }
+}
+
+.attendance {
+  padding-left: 1rem;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 2em;
 }
