@@ -8,7 +8,7 @@
                 </a>
             </div>
             @foreach($voting_item->getVoteGroupsForCouncillor($councillor) as $key => $votes)
-                <div class="card-content @if ($key == "Yes") green @elseif($key == "No") red darken-4 @else grey darken-3 @endif">
+                <div class="card-content white-text @if ($key == "Yes") green @elseif($key == "No") red darken-4 @else grey darken-3 @endif">
                     <div class="motion-status">
                         @if ($key == "Yes")
                             <i class="fa fa-check-square-o"></i> {{ $key }} ({{ $votes->count() }} votes)
