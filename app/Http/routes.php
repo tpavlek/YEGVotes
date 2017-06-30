@@ -6,6 +6,7 @@ Route::get('/about', 'Overview@about')->name('about');
 Route::get('/stats', 'Stats@show')->name('stats');
 Route::get('/movers', 'Stats@movers')->name('stats.movers');
 Route::get('/private', 'Stats@inPrivate')->name('stats.private');
+Route::get('/attendance', 'Stats@attendance')->name('stats.attendance');
 Route::get('/meetings', 'Meetings@listMeetings')->name('meetings.list');
 Route::get('/meetings/{meeting_id}', 'Meetings@show')->name('meetings.show');
 Route::get('/motions/{motion_id}', 'Motions@show')->name('motion.show');

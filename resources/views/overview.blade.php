@@ -27,7 +27,7 @@
 
         <div class="attendance-record-wrapper">
             @foreach ($attendance as $attendanceRecord)
-                @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'link' => true, 'attendance' => $attendanceRecord ])
+                @include('councilMemberPartial', [ 'council_member' => $attendanceRecord->getAttendee(), 'attendance' => $attendanceRecord ])
             @endforeach
         </div>
 

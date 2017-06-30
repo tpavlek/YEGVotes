@@ -3,6 +3,8 @@
 namespace Depotwarehouse\YEGVotes\Http\Controllers;
 
 use Carbon\Carbon;
+use Depotwarehouse\YEGVotes\Model\Attendance;
+use Depotwarehouse\YEGVotes\Model\AttendanceRecord;
 use Depotwarehouse\YEGVotes\Model\StatisticsService;
 use Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer;
 
@@ -19,6 +21,24 @@ class Stats extends Controller
     public function show()
     {
         return view('stats');
+    }
+
+    public function attendance()
+    {
+        $attendance = (new Attendance())->getRecordsForCouncil();
+        $attendance_records = $attendance->sortBy(function (AttendanceRecord $attendanceRecord) {
+            return $attendanceRecord->sortValue();
+        });
+
+        $skipped_meetings = $this->statisticsService->skippedMeetings();
+
+        $skipped_meetings = $skipped_meetings->sortByDesc(function ($skipped) {
+            return $skipped['skipped'];
+        })->slice(0,5);
+
+        return view('stats.attendance')
+            ->with('attendance_records', $attendance_records)
+            ->with('skipped_meetings', $skipped_meetings);
     }
 
     public function movers()

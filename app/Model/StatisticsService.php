@@ -239,5 +239,30 @@ class StatisticsService
         return $result;
     }
 
+    public function skippedMeetings()
+    {
+        $query = "SELECT meeting_type, meeting_id, count(*)
+                  from meetings
+                  join attendance on attendance.meeting_id = meetings.id
+                  where (attendance.attendee like '%Councillor%' or attendance.attendee like '%Mayor%' and attendance.attendee not like '%Sohi%')
+                  and present = 0
+                  group by meeting_type, meeting_id;";
+
+        $result = DB::getPdo()->query($query)->fetchAll();
+
+        $totals = collect(DB::table('meetings')->groupBy('meeting_type')->select([ 'meeting_type', DB::raw('count(*) as total') ])->get())->keyBy('meeting_type');
+
+        $result = collect($result)
+            ->groupBy('meeting_type')
+            ->map(function ($group, $type) use ($totals) {
+                return [
+                    'skipped' => $group->count(),
+                    'percentage' => number_format(($group->count() / $totals->get($type)->total) * 100)
+                ];
+            });
+
+        return $result;
+    }
+
 
 }

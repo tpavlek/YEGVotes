@@ -7,6 +7,7 @@ $row-highlight-color: #1F1F1F;
 
 body {
   background-color: $background-color;
+  font-size: 16px;
 }
 
 .body-wrapper {
@@ -63,11 +64,11 @@ a:not(.btn):hover { border-bottom: 3px solid slategray; box-sizing: border-box; 
 
 .vote-type { margin: 0; padding: 0.5rem; box-shadow: 0 1px 5px $row-highlight-color; }
 .vote-column.Yes .vote-type { color: whitesmoke; background: darken($yes-vote-color, 10%);   }
-.vote-column.Absent .vote-type { background: darken($absent-vote-color, 10%); }
+.vote-column.Absent .vote-type, .vote-column.Abstain .vote-type { background: darken($absent-vote-color, 10%); }
 .vote-column.No .vote-type { color:whitesmoke; background: darken($no-vote-color, 10%); }
 
 .vote-column.Yes { background-color: $yes-vote-color; }
-.vote-column.Absent { background-color: $absent-vote-color; }
+.vote-column.Absent, .vote-column.Abstain { background-color: $absent-vote-color; }
 .vote-column.No { background-color: $no-vote-color; }
 
 .vote-column {

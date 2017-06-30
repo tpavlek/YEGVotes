@@ -19,10 +19,8 @@
                 </div>
                 <div class="attendance">
                     <p>
-                        Meetings: {{ $attendance->attendanceFraction() }}
-                        (<span data-attendance-percent="{{ $attendance->weightedAttendancePercent() }}">
-                {{ $attendance->attendancePercent() }}%
-            </span>)
+                        Meetings: {{ $attendance->meetingFraction() }}
+                        (<span data-attendance-percent="{{ $attendance->weightedAttendancePercent() }}">{{ $attendance->attendancePercent() }}%</span>)
                     </p>
                     <p>
                         Votes: {{ $attendance->voteFraction() }}

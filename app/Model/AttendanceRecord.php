@@ -46,7 +46,7 @@ class AttendanceRecord
         return number_format(($this->votes_in_attendance / $this->total_votes) * 100);
     }
 
-    public function attendanceFraction()
+    public function meetingFraction()
     {
         return "{$this->days_in_attendance} / {$this->total_meetings}";
     }
