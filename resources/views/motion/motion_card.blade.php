@@ -51,7 +51,13 @@
     </div>
 
     <div class="card-content white">
-        @include('voteTablePartial', [ 'votes' => $votes, 'display_votes' => $display_votes ?? true ])
+        @include('voteTablePartial', [ 'votes' => $motion->votes->groupBy('vote'), 'display_votes' => $display_votes ?? true ])
     </div>
+
+    @if (Route::currentRouteName() != 'motion.show')
+        <a href="{{ URL::route('motion.show', $motion->id) }}" class="btn-floating halfway-fab waves-effect waves-light red">
+            <i class="fa fa-arrow-right"></i>
+        </a>
+    @endif
 </div>
 

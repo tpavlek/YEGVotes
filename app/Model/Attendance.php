@@ -27,8 +27,14 @@ class Attendance extends Model
             ->first();
     }
 
-    public function getRecordForCouncilMember(Councillor $councillor)
+    /**
+     * @param Councillor|string $councillor
+     * @return AttendanceRecord|null
+     */
+    public function getRecordForCouncilMember($councillor)
     {
+
+        $councillor_name = ($councillor instanceof Councillor) ? $councillor->toString() : $councillor;
 
         $results = $this->getConnection()->getPdo()->query("
             select a.attendee, vote_query.votes_present as votes_present, vote_query.total_votes as total_votes,
@@ -37,8 +43,8 @@ class Attendance extends Model
             from attendance as a,
             (select voter, count(v.id) as total_votes,
                 (select count(id) from votes where vote not in ('Absent', 'Off the Dais') and voter = v.voter) as votes_present
-                from votes v where voter like '%{$councillor->toString()}%') as vote_query
-            where a.attendee like '%{$councillor->toString()}%';
+                from votes v where voter like '%{$councillor_name}%') as vote_query
+            where a.attendee like '%{$councillor_name}%';
         ");
 
         foreach ($results as $row) {

@@ -17,8 +17,7 @@ class Motions extends Controller
         $motion = $this->motionModel->find($motion_id);
 
         return view('motion.show')
-            ->with('motion', $motion)
-            ->with('votes', $motion->votes->groupBy('vote'));
+            ->with('motion', $motion);
     }
 
 }

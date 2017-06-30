@@ -25,7 +25,7 @@ a:not(.btn):hover { border-bottom: 3px solid slategray; box-sizing: border-box; 
 .motion.card {
   max-width: 50rem;
   margin: 0 auto;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .motion-status {
@@ -206,7 +206,35 @@ span[data-attendance-percent^="5"] { color: #e05708; }
   display: inline-block;
 }
 
-auto-margin {
+.auto-margin {
   margin: 0 auto;
+}
+
+.center .flex {
+  justify-content: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.row-wrap {
+  flex-flow: row wrap;
+
+  .card {
+    margin-right: 2rem;
+  }
+}
+
+.flex-item {
+  margin-right: 2rem;
+}
+
+.flex-item p {
+  max-width: 45rem;
+}
+
+.margin-bottom-2 {
+  margin-bottom: 2rem;
 }
 

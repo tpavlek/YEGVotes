@@ -10,7 +10,9 @@
 @stop
 
 @section('content')
-    <h1 style="margin-bottom:3rem;">How often does Edmonton City Council meet in private?</h1>
+    <div class="center">
+
+    <h1>How often does Edmonton City Council meet in private?</h1>
 
     In <strong>{{ $private_meetings->count() }}</strong> of {{ $total_meetings }} total council/committee, council voted to
     meet in private. That means that the number of meetings that have a private component is:
@@ -18,9 +20,6 @@
     <div class="large-percentage" style="font-size:25vh;color:dodgerblue;">
         {{ number_format(($private_meetings->count() / $total_meetings) * 100, 0) }}%
     </div>
-
-    <br />
-    <br />
 
     <div>
         <h2>The most often cited section of FOIP is Section {{ $sections->keys()->first() }}</h2>
@@ -66,9 +65,7 @@
         <div style="flex-grow:1">
             With <strong>{{ $movers->first() }}</strong> motions <strong>{{ $movers->keys()->first() }}</strong> moves to meet in private and keep reports private
             the most.
-            <div class="small-person-details">
-                @include('councilMemberPartial', [ 'council_member' => new \Depotwarehouse\YEGVotes\Model\CouncilMember($movers->keys()->first()), 'link' => true ])
-            </div>
+            @include('councilMemberPartial', [ 'council_member' => new \Depotwarehouse\YEGVotes\Model\CouncilMember($movers->keys()->first()), 'link' => true ])
 
             <style>
                 table {
@@ -118,7 +115,7 @@
             If anything is noticed to be suspect, please reach out as soon as possible!
         </p>
     </div>
-
+    </div>
 
 @stop
 

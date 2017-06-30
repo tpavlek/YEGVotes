@@ -14,7 +14,7 @@
     <div class="center">
         <h1>How many people speak at City Council each year?</h1>
 
-        <div class="card" style="display: inline-block; margin: 0 auto;">
+        <div class="card inline auto-margin">
             <div class="card-content center">
                 <canvas id="participation-chart" width="700px" style="max-width: 700px; margin: 0 auto;"></canvas>
 
@@ -25,7 +25,7 @@
 
         </div>
 
-        <div></div>
+        <div class="margin-bottom-2"></div>
 
         <div class="card inline auto-margin">
             <div class="card-content">
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div></div>
+        <div class="margin-bottom-2"></div>
 
 
         <div class="card inline auto-margin">

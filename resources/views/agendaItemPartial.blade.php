@@ -8,17 +8,19 @@
                 </a>
             </div>
             @foreach($agenda_item->motions as $motion)
+                <a href="{{ URL::route('motion.show', $motion->id) }}">
                 <div class="card-content @if ($motion->status == "Carried") green @elseif($motion->status == "Failed") red darken-4 @else grey darken-3 @endif white-text">
                     <div class="motion-status">
                         @if ($motion->status == "Carried")
                             <i class="fa fa-check-square-o"></i> {{ $motion->status }} ({{ $motion->voteSummary() }})
-                        @elseif ($key == "No")
-                            <i class="fa fa-times-circle-o"></i> {{ $key }} ({{ $votes->count() }} votes)
+                        @elseif ($motion->status == "Failed")
+                            <i class="fa fa-times-circle-o"></i> {{ $motion->status }} ({{ $motion->voteSummary() }})
                         @else
-                            <i class="fa fa-times-circle-o"></i> {{ $key }} ({{ $votes->count() }} votes)
+                            <i class="fa fa-times-circle-o"></i> {{ $motion->status }} ({{ $motion->voteSummary() }})
                         @endif
                     </div>
                 </div>
+                </a>
             @endforeach
         </div>
     </div>

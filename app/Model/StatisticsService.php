@@ -186,7 +186,11 @@ class StatisticsService
         $result = DB::getPdo()->query($query)->fetchAll();
 
         $result = collect($result)->map(function ($entry) {
-            return [ 'mover' => new CouncilMember($entry['mover']), 'motions' => $entry['motions'] ];
+            return [
+                'mover' => new CouncilMember($entry['mover']),
+                'motions' => $entry['motions'],
+                'attendance' => (new Attendance())->getRecordForCouncilMember($entry['mover'])
+            ];
         });
 
         return $result;
@@ -203,7 +207,11 @@ class StatisticsService
         $result = DB::getPdo()->query($query)->fetchAll();
 
         $result = collect($result)->map(function ($entry) {
-            return [ 'seconder' => new CouncilMember($entry['seconder']), 'motions' => $entry['motions'] ];
+            return [
+                'seconder' => new CouncilMember($entry['seconder']),
+                'motions' => $entry['motions'],
+                'attendance' => (new Attendance())->getRecordForCouncilMember($entry['seconder'])
+            ];
         });
 
         return $result;

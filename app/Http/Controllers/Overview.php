@@ -7,6 +7,7 @@ use Depotwarehouse\YEGVotes\Model\Attendance;
 use Depotwarehouse\YEGVotes\Model\AttendanceRecord;
 use Depotwarehouse\YEGVotes\Model\CouncilMember;
 use Depotwarehouse\YEGVotes\Model\Meeting;
+use Depotwarehouse\YEGVotes\Model\Motion;
 
 class Overview extends Controller
 {
@@ -43,14 +44,20 @@ class Overview extends Controller
         });
 
         // We only want the top attender and the bottom attender
-        $attendance_records = collect([ $attendance_records->first(), $attendance_records->last() ]);
+        $best_and_worst = collect([ $attendance_records->first(), $attendance_records->last() ]);
+
+        $iveson_attendance = $attendance_records->first(function ($key, AttendanceRecord $record) {
+            return $record->getAttendee() == "D. Iveson - Mayor";
+        });
 
         $example_agenda_item = $this->agendaModel->find(48196);
         return view('about')
-            ->with('attendance_records', $attendance_records)
+            ->with('attendance_records', $best_and_worst)
             ->with('agenda_item', $example_agenda_item)
+            ->with('example_motion', Motion::find('40791d0b-e3ee-4c47-baa4-29e54f6c7563'))
             ->with('councillor', new CouncilMember("D. Iveson - Mayor"))
-            ->with('voting_items', $this->agendaModel->bylaws()->take(7)->get());
+            ->with('voting_items', $this->agendaModel->voteAgainst("D. Iveson - Mayor")->orderBy('meeting_id', 'DESC')->take(7)->get())
+            ->with('iveson_attendance', $iveson_attendance);
     }
 
     public function stats()

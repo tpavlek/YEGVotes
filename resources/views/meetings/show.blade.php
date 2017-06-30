@@ -35,14 +35,16 @@
             @if(count($speakers))
 
                 <div class="card">
-                    <h2>Speakers from the Public</h2>
-                    <ul>
-                        @foreach ($speakers as $speaker)
-                            <li>
-                                <a href="{{ URL::route('speakers.show', $speaker) }}">{{ $speaker }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
+                    <div class="card-content">
+                        <span class="card-title">Speakers from the Public</span>
+                        <ul>
+                            @foreach ($speakers as $speaker)
+                                <li>
+                                    <a href="{{ URL::route('speakers.show', $speaker) }}">{{ $speaker }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             @endif
 
