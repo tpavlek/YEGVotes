@@ -6,6 +6,8 @@
     At a {{ $skipped_meetings->keys()->first() }} there is a {{ $skipped_meetings->first()['percentage'] }}% chance of a councillor being absent
 @stop
 
+@section('meta_image', '/img/attendance.png')
+
 @section('content')
     <div class="center">
         <h1>How often do Edmonton City Councillors attend meetings?</h1>

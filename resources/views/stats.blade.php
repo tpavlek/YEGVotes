@@ -7,6 +7,8 @@
     does council disagree? Who makes the most motions?
 @stop
 
+
+
 @section('content')
     <style>
         li { padding-top: 0.5rem; padding-bottom: 0.5rem;}
@@ -27,6 +29,11 @@
             <li>
                 <a href="{{ URL::route('stats.speakers') }}">
                     Who speaks to City Council and Committee and how often?
+                </a>
+            </li>
+            <li>
+                <a href="{{ URL::route('stats.attendance') }}">
+                    How often does City Council attend meetings?
                 </a>
             </li>
         </ul>
