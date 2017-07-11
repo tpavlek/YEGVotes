@@ -4,6 +4,8 @@
 
 @section('content')
 
-    @include('motion.motion_card', [ 'motion' => $motion ])
+    @foreach($motions as $motion)
+        @include('motion.motion_card', [ 'motion' => $motion ])
+    @endforeach
 
 @stop

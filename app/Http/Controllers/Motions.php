@@ -14,10 +14,10 @@ class Motions extends Controller
 
     public function show($motion_id)
     {
-        $motion = $this->motionModel->find($motion_id);
+        $motions = $this->motionModel->newQuery()->whereIn('id', explode(',', $motion_id))->get();
 
         return view('motion.show')
-            ->with('motion', $motion);
+            ->with('motions', $motions);
     }
 
 }
