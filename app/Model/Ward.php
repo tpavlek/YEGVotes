@@ -31,7 +31,7 @@ class Ward
         ];
 
         if (!array_key_exists($council_member, $map)) {
-            throw new \InvalidArgumentException("Could not determine ward for: {$council_member}");
+            return "Unknown";
         }
 
         return $map[$council_member];
