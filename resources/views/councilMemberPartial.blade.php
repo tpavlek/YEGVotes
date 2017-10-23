@@ -7,7 +7,7 @@
             <span class="card-title">{{ $council_member }} @if($council_member->getWard() != "Mayor")
                     <small>{{ $council_member->getWard() }}</small>@endif</span>
 
-            @if(!isset($attendance) && $attendance = (new \Depotwarehouse\YEGVotes\Model\Attendance())->getRecordForCouncilMember((string)$council_member))
+            @if(!isset($attendance) && $attendance = (new \App\Model\Attendance())->getRecordForCouncilMember((string)$council_member))
             @endif
             <div class="valign-wrapper">
                 <div class="c100 p{{ $attendance->weightedVoteAttendancePercent() }}" data-attendance-percent="{{ $attendance->weightedVoteAttendancePercent() }}">

@@ -11,17 +11,17 @@
 
         <div style="text-align: left; line-height:1.8em;">
 
-            @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_INQUIRY, 'section_name' => "Councillor Inquiries" ])
+            @include('agendaSectionPartial', [ 'section_key' => \App\Model\AgendaItem::CATEGORY_INQUIRY, 'section_name' => "Councillor Inquiries" ])
 
-            @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PRIVATE, 'section_name' => 'Private/FOIP', 'card_class' => 'private' ])
+            @include('agendaSectionPartial', [ 'section_key' => \App\Model\AgendaItem::CATEGORY_PRIVATE, 'section_name' => 'Private/FOIP', 'card_class' => 'private' ])
 
-            @include('agendaSectionWithVotesPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_OTHER, 'section_name' => "General" ])
+            @include('agendaSectionWithVotesPartial', [ 'section_key' => \App\Model\AgendaItem::CATEGORY_OTHER, 'section_name' => "General" ])
 
-            @include('agendaSectionWithVotesPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_BYLAW, 'section_name' => "Bylaws" ])
+            @include('agendaSectionWithVotesPartial', [ 'section_key' => \App\Model\AgendaItem::CATEGORY_BYLAW, 'section_name' => "Bylaws" ])
 
-            @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE, 'section_name' => "Bylaws Passed Without Debate" ])
+            @include('agendaSectionPartial', [ 'section_key' => \App\Model\AgendaItem::CATEGORY_PASSED_WITHOUT_DEBATE, 'section_name' => "Bylaws Passed Without Debate" ])
 
-            @include('agendaSectionPartial', [ 'section_key' => \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_REVISED_DUE_DATE, 'section_name' => 'Reports with a Revised Due Date'])
+            @include('agendaSectionPartial', [ 'section_key' => \App\Model\AgendaItem::CATEGORY_REVISED_DUE_DATE, 'section_name' => 'Reports with a Revised Due Date'])
 
             @if ($groupedAgendaItems->count() == 0)
                 <h2>There is nothing here!</h2>

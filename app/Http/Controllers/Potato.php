@@ -1,8 +1,8 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Depotwarehouse\YEGVotes\Model\Potato\PotatoVote;
+use App\Model\Potato\PotatoVote;
 use Illuminate\Http\Request;
 
 class Potato extends Controller

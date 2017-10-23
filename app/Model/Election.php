@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Model;
+namespace App\Model;
 
 use Carbon\Carbon;
 

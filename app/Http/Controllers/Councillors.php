@@ -1,12 +1,12 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\Attendance;
-use Depotwarehouse\YEGVotes\Model\Councillor;
-use Depotwarehouse\YEGVotes\Model\Meeting;
-use Depotwarehouse\YEGVotes\Model\Vote;
+use App\Model\AgendaItem;
+use App\Model\Attendance;
+use App\Model\Councillor;
+use App\Model\Meeting;
+use App\Model\Vote;
 
 class Councillors extends Controller
 {

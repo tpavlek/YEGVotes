@@ -1,15 +1,15 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Console;
+namespace App\Console;
 
-use Depotwarehouse\YEGVotes\Console\Commands\CrawlAgendaCommand;
-use Depotwarehouse\YEGVotes\Console\Commands\UpdateAgendaCommand;
-use Depotwarehouse\YEGVotes\Console\Commands\UpdateAllData;
-use Depotwarehouse\YEGVotes\Console\Commands\UpdateAttendanceCommand;
-use Depotwarehouse\YEGVotes\Console\Commands\UpdateCouncillorsCommand;
-use Depotwarehouse\YEGVotes\Console\Commands\UpdateMeetingsCommand;
-use Depotwarehouse\YEGVotes\Console\Commands\UpdateMotionsCommand;
-use Depotwarehouse\YEGVotes\Console\Commands\UpdateVotesCommand;
+use App\Console\Commands\CrawlAgendaCommand;
+use App\Console\Commands\UpdateAgendaCommand;
+use App\Console\Commands\UpdateAllData;
+use App\Console\Commands\UpdateAttendanceCommand;
+use App\Console\Commands\UpdateCouncillorsCommand;
+use App\Console\Commands\UpdateMeetingsCommand;
+use App\Console\Commands\UpdateMotionsCommand;
+use App\Console\Commands\UpdateVotesCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

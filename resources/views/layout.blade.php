@@ -9,9 +9,6 @@
             <a href="{{ URL::to('/') }}" class="brand-logo">YEGVotes</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
-                    <a href="{{ URL::route('elections.2017') }}">2017 Election</a>
-                </li>
-                <li>
                     <a href="{{ URL::route('meetings.list') }}">Meetings</a>
                 </li>
                 <li>
@@ -28,7 +25,6 @@
         </div>
     </nav>
 </header>
-@include('vendor.toolbox.errors.errorPartial')
 <div class="body-wrapper">
     @yield('content')
 </div>

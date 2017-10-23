@@ -5,7 +5,7 @@
 
             @foreach($groupedAgendaItems->get($section_key) as $agenda_item)
 
-                @if ($section_key == \Depotwarehouse\YEGVotes\Model\AgendaItem::CATEGORY_REVISED_DUE_DATE)
+                @if ($section_key == \App\Model\AgendaItem::CATEGORY_REVISED_DUE_DATE)
                     <span>{!! $agenda_item->formattedTitle !!} • </span>
                     <span style="font-weight: bold; color:green;">
                         {{ $agenda_item->revised_due_date->format("F j, Y") }}

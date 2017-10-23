@@ -1,10 +1,10 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Console\Commands;
+namespace App\Console\Commands;
 
-use Depotwarehouse\YEGVotes\Jobs\UpdateAgenda;
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\Meeting;
+use App\Jobs\UpdateAgenda;
+use App\Model\AgendaItem;
+use App\Model\Meeting;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use socrata\soda\Client;
@@ -28,7 +28,7 @@ class UpdateAgendaCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param \Depotwarehouse\YEGVotes\Jobs\UpdateAgenda $internalCommand
+     * @param \App\Jobs\UpdateAgenda $internalCommand
      */
     public function __construct(UpdateAgenda $internalCommand)
     {

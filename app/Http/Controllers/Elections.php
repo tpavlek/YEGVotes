@@ -1,9 +1,9 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Depotwarehouse\YEGVotes\Model\Election;
+use App\Model\Election;
 
 class Elections extends Controller
 {

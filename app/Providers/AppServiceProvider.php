@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Laracasts\Utilities\JavaScript\LaravelViewBinder;

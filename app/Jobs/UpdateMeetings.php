@@ -1,9 +1,9 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Jobs;
+namespace App\Jobs;
 
 use Carbon\Carbon;
-use Depotwarehouse\YEGVotes\Model\Meeting;
+use App\Model\Meeting;
 use Illuminate\Support\Collection;
 use socrata\soda\Client;
 

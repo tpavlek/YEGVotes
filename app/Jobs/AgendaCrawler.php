@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Jobs;
+namespace App\Jobs;
 
 use Goutte\Client;
 

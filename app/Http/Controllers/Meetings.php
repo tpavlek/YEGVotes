@@ -1,10 +1,10 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Barryvdh\Reflection\DocBlock\Type\Collection;
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\Meeting;
+use App\Model\AgendaItem;
+use App\Model\Meeting;
 
 class Meetings extends Controller
 {

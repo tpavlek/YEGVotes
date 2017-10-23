@@ -1,8 +1,8 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Console\Commands;
+namespace App\Console\Commands;
 
-use Depotwarehouse\YEGVotes\Jobs\UpdateCouncillors;
+use App\Jobs\UpdateCouncillors;
 use Illuminate\Console\Command;
 
 class UpdateCouncillorsCommand extends Command

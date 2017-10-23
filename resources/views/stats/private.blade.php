@@ -65,7 +65,7 @@
         <div style="flex-grow:1">
             With <strong>{{ $movers->first() }}</strong> motions <strong>{{ $movers->keys()->first() }}</strong> moves to meet in private and keep reports private
             the most.
-            @include('councilMemberPartial', [ 'council_member' => new \Depotwarehouse\YEGVotes\Model\CouncilMember($movers->keys()->first()), 'link' => true ])
+            @include('councilMemberPartial', [ 'council_member' => new \App\Model\CouncilMember($movers->keys()->first()), 'link' => true ])
 
             <style>
                 table {

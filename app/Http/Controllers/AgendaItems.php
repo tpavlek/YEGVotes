@@ -1,8 +1,8 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
+use App\Model\AgendaItem;
 
 class AgendaItems extends Controller
 {

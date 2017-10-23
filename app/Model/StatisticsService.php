@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Model;
+namespace App\Model;
 
 use Carbon\Carbon;
 use DB;
@@ -250,7 +250,7 @@ class StatisticsService
 
         $result = DB::getPdo()->query($query)->fetchAll();
 
-        $totals = collect(DB::table('meetings')->groupBy('meeting_type')->select([ 'meeting_type', DB::raw('count(*) as total') ])->get())->keyBy('meeting_type');
+        $totals = DB::table('meetings')->groupBy('meeting_type')->select([ 'meeting_type', DB::raw('count(*) as total') ])->get()->keyBy('meeting_type');
 
         $result = collect($result)
             ->groupBy('meeting_type')

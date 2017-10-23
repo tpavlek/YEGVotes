@@ -1,9 +1,9 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Depotwarehouse\YEGVotes\Model\Motion;
-use Depotwarehouse\YEGVotes\Model\SpeakerService;
+use App\Model\Motion;
+use App\Model\SpeakerService;
 
 class Speakers extends Controller
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Console\Commands;
+namespace App\Console\Commands;
 
-use Depotwarehouse\YEGVotes\Jobs\UpdateAttendance;
-use Depotwarehouse\YEGVotes\Model\Attendance;
-use Depotwarehouse\YEGVotes\Model\Meeting;
+use App\Jobs\UpdateAttendance;
+use App\Model\Attendance;
+use App\Model\Meeting;
 use Illuminate\Console\Command;
 use socrata\soda\Client;
 
@@ -31,7 +31,7 @@ class UpdateAttendanceCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param \Depotwarehouse\YEGVotes\Jobs\UpdateAttendance $internalCommand
+     * @param \App\Jobs\UpdateAttendance $internalCommand
      */
     public function __construct(UpdateAttendance $internalCommand)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Model;
+namespace App\Model;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -53,7 +53,7 @@ class AgendaItemRankingService
      *
      * Certain items are simply never interesting, so we guard against those.
      *
-     * @param \Depotwarehouse\YEGVotes\Model\AgendaItem $agendaItem
+     * @param \App\Model\AgendaItem $agendaItem
      * @return float
      */
     public function rank(AgendaItem $agendaItem)

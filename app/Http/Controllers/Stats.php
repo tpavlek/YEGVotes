@@ -1,11 +1,11 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Depotwarehouse\YEGVotes\Model\Attendance;
-use Depotwarehouse\YEGVotes\Model\AttendanceRecord;
-use Depotwarehouse\YEGVotes\Model\StatisticsService;
+use App\Model\Attendance;
+use App\Model\AttendanceRecord;
+use App\Model\StatisticsService;
 use Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer;
 
 class Stats extends Controller

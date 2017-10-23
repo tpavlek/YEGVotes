@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Model;
+namespace App\Model;
 
 use Carbon\Carbon;
 
@@ -18,7 +18,7 @@ class DueDateRevision
 
     public function revisedDueDate()
     {
-        $date_text = $this->item->motions->first(function ($_, Motion $motion) {
+        $date_text = $this->item->motions->first(function (Motion $motion) {
             return $motion->isRevisedDueDate();
         });
 
@@ -36,7 +36,7 @@ class DueDateRevision
             return new NullDate($extracted_date);
         }
 
-        $replace_texts = [ '&nbsp;', 'by', 'city council', 'first item of business', 'exec. committee'];
+        $replace_texts = [ '&nbsp;', 'by', 'city council', 'first item of business', 'exec. committee', 'due date'];
 
         foreach ($replace_texts as $replace) {
             $extracted_date = str_replace($replace, '', $extracted_date);

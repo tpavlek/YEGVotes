@@ -1,8 +1,8 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Console\Commands;
+namespace App\Console\Commands;
 
-use Depotwarehouse\YEGVotes\Jobs\AgendaCrawler;
+use App\Jobs\AgendaCrawler;
 use Illuminate\Console\Command;
 
 class CrawlAgendaCommand extends Command

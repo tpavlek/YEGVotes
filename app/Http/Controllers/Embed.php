@@ -1,10 +1,10 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\Attendance;
-use Depotwarehouse\YEGVotes\Model\AttendanceRecord;
+use App\Model\AgendaItem;
+use App\Model\Attendance;
+use App\Model\AttendanceRecord;
 
 class Embed extends Controller
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Jobs;
+namespace App\Jobs;
 
-use Depotwarehouse\YEGVotes\Model\Motion;
-use Depotwarehouse\YEGVotes\Model\Vote;
+use App\Model\Motion;
+use App\Model\Vote;
 use Illuminate\Support\Collection;
 use socrata\soda\Client;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Jobs;
+namespace App\Jobs;
 
-use Depotwarehouse\YEGVotes\Model\Councillor;
+use App\Model\Councillor;
 use socrata\soda\Client;
 
 class UpdateCouncillors
@@ -36,7 +36,7 @@ class UpdateCouncillors
 
         collect($results)->each(function ($attendee) use ($allCouncillors) {
 
-            $councillorExists = $allCouncillors->contains(function ($key, Councillor $councillor) use ($attendee) {
+            $councillorExists = $allCouncillors->contains(function (Councillor $councillor) use ($attendee) {
                 return $councillor->id == $attendee['attendee'];
             });
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Model;
+namespace App\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Meeting
- * @package Depotwarehouse\YEGVotes\Model
+ * @package App\Model
  *
  * @property \Illuminate\Database\Eloquent\Collection voting_items
  * @property string meeting_type
@@ -75,7 +75,7 @@ class Meeting extends Model
 
     public function hasVotes()
     {
-        return $this->agenda_items->contains(function ($key, AgendaItem $agenda_item) {
+        return $this->agenda_items->contains(function (AgendaItem $agenda_item) {
             return $agenda_item->hasVotes();
         });
     }

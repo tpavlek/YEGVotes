@@ -36,7 +36,7 @@
             <div style="flex:1">
                 When looking at motions to read bylaws, two councillors come up as a mover-seconder power team <em>very often</em>
                 <div>
-                    @include('motion.motion_card', [ 'motion' => \Depotwarehouse\YEGVotes\Model\Motion::find('bb36b3ab-11bb-4287-ac1c-a1be06fa85f9') ])
+                    @include('motion.motion_card', [ 'motion' => \App\Model\Motion::find('bb36b3ab-11bb-4287-ac1c-a1be06fa85f9') ])
                 </div>
 
 

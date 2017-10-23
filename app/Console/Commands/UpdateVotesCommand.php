@@ -1,8 +1,8 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Console\Commands;
+namespace App\Console\Commands;
 
-use Depotwarehouse\YEGVotes\Jobs\UpdateVotes;
+use App\Jobs\UpdateVotes;
 use Illuminate\Console\Command;
 
 
@@ -26,7 +26,7 @@ class UpdateVotesCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param \Depotwarehouse\YEGVotes\Jobs\UpdateVotes $internalCommand
+     * @param \App\Jobs\UpdateVotes $internalCommand
      */
     public function __construct(UpdateVotes $internalCommand)
     {

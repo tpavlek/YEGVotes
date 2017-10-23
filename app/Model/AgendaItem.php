@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Model;
+namespace App\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,7 +12,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * Class AgendaItem
  * @property Collection motions
- * @package Depotwarehouse\YEGVotes\Model
+ * @package App\Model
  *
  * @method Builder bylaws()
  */
@@ -172,7 +172,7 @@ class AgendaItem extends Model
 
     public function hasVotes()
     {
-        $containsVotes = $this->motions->contains(function ($key, Motion $motion) {
+        $containsVotes = $this->motions->contains(function (Motion $motion) {
             return $motion->votes->count();
         });
         return $containsVotes;
@@ -209,7 +209,7 @@ class AgendaItem extends Model
      */
     public function hasDissent()
     {
-        return $this->motions->contains(function ($key, Motion $motion) {
+        return $this->motions->contains(function (Motion $motion) {
             return $motion->hasDissent();
         });
     }
@@ -237,22 +237,22 @@ class AgendaItem extends Model
     public function passedWithoutDebate()
     {
         return ($this->motions->count() > 3) &&
-            $this->motions->contains(function ($key, Motion $motion) {
+            $this->motions->contains(function (Motion $motion) {
                 return $motion->isConsiderationForThirdReading();
             }) &&
-            $this->motions->contains(function ($key, Motion $motion) {
+            $this->motions->contains(function (Motion $motion) {
                 return $motion->isThirdReading();
             }) &&
 
             // If any of the motions have dissent, then they did not pass without debate.
-            $this->motions->first(function ($key, Motion $motion) {
+            $this->motions->first(function (Motion $motion) {
                 return $this->hasDissent();
             }) == null;
     }
 
     public function isPrivate()
     {
-        return $this->motions->contains(function ($_, Motion $motion) {
+        return $this->motions->contains(function (Motion $motion) {
             return str_contains(strtolower($motion->description), 'meet in private') ||
                 str_contains(strtolower($motion->description), 'remain private');
         });
@@ -260,7 +260,7 @@ class AgendaItem extends Model
 
     public function isDueDateRevision()
     {
-        return $this->motions->contains(function ($_, Motion $motion) {
+        return $this->motions->contains(function (Motion $motion) {
             return $motion->isRevisedDueDate();
         });
     }
@@ -307,7 +307,7 @@ class AgendaItem extends Model
      * their "interesting" factor.
      *
      * The next selection of items will be from the previous 45 days.
-     * @param \Depotwarehouse\YEGVotes\Model\Meeting $last_meeting
+     * @param \App\Model\Meeting $last_meeting
      * @return static
      */
     public function getInterestingAgendaItems(Meeting $last_meeting)

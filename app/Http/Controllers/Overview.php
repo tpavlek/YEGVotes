@@ -1,13 +1,13 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\Attendance;
-use Depotwarehouse\YEGVotes\Model\AttendanceRecord;
-use Depotwarehouse\YEGVotes\Model\CouncilMember;
-use Depotwarehouse\YEGVotes\Model\Meeting;
-use Depotwarehouse\YEGVotes\Model\Motion;
+use App\Model\AgendaItem;
+use App\Model\Attendance;
+use App\Model\AttendanceRecord;
+use App\Model\CouncilMember;
+use App\Model\Meeting;
+use App\Model\Motion;
 
 class Overview extends Controller
 {
@@ -46,7 +46,7 @@ class Overview extends Controller
         // We only want the top attender and the bottom attender
         $best_and_worst = collect([ $attendance_records->first(), $attendance_records->last() ]);
 
-        $iveson_attendance = $attendance_records->first(function ($key, AttendanceRecord $record) {
+        $iveson_attendance = $attendance_records->first(function (AttendanceRecord $record) {
             return $record->getAttendee() == "D. Iveson - Mayor";
         });
 

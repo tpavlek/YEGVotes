@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Model;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +28,7 @@ class Motion extends Model
 
     public function vote($council_member)
     {
-        $vote = $this->votes->first(function ($key, Vote $vote) use ($council_member) {
+        $vote = $this->votes->first(function (Vote $vote) use ($council_member) {
             return $vote->voter == $council_member;
         });
 
@@ -45,7 +45,7 @@ class Motion extends Model
      */
     public function hasDissent()
     {
-        return $this->votes->contains(function ($key, Vote $vote) {
+        return $this->votes->contains(function (Vote $vote) {
             return ((string)$vote == "No" || (string)$vote == "Abstain");
         });
     }

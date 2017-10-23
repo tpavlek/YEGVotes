@@ -1,13 +1,13 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Console\Commands;
+namespace App\Console\Commands;
 
-use Depotwarehouse\YEGVotes\Jobs\UpdateAgenda;
-use Depotwarehouse\YEGVotes\Jobs\UpdateAttendance;
-use Depotwarehouse\YEGVotes\Jobs\UpdateMeetings;
-use Depotwarehouse\YEGVotes\Jobs\UpdateMotions;
-use Depotwarehouse\YEGVotes\Jobs\UpdateVotes;
-use Depotwarehouse\YEGVotes\Model\Motion;
+use App\Jobs\UpdateAgenda;
+use App\Jobs\UpdateAttendance;
+use App\Jobs\UpdateMeetings;
+use App\Jobs\UpdateMotions;
+use App\Jobs\UpdateVotes;
+use App\Model\Motion;
 use Illuminate\Console\Command;
 
 class UpdateAllData extends Command
@@ -29,11 +29,11 @@ class UpdateAllData extends Command
     /**
      * Create a new command instance.
      *
-     * @param \Depotwarehouse\YEGVotes\Jobs\UpdateMeetings $updateMeetings
-     * @param \Depotwarehouse\YEGVotes\Jobs\UpdateAttendance $updateAttendance
-     * @param \Depotwarehouse\YEGVotes\Jobs\UpdateAgenda $updateAgenda
-     * @param \Depotwarehouse\YEGVotes\Jobs\UpdateMotions $updateMotions
-     * @param \Depotwarehouse\YEGVotes\Jobs\UpdateVotes $updateVotes
+     * @param \App\Jobs\UpdateMeetings $updateMeetings
+     * @param \App\Jobs\UpdateAttendance $updateAttendance
+     * @param \App\Jobs\UpdateAgenda $updateAgenda
+     * @param \App\Jobs\UpdateMotions $updateMotions
+     * @param \App\Jobs\UpdateVotes $updateVotes
      */
     public function __construct(
         UpdateMeetings $updateMeetings,

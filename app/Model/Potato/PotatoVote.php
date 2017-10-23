@@ -1,6 +1,6 @@
 <?php
 
-namespace Depotwarehouse\YEGVotes\Model\Potato;
+namespace App\Model\Potato;
 
 use Illuminate\Database\Eloquent\Model;
 
