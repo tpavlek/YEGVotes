@@ -2,9 +2,8 @@
 
 namespace Depotwarehouse\YEGVotes\Tests\Model;
 
-
-use Depotwarehouse\YEGVotes\Model\Motion;
-use Depotwarehouse\YEGVotes\Model\PublicHearingSpeakerParser;
+use App\Model\Motion;
+use App\Model\PublicHearingSpeakerParser;
 
 class PublicHearingSpeakerParserTest extends \TestCase
 {
@@ -78,7 +77,6 @@ D. Owens, Sherbrooke Liquor; S. Baisley, Abbottsfield Project Limited Partnershi
     public function it_does_not_include_the_clerk()
     {
         $motion = Motion::find('d875cc13-1a30-4190-865f-ece3fe4c0496');
-
     }
 
 }

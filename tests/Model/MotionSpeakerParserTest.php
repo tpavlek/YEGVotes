@@ -2,8 +2,8 @@
 
 namespace Depotwarehouse\YEGVotes\Tests\Model;
 
-use Depotwarehouse\YEGVotes\Model\Motion;
-use Depotwarehouse\YEGVotes\Model\MotionSpeakerParser;
+use App\Model\Motion;
+use App\Model\MotionSpeakerParser;
 
 class SpeakerParserTest extends \TestCase
 {

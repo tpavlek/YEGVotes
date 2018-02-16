@@ -2,13 +2,12 @@
 
 namespace Depotwarehouse\YEGVotes\Tests\Model;
 
-
 use Carbon\Carbon;
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\DueDateRevision;
-use Depotwarehouse\YEGVotes\Model\Meeting;
-use Depotwarehouse\YEGVotes\Model\Motion;
-use Depotwarehouse\YEGVotes\Model\NullDate;
+use App\Model\AgendaItem;
+use App\Model\DueDateRevision;
+use App\Model\Meeting;
+use App\Model\Motion;
+use App\Model\NullDate;
 use Faker\Provider\Uuid;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Mockery as m;

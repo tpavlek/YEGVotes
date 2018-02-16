@@ -2,9 +2,9 @@
 
 namespace Depotwarehouse\YEGVotes\Tests\Model;
 
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
+use App\Model\AgendaItem;
 
-class AgendaItemTest extends \PHPUnit_Framework_TestCase
+class AgendaItemTest extends \TestCase
 {
 
     public function setUp()

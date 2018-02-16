@@ -97,7 +97,7 @@ abstract class SocrataSync
         $data = $this->socrataClient->get($this->getResourceUri(), $searchParams);
         $recordsToInsert = [];
 
-        $localModelIds = $this->model->lists('id')->all();
+        $localModelIds = $this->model->newQuery()->select(['id'])->pluck('id')->all();
 
         while (!empty($data)) {
             $this->output("Querying {$searchParams['$limit']} records, offset {$searchParams['$offset']}");

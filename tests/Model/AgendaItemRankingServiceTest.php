@@ -2,11 +2,11 @@
 
 namespace Depotwarehouse\YEGVotes\Tests\Model;
 
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\AgendaItemRankingService;
-use Depotwarehouse\YEGVotes\Model\Meeting;
-use Depotwarehouse\YEGVotes\Model\Motion;
-use Depotwarehouse\YEGVotes\Model\Vote;
+use App\Model\AgendaItem;
+use App\Model\AgendaItemRankingService;
+use App\Model\Meeting;
+use App\Model\Motion;
+use App\Model\Vote;
 use Illuminate\Support\Collection;
 use Mockery as m;
 

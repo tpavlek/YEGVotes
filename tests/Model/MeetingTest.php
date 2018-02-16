@@ -2,9 +2,8 @@
 
 namespace Depotwarehouse\YEGVotes\Tests\Model;
 
-
-use Depotwarehouse\YEGVotes\Model\AgendaItem;
-use Depotwarehouse\YEGVotes\Model\Meeting;
+use App\Model\AgendaItem;
+use App\Model\Meeting;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class MeetingTest extends \TestCase

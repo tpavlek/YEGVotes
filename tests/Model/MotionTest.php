@@ -2,7 +2,7 @@
 
 namespace Depotwarehouse\YEGVotes\Tests\Model;
 
-use Depotwarehouse\YEGVotes\Model\Motion;
+use App\Model\Motion;
 
 class MotionTest extends \TestCase
 {
