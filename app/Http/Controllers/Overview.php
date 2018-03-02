@@ -50,11 +50,11 @@ class Overview extends Controller
             return $record->getAttendee() == "D. Iveson - Mayor";
         });
 
-        $example_agenda_item = $this->agendaModel->find(48196);
+        $example_agenda_item = $this->agendaModel->find(64762);
         return view('about')
             ->with('attendance_records', $best_and_worst)
             ->with('agenda_item', $example_agenda_item)
-            ->with('example_motion', Motion::find('40791d0b-e3ee-4c47-baa4-29e54f6c7563'))
+            ->with('example_motion', Motion::find('8aadf80a-2602-49ab-a2b6-c5aea1059963'))
             ->with('councillor', new CouncilMember("D. Iveson - Mayor"))
             ->with('voting_items', $this->agendaModel->voteAgainst("D. Iveson - Mayor")->orderBy('meeting_id', 'DESC')->take(7)->get())
             ->with('iveson_attendance', $iveson_attendance);

@@ -10,6 +10,8 @@ use socrata\soda\Client;
 class UpdateAgenda extends SocrataSync
 {
 
+    private $meetingModel;
+
     public function __construct(Client $socrataClient, AgendaItem $model, Meeting $meetingModel)
     {
         parent::__construct($socrataClient, $model);
@@ -18,7 +20,8 @@ class UpdateAgenda extends SocrataSync
 
     public function getResourceUri()
     {
-        return "/resource/y4rx-kdcn.json";
+        //return "/resource/y4rx-kdcn.json";
+        return "/resource/58rx-sm6i.json";
     }
 
     public function resourceId($entry)

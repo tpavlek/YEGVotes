@@ -32,7 +32,7 @@ class UpdateCouncillors
             '$select' => 'attendee',
             '$group' => 'attendee',
         ];
-        $results = $this->socrataClient->get("/resource/7en4-rwfd.json", $query);
+        $results = $this->socrataClient->get("/resource/vmzv-h5uh.json", $query);
 
         collect($results)->each(function ($attendee) use ($allCouncillors) {
 

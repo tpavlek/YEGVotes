@@ -18,7 +18,8 @@ class UpdateVotes extends SocrataSync
 
     public function getResourceUri()
     {
-        return "/resource/fwq5-ux79.json";
+        //return "/resource/fwq5-ux79.json";
+        return "/resource/6pug-aegx.json";
     }
 
     public function resourceId($entry)

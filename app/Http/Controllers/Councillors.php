@@ -28,7 +28,9 @@ class Councillors extends Controller
         $attendance = $this->attendanceModel->getRecordForCouncilMember($councillor);
         $bylaws = $this->agendaModel->interesting()->hasVotes()->orderBy('meeting_id', 'DESC')->paginate(15);
 
-        return view('councillor.show')->with('voting_items', $bylaws)->with('attendanceRecord', $attendance);
+        return view('councillor.show')
+            ->with('voting_items', $bylaws)
+            ->with('attendanceRecord', $attendance);
     }
 
     public function noVotes(Councillor $councillor)

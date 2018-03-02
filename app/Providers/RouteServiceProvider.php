@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Model\Councillor;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -24,6 +25,9 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+        \Route::bind('councillor', function ($name) {
+            return Councillor::query()->where('name', 'like', $name)->firstOrFail();
+        });
     }
 
     /**

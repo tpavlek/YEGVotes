@@ -31,8 +31,6 @@
                 </div>
             </div>
 
-
-
         </div>
         <div class="card-action">
             <a href="{{ URL::route('councillor.show', (string)$council_member) }}"><i class="fa fa-check"></i> Voting Record</a>

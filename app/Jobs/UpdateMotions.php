@@ -20,7 +20,8 @@ class UpdateMotions extends SocrataSync
 
     public function getResourceUri()
     {
-        return "/resource/smk2-dtnx.json";
+        //return "/resource/smk2-dtnx.json";
+        return "/resource/ygh8-ax9t.json";
     }
 
     public function resourceId($entry)
@@ -60,7 +61,7 @@ class UpdateMotions extends SocrataSync
             'mover' => (isset($entry['motion_mover'])) ? $entry['motion_mover'] : null,
             'seconder' => (isset($entry['motion_seconder'])) ? $entry['motion_seconder'] : null,
             'description' => (isset($entry['motion_description'])) ? $entry['motion_description'] : "",
-            'status' => $entry['motion_status']
+            'status' => $entry['motion_status'] ?? Motion::STATUS_NONE
         ];
     }
 

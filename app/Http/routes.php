@@ -15,8 +15,11 @@ Route::get('/embed/about/attendance', 'Embed@attendanceInfo')->name('embed.about
 Route::get('/embed/agenda_item/{agendaItem}', 'Embed@agendaItem')->name('embed.agenda_item');
 
 Route::get('/agenda/{agenda_item_id}', 'AgendaItems@show')->name('agenda_item.show');
-Route::get('/councillor/{councillor}', 'Councillors@show')->name('councillor.show');
-Route::get('councillor/{councillor}/no_votes', 'Councillors@noVotes')->name('councillor.no_votes');
+
+Route::group([ 'middleware' => 'bindings' ], function () {
+    Route::get('/councillor/{councillor}', 'Councillors@show')->name('councillor.show');
+    Route::get('councillor/{councillor}/no_votes', 'Councillors@noVotes')->name('councillor.no_votes');
+});
 
 Route::get('election', function() { return redirect()->route('elections.2017'); });
 Route::get('elections/2017', 'Elections@general2017')->name('elections.2017');

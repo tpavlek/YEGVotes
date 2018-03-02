@@ -17,7 +17,8 @@ class UpdateMeetings extends SocrataSync
 
     public function getResourceUri()
     {
-        return '/resource/p738-nr6i.json';
+        //return '/resource/p738-nr6i.json';
+        return "/resource/nzwt-pmh6.json";
     }
 
     public function resourceId($entry)

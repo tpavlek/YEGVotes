@@ -16,16 +16,15 @@ class Ward
         $map = [
             'A. Knack - Councillor' => 1,
             'B. Esslinger - Councillor' => 2,
-            'D. Loken - Councillor' => 3,
-            'E. Gibbons - Councillor' => 4,
-            'M. Oshry - Councillor' => 5,
+            'J. Dziadyk - Councillor' => 3,
+            'A. Paquette - Councillor' => 4,
+            'S. Hamilton - Councillor' => 5,
             'S. McKeen - Councillor' => 6,
             'T. Caterina - Councillor' => 7,
             'B. Henderson - Councillor' => 8,
-            'B. Anderson - Councillor' => 9,
+            'T. Cartmell - Councillor' => 9,
             'M. Walters - Councillor' => 10,
             'M. Nickel - Councillor' => 11,
-            'A. Sohi - Councillor' => 12,
             'M. Banga - Councillor' => 12,
             'D. Iveson - Mayor' => "Mayor"
         ];

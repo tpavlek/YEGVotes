@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 class Motion extends Model
 {
 
+    const STATUS_CARRIED = "Carried";
+    const STATUS_FAILED = "Failed";
+    const STATUS_NONE = "None";
+
     use FiltersProtocolItems;
 
     public $timestamps = false;
