@@ -2,7 +2,7 @@
 <div>
     <span>
         <span class="{{ $rating_color }} font-black">{{ $attendanceRating }}</span>
-        <span class="font-thin text-grey-darkest">attendance!</span>
+        <span class="font-thin text-grey-darkest">attendance</span>
     </span>
 </div>
 <div>
