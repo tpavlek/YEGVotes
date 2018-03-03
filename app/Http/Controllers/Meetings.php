@@ -16,13 +16,17 @@ class Meetings extends Controller
 
     public function listMeetings()
     {
-        $meetings = $this->model->with('agenda_items')->orderBy('date', 'desc')->get();
+        $meetings = Meeting::query()
+            ->with('agenda_items')
+            ->orderBy('date', 'desc')
+            ->get();
 
         $meetings = $meetings->groupBy(function(Meeting $meeting) {
-            return $meeting->date->format("Y-m");
+            return $meeting->meeting_type;
         });
 
-        return view('meetings.list')->with('meetings', $meetings);
+        return view('meetings.list')
+            ->with('meetings', $meetings);
     }
 
     public function show($meeting_id)

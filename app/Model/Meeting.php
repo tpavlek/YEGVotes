@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property \Illuminate\Database\Eloquent\Collection voting_items
  * @property string meeting_type
+ * @property Carbon date
  */
 class Meeting extends Model
 {

@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#d4dad0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <script src="https://use.fontawesome.com/91c9d3ddd3.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
     <link rel="stylesheet" href="/css/app.css"/>
 
