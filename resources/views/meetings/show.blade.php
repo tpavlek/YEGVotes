@@ -4,7 +4,33 @@
 
 @section('content')
 
-<h1>{{ $meeting }} <a href="http://sirepub.edmonton.ca/sirepub/mtgviewer.aspx?meetid={{$meeting->id}}&doctype=MINUTES" class="btn">Official Minutes <i class="fa fa-arrow-right"></i></a></h1>
+<div class="bg-grey-darkest text-center pt-4 relative">
+    <h1 class="text-grey-lightest">
+        {{ $meeting }}
+    </h1>
+    @if ($attendance->count())
+        <div class="attendance-wrapper">
+            <div class="flex row-wrap justify-center">
+                @foreach($attendance as $type => $records)
+                    @foreach ($records as $attendanceRecord)
+                        <?php /** @var \App\Model\AttendanceRecord $attendanceRecord */ ?>
+                        <a href="{{ URL::route('councillor.show', (string)$attendanceRecord->getAttendee()->name) }}" class="p-2 hover:bg-grey-darker" title="{{ $attendanceRecord->getAttendee()->name }}">
+                            <div class="block h-16 w-16 rounded-full bg-cover bg-center border-2 @if($type == 1) border-green-dark @else border-red-darker @endif" style="background-image: url({{ $attendanceRecord->getAttendee()->getImageUrl() }})">
+                            </div>
+                        </a>
+                    @endforeach
+                @endforeach
+            </div>
+        </div>
+    @endif
+    <a href="http://sirepub.edmonton.ca/sirepub/mtgviewer.aspx?meetid={{$meeting->id}}&doctype=MINUTES" class="flex flex-col justify-center absolute pin-r pin-t h-full hover:bg-grey-darker px-4" title="Official Minutes">
+        <span class="text-4xl text-grey-lightest">
+            <i class="far fa-newspaper"></i>
+        </span>
+    </a>
+
+</div>
+
 
 <div class="meeting">
     <div class="agenda-wrapper">
@@ -50,32 +76,6 @@
 
         </div>
     </div>
-
-    @if ($attendance->count())
-        <div class="attendance-wrapper">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">Attendance</span>
-                </div>
-                @foreach($attendance as $type => $records)
-                    <div class="card-content @if ($type) green @else red darken-2 @endif">
-
-                        @if ($type)
-                            <span class="card-title white-text"><small><i class="fa fa-check-circle"></i> &nbsp; Present</small></span>
-                        @else
-                            <span class="card-title white-text"><small><i class="fa fa-times-circle"></i> &nbsp; Absent</small></span>
-                        @endif
-                        @foreach ($records as $attendanceRecord)
-                            <div style="padding: 0.5rem;">
-                                <a href="{{ URL::route('councillor.show', (string)$attendanceRecord->getAttendee()) }}">{{ $attendanceRecord->getAttendee() }}</a>
-                            </div>
-
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    @endif
 </div>
 
 
