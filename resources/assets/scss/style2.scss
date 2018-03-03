@@ -1,0 +1,241 @@
+$background-color: lighten(#D4DAD0, 10%);
+$yes-vote-color: green;
+$absent-vote-color: #daa520;
+$no-vote-color: #D44141;
+
+$row-highlight-color: #1F1F1F;
+
+body {
+  background-color: $background-color;
+  font-size: 16px;
+}
+
+.body-wrapper {
+  padding: 1rem;
+}
+
+a { text-decoration: none; color: inherit; }
+a:not(.btn):hover { border-bottom: 3px solid slategray; box-sizing: border-box; }
+
+.motions {
+  display: flex;
+  flex-flow: row wrap;
+
+}
+
+.motion.card {
+  max-width: 50rem;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.motion-status {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.mover-text {
+  margin-right: 1rem;
+  color: grey;
+  font-weight: bold;
+}
+
+.mover {
+  display: inline-block;
+  position:relative;
+}
+
+.mover a {
+  margin-left: 2rem;
+}
+
+.motion-label {
+  font-weight: bold;
+}
+
+.vote.Yes { background-color: green; }
+.vote.No { background-color: $no-vote-color; color: white; }
+.vote.Absent { background-color: goldenrod;}
+.vote.Abstain, .vote.No-Vote { background-color: lightgrey; }
+
+.tabular-votes {
+  display: flex;
+}
+
+.vote-type { margin: 0; padding: 0.5rem; box-shadow: 0 1px 5px $row-highlight-color; }
+.vote-column.Yes .vote-type { color: whitesmoke; background: darken($yes-vote-color, 10%);   }
+.vote-column.Absent .vote-type, .vote-column.Abstain .vote-type { background: darken($absent-vote-color, 10%); }
+.vote-column.No .vote-type { color:whitesmoke; background: darken($no-vote-color, 10%); }
+
+.vote-column.Yes { background-color: $yes-vote-color; }
+.vote-column.Absent, .vote-column.Abstain { background-color: $absent-vote-color; }
+.vote-column.No { background-color: $no-vote-color; }
+
+.vote-column {
+  flex-grow: 1;
+  text-align: left;
+  padding-bottom: 0.5rem;
+}
+
+.vote { padding: 0.5rem; display: block;}
+
+.unanimous-status {
+  color: green;
+  font-weight: bold;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+footer {
+  background-color: #111;
+  color: whitesmoke;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 10%;
+
+  a { font-weight: 600; }
+}
+
+.private {
+  padding: 1rem;
+  background: repeating-linear-gradient(
+                  45deg,
+                  #000000,
+                  #000000 30px,
+                  #eddd53 30px,
+                  #eddd53 60px
+  );
+
+  .card-content {
+    background: white;
+  }
+}
+
+.attendance {
+  padding-left: 1rem;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 2em;
+}
+
+.vote-summary-container, .motion-summary-container {
+  display: flex;
+  flex-flow: row wrap;
+
+  .card-content {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+
+  .motion-status {
+    font-size: 15px;
+  }
+
+  .card.vote-summary {
+    margin: 1rem;
+    max-width: 30rem;
+  }
+}
+
+.c100[data-attendance-percent^="3"] .bar { border: .08em solid #e20d0d; }
+.c100[data-attendance-percent^="4"] .bar { border: .08em solid #dd513b; }
+.c100[data-attendance-percent^="5"] .bar, .c100[data-attendance-percent^="5"] .fill  { border: .08em solid #e05708; }
+
+.c100[data-attendance-percent="50"] .fill  { border: none; }
+
+.c100[data-attendance-percent^="6"] .bar, .c100[data-attendance-percent^="6"] .fill { border: .08em solid #e58609; }
+.c100[data-attendance-percent^="7"] .bar, .c100[data-attendance-percent^="7"] .fill { border: .08em solid #d6c22f; }
+.c100[data-attendance-percent^="8"] .bar, .c100[data-attendance-percent^="8"] .fill { border: .08em solid #5ccc4d; }
+.c100[data-attendance-percent^="9"] .bar, .c100[data-attendance-percent^="9"] .fill { border: .08em solid #118202; }
+.c100[data-attendance-percent="100"] .bar, .c100[data-attendance-percent="100"] .fill { border: .08em solid #00772d; }
+
+
+span[data-attendance-percent^="3"] { color: #e20d0d; }
+span[data-attendance-percent^="4"] { color: #dd513b; }
+span[data-attendance-percent^="5"] { color: #e05708; }
+[data-attendance-percent^="6"] { color: #e58609; }
+[data-attendance-percent^="7"] { color: #d6c22f; }
+[data-attendance-percent^="8"] { color: #5ccc4d; }
+[data-attendance-percent^="9"] { color: #118202; }
+[data-attendance-percent="100"] { color: #00772d; }
+
+.overview-wrapper {
+  display: flex;
+
+  .items {
+    margin-right: 2rem;
+  }
+}
+
+.meetings-listing {
+  line-height: 1.7em;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.meeting {
+  display: flex;
+
+  .card { margin-left: 2rem;}
+}
+
+.meetings-list {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.attendance-wrapper {
+  min-width: 30rem;
+}
+
+.attendance-record-wrapper {
+  min-width: 40rem;
+}
+
+.council-member {
+
+  .card-image img {
+    max-height: 100%;
+  }
+}
+
+.inline {
+  display: inline-block;
+}
+
+.auto-margin {
+  margin: 0 auto;
+}
+
+.center .flex {
+  justify-content: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.row-wrap {
+  flex-flow: row wrap;
+
+  .card {
+    margin-right: 2rem;
+  }
+}
+
+.flex-item {
+  margin-right: 2rem;
+}
+
+.flex-item p {
+  max-width: 45rem;
+}
+
+.margin-bottom-2 {
+  margin-bottom: 2rem;
+}
+

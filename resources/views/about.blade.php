@@ -61,7 +61,7 @@
                         Drill down and look at every bylaw each councillor voted on - you can also show only the votes
                         they opposed!
                     </p>
-                    @include('councilMemberPartial', [ 'council_member' => $councillor, 'attendance' => $iveson_attendance ])
+                    @include('councilMemberPartial', [ 'attendance_record' => $iveson_attendance ])
                     @include('councillor.votingSummaryPartial', [ 'councillor' => $councillor ])
                 </div>
             </div>

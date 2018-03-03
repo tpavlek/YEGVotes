@@ -4,33 +4,24 @@
 
 
 <header>
-    <nav class="grey darken-4">
-        <div class="nav-wrapper">
-            <a href="{{ URL::to('/') }}" class="brand-logo">YEGVotes</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li>
-                    <a href="{{ URL::route('meetings.list') }}">Meetings</a>
-                </li>
-                <li>
-                    <a href="{{ URL::route('about') }}">About</a>
-                </li>
-                <li>
-                    <a href="{{ URL::route('stats') }}">Stats</a>
-                </li>
-                <li>
-                    <a href="https://basketofyegs.com">Podcast</a>
-                </li>
-                @yield('additional_nav', '')
-            </ul>
-        </div>
+    <nav class="bg-black flex">
+            <a href="{{ URL::to('/') }}" class="no-underline text-grey-light text-xl font-bold hover:bg-grey-darkest p-4">YEGVotes</a>
+            <span class="flex-grow"></span>
+        <!--
+            <a href="{{ URL::route('meetings.list') }}" class="no-underline text-grey-light hover:bg-grey-darkest p-4">Meetings</a>
+            <a href="{{ URL::route('about') }}" class="no-underline text-grey-light hover:bg-grey-darkest p-4">About</a>
+            <a href="{{ URL::route('stats') }}" class="no-underline text-grey-light hover:bg-grey-darkest p-4">Stats</a>
+            <a href="https://basketofyegs.com" class="no-underline text-grey-light hover:bg-grey-darkest p-4 mr-8">Podcast</a>
+            -->
+            @yield('additional_nav', '')
     </nav>
 </header>
 <div class="body-wrapper">
     @yield('content')
 </div>
-<footer>
-    &copy; <a href="http://tpavlek.me">Troy Pavlek</a> {{ \Carbon\Carbon::now()->year }}.
-    Data provided by <a href="https://data.edmonton.ca">Edmonton Open Data Catalogue</a>
+<footer class="p-8 bg-black text-grey-light">
+    &copy; <a class="text-grey-light no-underline font-bold" href="http://tpavlek.me">Troy Pavlek</a> {{ \Carbon\Carbon::now()->year }}.
+    Data provided by <a class="text-grey-light no-underline font-bold" href="https://data.edmonton.ca">Edmonton Open Data Catalogue</a>
 </footer>
 
 

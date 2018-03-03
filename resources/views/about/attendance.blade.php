@@ -1,9 +1,14 @@
-
+<?php /** @var \App\Model\AttendanceRecord $attendance_record */ ?>
 <h3>Councillor and Mayor Attendance</h3>
 
 <div class="flex row-wrap">
     @foreach($attendance_records as $attendance_record)
-        @include('councilMemberPartial', [ 'council_member' => $attendance_record->getAttendee(), 'attendance' => $attendance_record ])
+        <council-member
+                link-url="{{ URL::route('councillor.show', $attendance_record->getAttendee()->__toString()) }}"
+                img-url="{{ $attendance_record->getAttendee()->getImageUrl() }}"
+                council-member-name="{{ $attendance_record->getAttendee()->name }}"
+                council-member-ward="{{ $attendance_record->getWard() }}">
+        </council-member>
     @endforeach
 </div>
 <p>

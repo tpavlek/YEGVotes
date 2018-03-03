@@ -2,8 +2,12 @@
 
 namespace App\Model;
 
+
 class CouncilMember
 {
+
+    /** @var string */
+    public $name;
 
     public function __construct($council_member)
     {
@@ -13,7 +17,7 @@ class CouncilMember
 
     public function __toString()
     {
-        return $this->name;
+        return (string)explode('-', $this->name)[0];
     }
 
     public function getImageUrl()

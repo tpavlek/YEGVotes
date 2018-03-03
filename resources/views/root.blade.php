@@ -13,9 +13,7 @@
 
     <script src="https://use.fontawesome.com/91c9d3ddd3.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/all.css"/>
+    <link rel="stylesheet" href="/css/app.css"/>
 
 
 
@@ -35,10 +33,13 @@
     <meta property="og:type" content="article" />
 </head>
 <body>
-@yield('body')
+<div id="app">
+    <div class="bg-orange-lightest">
+        @yield('body')
+    </div>
+</div>
 
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+<script src="/js/app.js"></script>
 @yield('root_scripts')
 </body>
 </html>

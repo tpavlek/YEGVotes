@@ -42,7 +42,7 @@ class AttendanceRecord
 
     public function votePercent()
     {
-        if ($this->total_votes == 0) { throw new \Exception("Division by zero"); }
+        if ($this->total_votes == 0) { return 100; }
         return number_format(($this->votes_in_attendance / $this->total_votes) * 100);
     }
 

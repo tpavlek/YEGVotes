@@ -9,23 +9,23 @@
 @section('meta_image', '/img/attendance.png')
 
 @section('content')
-    <div class="center">
+    <div class="text-center">
         <h1>How often do Edmonton City Councillors attend meetings?</h1>
 
-        <div class="flex row-wrap">
-            <div class="flex-item">
-                @include('councilMemberPartial', [ 'council_member' => $attendance_records->first()->getAttendee(), 'attendance' => $attendance_records->first() ])
+        <div class="p-8 flex flex-row">
+            <div class="flex-grow">
+                @include('councilMemberPartial', [ 'attendance_record' => $attendance_records->first() ])
 
-                <p>
+                <p class="mt-4 text-left">
                     With <strong>{{ $attendance_records->first()->votePercent() }}%</strong> attendance for votes in council,
                     {{ $attendance_records->first()->getAttendee() }} has the best attendance.
                 </p>
             </div>
 
-            <div class="flex-item">
-                @include('councilMemberPartial', [ 'council_member' => $attendance_records->last()->getAttendee(), 'attendance' => $attendance_records->last() ])
+            <div class="flex-grow">
+                @include('councilMemberPartial', [ 'attendance_record' => $attendance_records->last() ])
 
-                <p>
+                <p class="mt-4 text-left">
                     With <strong>{{ $attendance_records->last()->votePercent() }}%</strong> attendance for votes in council,
                     {{ $attendance_records->last()->getAttendee() }} has the worst attendance.
                 </p>
@@ -40,29 +40,27 @@
         </style>
 
         <div class="flex">
-            <div class="card">
-                <div class="card-content">
-                    <table class="striped">
-                        <thead>
+            <div class="card mx-auto m-2 leading-loose">
+                <table class="striped">
+                    <thead>
                         <tr>
                             <th>Councillor</th>
                             <th>Meetings</th>
                             <th>Votes</th>
                             <th>Score</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($attendance_records as $attendance_record)
-                            <tr>
-                                <td>{{ $attendance_record->getAttendee() }}</td>
-                                <td>{{ $attendance_record->meetingFraction() }}</td>
-                                <td>{{ $attendance_record->voteFraction() }}</td>
-                                <td><strong><span data-attendance-percent="{{ $attendance_record->weightedVoteAttendancePercent() }}">{{ $attendance_record->votePercent() }}%</span></strong></td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                    </thead>
+                    <tbody>
+                    @foreach($attendance_records as $attendance_record)
+                        <tr>
+                            <td>{{ $attendance_record->getAttendee() }}</td>
+                            <td>{{ $attendance_record->meetingFraction() }}</td>
+                            <td>{{ $attendance_record->voteFraction() }}</td>
+                            <td><strong><span data-attendance-percent="{{ $attendance_record->weightedVoteAttendancePercent() }}">{{ $attendance_record->votePercent() }}%</span></strong></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
 

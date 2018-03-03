@@ -15,7 +15,7 @@
             <div class="flex-item">
                 With <strong>{{ $movers->first()['motions'] }}</strong> motions the councillor with the most <strong>motions</strong> is:
                 <div class="small-person-details">
-                    @include('councilMemberPartial', [ 'council_member' => $movers->first()['mover'], 'attendance' => $movers->first()['attendance'] ])
+                    @include('councilMemberPartial', [ 'attendance_record' => $movers->first()['attendance'] ])
                 </div>
 
                 The second-highest councillor is {{ $movers->get(1)['mover'] }} with {{ $movers->get(1)['motions'] }}
@@ -24,7 +24,7 @@
             <div class="flex-item">
                 With <strong>{{ $seconders->first()['motions'] }}</strong> seconds the councillor with the most <strong>seconds</strong> is:
                 <div class="small-person-details">
-                    @include('councilMemberPartial', [ 'council_member' => $seconders->first()['seconder'], 'attendance' => $seconders->first()['attendance'] ])
+                    @include('councilMemberPartial', [ 'attendance_record' => $seconders->first()['attendance'] ])
                 </div>
                 The second-highest councillor is {{ $seconders->get(1)['seconder'] }} with {{ $seconders->get(1)['motions'] }}
             </div>
