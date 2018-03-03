@@ -2,14 +2,12 @@
 
 @section('title', "How often do Edmonton City Councillors skip meetings? -")
 
-@section('meta_description')
-    At a {{ $skipped_meetings->keys()->first() }} there is a {{ $skipped_meetings->first()['percentage'] }}% chance of a councillor being absent
-@stop
+@section('meta_description', "At a " . $skipped_meetings->keys()->first() . " there is a " . $skipped_meetings->first()['percentage'] . "% chance of a councillor being absent")
 
 @section('meta_image', '/img/attendance.png')
 
 @section('content')
-    <div class="text-center">
+    <div class="text-center mt-4 text-grey-darker">
         <h1>How often do Edmonton City Councillors attend meetings?</h1>
 
         <div class="p-8 flex flex-row">
@@ -32,31 +30,24 @@
             </div>
         </div>
 
-        <style>
-            table {
-                min-width: 50rem;
-                font-size: 18px;
-            }
-        </style>
-
         <div class="flex">
             <div class="card mx-auto m-2 leading-loose">
-                <table class="striped">
+                <table class="">
                     <thead>
                         <tr>
-                            <th>Councillor</th>
-                            <th>Meetings</th>
-                            <th>Votes</th>
-                            <th>Score</th>
+                            <th class="p-2 text-grey-dark font-bold text-lg">Councillor</th>
+                            <th class="p-2 text-grey-dark font-bold text-lg">Meetings</th>
+                            <th class="p-2 text-grey-dark font-bold text-lg">Votes</th>
+                            <th class="p-2 text-grey-dark font-bold text-lg">Score</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($attendance_records as $attendance_record)
                         <tr>
-                            <td>{{ $attendance_record->getAttendee() }}</td>
-                            <td>{{ $attendance_record->meetingFraction() }}</td>
-                            <td>{{ $attendance_record->voteFraction() }}</td>
-                            <td><strong><span data-attendance-percent="{{ $attendance_record->weightedVoteAttendancePercent() }}">{{ $attendance_record->votePercent() }}%</span></strong></td>
+                            <td class="p-2 pr-8 text-grey-dark">{{ $attendance_record->getAttendee() }}</td>
+                            <td class="p-2 pr-8 text-grey-dark">{{ $attendance_record->meetingFraction() }}</td>
+                            <td class="p-2 pr-8 text-grey-dark">{{ $attendance_record->voteFraction() }}</td>
+                            <td class="p-2 {{ (new \App\Template\AttendanceTemplate($attendance_record))->ratingColor() }}"><strong><span data-attendance-percent="{{ $attendance_record->weightedVoteAttendancePercent() }}">{{ $attendance_record->votePercent() }}%</span></strong></td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -64,14 +55,14 @@
             </div>
         </div>
 
-        <div class="flex">
-            <div class="card">
-                <div class="card-content">
-                    <p>
+        <div class="flex justify-center">
+            <div class="card mx-auto leading-loose mb-8">
+                <div class="p-8 text-left">
+                    <p class="text-grey-darker">
                         Of all the meetings, {{ $skipped_meetings->keys()->first() }} is the most likely to have a councillor
                         absent ({{ $skipped_meetings->first()['percentage'] }}% of the time)
                     </p>
-                    <table class="striped">
+                    <table class="p-8 pb-0 text-grey-darker">
                         <thead>
                             <tr>
                                 <th>Meeting Type</th>
@@ -81,7 +72,7 @@
                         <tbody>
                             @foreach($skipped_meetings as $meeting_type => $skipped)
                                 <tr>
-                                    <td>{{ $meeting_type }}</td>
+                                    <td class="pr-8">{{ $meeting_type }}</td>
                                     <td>{{ $skipped['skipped'] }} ({{ $skipped['percentage'] }}%)</td>
                                 </tr>
                             @endforeach

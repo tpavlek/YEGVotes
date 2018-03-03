@@ -45,7 +45,7 @@ class AttendanceTemplate
         return "Poor";
     }
 
-    private function ratingColor()
+    public function ratingColor()
     {
         $percent = $this->attendanceRecord->votePercent();
 
